@@ -1,0 +1,29 @@
+name: Vientos fuertes
+description: >-
+  Indicar si existe un pronóstico de vientos fuertes.
+type: raw
+
+frequencies:
+  - minutes: 1440
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-forecasts-triggers
+  - q03
+
+meta:
+  duration:
+    type: number
+  start:
+    type: string
+  end:
+    type: string

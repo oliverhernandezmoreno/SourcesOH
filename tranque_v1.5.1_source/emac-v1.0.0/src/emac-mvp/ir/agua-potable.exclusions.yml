@@ -1,0 +1,14 @@
+name: Exclusiones por afectación aguas arriba -- Agua Potable
+
+scope: group
+groups:
+  items:
+    - name: Muestreo superficial
+      canonical_name: superficial
+    - name: Muestreo subterráneo
+      canonical_name: subterraneo
+
+inputs:
+  - "@emac-mvp/normalized-variables/agua-potable/*"
+
+script: ./exclusions.js

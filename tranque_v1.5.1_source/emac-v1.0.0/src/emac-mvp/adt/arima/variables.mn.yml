@@ -1,0 +1,48 @@
+name: Mn -- ARIMA
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/valid-variables/mn"
+
+script: ./../arima-monthly.js
+
+meta:
+  arima:
+    type: object
+  interval:
+    type: string
+  range:
+    type: object
+    properties:
+      lt:
+        type: number
+      gt:
+        type: number
+      lte:
+        type: number
+      gte:
+        type: number
+  values:
+    type: array
+    items:
+      type: number
+  predictions:
+    type: array
+    items:
+      type: object
+      properties:
+        value:
+          type: number
+
+parameters:
+  - name: Lambda parameter for Box-Cox for Mn
+    canonical_name: box-cox-lambda-variable-mn
+    schema:
+      oneOf:
+        - type: number
+        - type: "null"

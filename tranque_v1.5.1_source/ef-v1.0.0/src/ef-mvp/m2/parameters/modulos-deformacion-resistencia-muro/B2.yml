@@ -1,0 +1,24 @@
+name: Evento B2 de Módulos de deformación y resistencia al corte del material de relleno del muro del depósito
+description: >-
+  Evento B2: (Se informa por sector)
+  Posterior a un ensayo SPT o similar realizado en el muro del depósito se determina la existencia de un
+  estrato que no cumple con los criterios de densidad especificados por diseño.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/modulos-deformacion-resistencia-muro/detecta-B2"

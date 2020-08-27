@@ -1,0 +1,156 @@
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - test
+  - code quality
+  - push
+  - deploy
+
+.test: &test
+  stage: test
+  image: node:10.17.0-jessie
+  script:
+    - yarn install
+    - yarn lint
+    - yarn test --coverage
+
+test-manual:
+  <<: *test
+  when: manual
+
+test-main:
+  <<: *test
+  only:
+    - dev
+    - master
+  except:
+    variables:
+      - $DEPLOY
+  artifacts:
+    paths:
+      - coverage
+
+sonar:
+  stage: code quality
+  only:
+    - dev
+    - master
+  except:
+    variables:
+      - $DEPLOY
+  image:
+    name: newtmitch/sonar-scanner:3.2.0
+    entrypoint: ['']
+  script:
+    # install vault
+    - wget -q https://releases.hashicorp.com/vault/0.11.1/vault_0.11.1_linux_amd64.zip
+    - unzip -q vault_0.11.1_linux_amd64.zip
+    - rm -f vault_0.11.1_linux_amd64.zip
+    # get sonar login token from vault
+    - SONAR_TOKEN=$(./vault read -field=key secret/tranque/dev/sonarqube/login)
+    # - run sonar scanner
+    - sonar-scanner -Dsonar.projectBaseDir=$CI_PROJECT_DIR -Dsonar.host.url=https://sonar.dev.inria.cl -Dsonar.login=$SONAR_TOKEN -Dsonar.projectName="Tranque E700 Frontend" -Dsonar.projectKey=tranque-e700-frontend -Dsonar.projectVersion=$CI_COMMIT_SHA -Dsonar.sources=$CI_PROJECT_DIR/src   -Dsonar.tests=$CI_PROJECT_DIR/src   -Dsonar.exclusions=**/*.test.js,src/serviceWorker.js,src/__mocks__/*.*,src/index.js   -Dsonar.test.inclusions=**/*.test.js   -Dsonar.javascript.lcov.reportPaths=$CI_PROJECT_DIR/coverage/lcov.info
+
+.docker-push: &docker-push
+  stage: push
+  only:
+    - dev
+    - master
+    - tags
+  except:
+    variables:
+      - $DEPLOY == "artifacts"
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build
+             -t "${CI_REGISTRY_IMAGE}${IMAGE_VARIANT}:${CI_COMMIT_REF_SLUG}"
+             --build-arg "INCLUDED_ROUTES=${INCLUDED_ROUTES}"
+             --build-arg "EXCLUDED_ROUTES=${EXCLUDED_ROUTES}"
+             --build-arg "DEFAULT_REDIRECT=${DEFAULT_REDIRECT}"
+             .
+    - docker push "${CI_REGISTRY_IMAGE}${IMAGE_VARIANT}:${CI_COMMIT_REF_SLUG}"
+
+docker-push-main:
+  <<: *docker-push
+  variables:
+    INCLUDED_ROUTES: "*"
+    EXCLUDED_ROUTES: ""
+    DEFAULT_REDIRECT: "public"
+    IMAGE_VARIANT: ""
+
+docker-push-public:
+  <<: *docker-push
+  variables:
+    INCLUDED_ROUTES: "public"
+    EXCLUDED_ROUTES: ""
+    DEFAULT_REDIRECT: "public"
+    IMAGE_VARIANT: "/public"
+
+docker-push-authorities:
+  <<: *docker-push
+  variables:
+    INCLUDED_ROUTES: "*"
+    EXCLUDED_ROUTES: "public,miners"
+    DEFAULT_REDIRECT: "authorities"
+    IMAGE_VARIANT: "/authorities"
+
+docker-push-smc:
+  <<: *docker-push
+  variables:
+    INCLUDED_ROUTES: "*"
+    EXCLUDED_ROUTES: "miners"
+    DEFAULT_REDIRECT: "public"
+    IMAGE_VARIANT: "/smc"
+
+docker-push-sml:
+  <<: *docker-push
+  variables:
+    INCLUDED_ROUTES: "*"
+    EXCLUDED_ROUTES: "public,authorities"
+    DEFAULT_REDIRECT: "miners"
+    IMAGE_VARIANT: "/sml"
+
+deploy:
+  stage: deploy
+  only:
+    - dev
+    - master
+  except:
+    variables:
+      - $DEPLOY == "artifacts"
+  image: alpine:3.8
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8017352/trigger/pipeline
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${CI_COMMIT_REF_SLUG} ${TRIGGER_URL}
+
+deploy-artifacts:
+  stage: deploy
+  only:
+    variables:
+      - $DEPLOY == "artifacts"
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker build
+             -t localbuild:local
+             --build-arg "API_HOST=${API_HOST:-/api}"
+             --build-arg "INCLUDED_ROUTES=${INCLUDED_ROUTES:-*}"
+             --build-arg "EXCLUDED_ROUTES=${EXCLUDED_ROUTES}"
+             --build-arg "DEFAULT_REDIRECT=${DEFAULT_REDIRECT:-public}"
+             .
+    - docker create --name localbuild localbuild:local
+    - docker cp localbuild:/var/www-src/ bundle
+  artifacts:
+    paths:
+      - bundle

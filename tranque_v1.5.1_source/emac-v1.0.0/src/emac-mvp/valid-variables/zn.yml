@@ -1,0 +1,13 @@
+name: Zn -- Validado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/zn"
+  - "@emac-mvp/ionic-balance"
+
+script: ./ionic-balance-validation.js

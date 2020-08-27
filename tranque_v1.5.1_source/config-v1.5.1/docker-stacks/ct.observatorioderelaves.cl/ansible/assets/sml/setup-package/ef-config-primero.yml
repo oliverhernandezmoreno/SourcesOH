@@ -1,0 +1,120 @@
+target: primero
+
+timeseries:
+  - canonical_name: primero.s-PZ-80.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 700
+        kind: cota-instalacion
+      - lower: 720
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-81.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-82.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 720
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-83.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 700
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-84.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 700
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-85.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-87.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 720
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-88.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 720
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-90.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-91.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-92.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-93.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+
+  - canonical_name: primero.s-PZ-94.ef-mvp.m2.parameters.presion-poros
+    thresholds:
+      - lower: 720
+        kind: cota-instalacion
+      - lower: 700
+        kind: cota-terreno
+      - upper: 800
+      - upper: 830
+

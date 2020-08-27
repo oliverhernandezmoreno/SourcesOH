@@ -1,0 +1,33 @@
+name: pH
+description: pH
+range_gte: 1
+range_lte: 14
+type: raw
+
+frequencies:
+  - minutes: 43200
+
+thresholds:
+  - upper: 9
+    lower: 6
+    kind: vida-acuatica
+  - upper: 8.5
+    lower: 6
+    kind: recreacion
+  - upper: 9.0
+    lower: 5.5
+    kind: riego
+  - upper: 8.5
+    lower: 6.5
+    kind: agua-potable
+  - upper: 8.5
+    lower: 6.5
+    kind: ii
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-variable

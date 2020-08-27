@@ -1,0 +1,28 @@
+name: Evento D1 de Condiciones asociadas a los escenarios de falla (Módulo 2) IT-06 Inestabilidad por deslizamiento del muro
+description: >-
+  a) Evento C1:
+    Se deben cumplir todos los eventos en un sector para activar el escenario de falla:
+      Eventos Módulo 1:
+        • Evento gatillador: Deslizamiento superficial de un sector del talud del muro (Evento B)
+      Eventos Módulo 2:
+        • Evidencia de grietas en el muro del depósito: (Evento C3)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m1/triggers/deslizamiento-menor"
+  - "@ef-mvp/m2/parameters/integridad-externa/grietas/C3"

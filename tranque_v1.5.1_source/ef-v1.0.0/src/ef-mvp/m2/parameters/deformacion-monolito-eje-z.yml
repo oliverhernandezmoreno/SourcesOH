@@ -1,0 +1,38 @@
+name: Deformación superficial del muro por monolito en el eje Z
+type: raw
+
+
+frequencies:
+  - minutes: 10080  # 7 días
+
+
+unit:
+  id: millimeters
+  name: Milímetros
+  abbreviation: mm
+  si: false
+
+
+thresholds:
+  - upper: ~  # Debe ser definido en configuracion sitio especifico
+  
+scope: spread
+groups:
+  items:
+    - name: Prismas y Monolitos
+      canonical_name: prismas-monolitos
+
+
+meta:
+  initial_coord_x:
+    type: number
+  initial_coord_y:
+    type: number
+  initial_coord_z:
+    type: number
+  current_coord_x:
+    type: number
+  current_coord_y:
+    type: number
+  current_coord_z:
+    type: number

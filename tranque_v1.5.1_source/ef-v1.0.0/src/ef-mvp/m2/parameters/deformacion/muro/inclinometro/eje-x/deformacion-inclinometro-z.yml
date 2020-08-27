@@ -1,0 +1,12 @@
+name: Deformación de inclinómetro(Z) en el eje X de muro
+
+scope: spread
+groups:
+  items:
+    - canonical_name: muro
+      name: "Muro"
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion-inclinometro-z-eje-x"
+
+script: common-scripts/copy-events.js

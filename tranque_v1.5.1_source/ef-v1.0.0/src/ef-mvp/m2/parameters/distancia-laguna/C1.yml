@@ -1,0 +1,12 @@
+name: Evento C1 de distancia de laguna
+description: >-
+  Laguna en contacto con el muro (Distancia 0 metros)
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/distancia-laguna"

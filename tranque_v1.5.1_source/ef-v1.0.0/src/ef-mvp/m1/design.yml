@@ -1,0 +1,5 @@
+name: Desviaciones con respecto al diseño
+description: Diferencias entre el estado actual del depósito y el diseño aprobado
+
+inputs:
+  - "@ef-mvp/m1/design/*"

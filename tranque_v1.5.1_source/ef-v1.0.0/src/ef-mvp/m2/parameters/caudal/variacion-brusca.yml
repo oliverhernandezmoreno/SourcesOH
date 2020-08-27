@@ -1,0 +1,21 @@
+name: Reporte manual de variación brusca de caudal
+description: >-
+  El operador detecta que las mediciones de este instrumento indican
+  una variación brusca de caudal.
+type: raw
+
+scope: spread
+groups:
+  items:
+    - name: Caudalímetros
+      canonical_name: caudalimetros
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0

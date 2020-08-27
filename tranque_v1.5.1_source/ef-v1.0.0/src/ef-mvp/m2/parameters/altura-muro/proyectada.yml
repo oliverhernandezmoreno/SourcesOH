@@ -1,0 +1,13 @@
+name: Altura proyectada del coronamiento del muro
+description: >-
+  La altura que debiese tener el depósito según el plan de crecimiento
+  disponible.
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/altura-muro"

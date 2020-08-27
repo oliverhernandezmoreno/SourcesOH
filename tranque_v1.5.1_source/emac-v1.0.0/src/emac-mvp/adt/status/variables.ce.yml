@@ -1,0 +1,7 @@
+name: CE -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/ce"
+  - "@emac-mvp/adt/arima/variables.ce"
+
+script: ./../adt.js

@@ -1,0 +1,9 @@
+name: Potencial de rebalse
+
+frequencies:
+  - protocol: lluvia
+    minutes: 60  # 1 hora
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse/ingreso-pronosticado-total"
+  - "@ef-mvp/m2/parameters/variables/volumen-disponible"

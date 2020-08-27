@@ -1,0 +1,7 @@
+name: Cu -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/cu"
+  - "@emac-mvp/adt/arima/variables.cu"
+
+script: ./../adt.js

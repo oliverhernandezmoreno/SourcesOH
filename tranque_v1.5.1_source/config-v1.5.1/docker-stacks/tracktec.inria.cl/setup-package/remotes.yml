@@ -1,0 +1,4 @@
+remotes:
+  - namespace: global-namespace
+    exchange: federated.global-namespace
+    bucket: sml

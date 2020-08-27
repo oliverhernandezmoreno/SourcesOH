@@ -1,0 +1,13 @@
+name: Presión de poros máxima en el eje central
+range_gte: 0
+
+scope: group
+groups:
+  items:
+    - name: Sección del eje central del muro
+      canonical_name: ubicacion-eje-central
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros"
+
+script: common-scripts/maximo.js

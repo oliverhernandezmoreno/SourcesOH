@@ -1,0 +1,13 @@
+s=${BACKEND_IMAGE}=registry.gitlab.com/inria-chile/tranque/backend:dev=
+s=${ENRICHMENT_IMAGE}=registry.gitlab.com/inria-chile/tranque/enrichment:dev=
+s=${STATS_IMAGE}=registry.gitlab.com/inria-chile/tranque/stats/r-base:dev=
+s=${CRON_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/cron:dev=
+s=${LOGSTASH_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/logstash:master=
+s=${BEATS_CONSUMER_IMAGE}=registry.gitlab.com/inria-chile/tranque/beats-consumer:dev=
+s=${ELASTICSEARCH_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/elasticsearch:dev=
+s=${RABBITMQ_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/rabbitmq:dev=
+s=${STORAGE_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/storage:dev=
+s=${FRONTEND_IMAGE}=registry.gitlab.com/inria-chile/tranque/e700-frontend/sml:dev=
+s=${DJANGO_STATIC_IMAGE}=registry.gitlab.com/inria-chile/tranque/backend/static-nginx:dev=
+s=${KIBANA_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/kibana:dev=
+s=${PROXY_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/secure-proxy:dev=

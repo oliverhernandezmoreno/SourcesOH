@@ -1,0 +1,7 @@
+name: F -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/fluoride"
+  - "@emac-mvp/adt/arima/variables.fluoride"
+
+script: ./../adt.js

@@ -1,0 +1,47 @@
+{
+  "name": "enrichment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@gitlab.com:Inria-Chile/tranque/enrichment.git",
+  "author": "Inria Chile",
+  "license": "MIT",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "build-indices": "node scripts/build-indices.js",
+    "setup-db": "node scripts/setup-db.js",
+    "lint": "find __mocks__ lib impl | grep 'js$' | grep -v indices | xargs eslint index.js",
+    "start": "node index.js",
+    "start-debug": "node --inspect=0.0.0.0:9229 index.js",
+    "test": "jest --verbose",
+    "prettier": "prettier --write index.js lib impl __mocks__"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "jest": "^23.6.0"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "7",
+    "amqplib": "^0.5.5",
+    "commander": "^2.20.3",
+    "geolib": "^3.2.1",
+    "js-yaml": "^3.13.1",
+    "moment": "^2.24.0",
+    "pg": "^7.18.2",
+    "pg-hstore": "^2.3.3",
+    "prettier": "^2.0.5",
+    "proj4": "^2.6.0",
+    "raven": "^2.6.4",
+    "request": "^2.88.2",
+    "sequelize": "^4.44.4",
+    "uuid": "^3.3.2",
+    "winston": "^3.2.1",
+    "winston-elasticsearch": "^0.8.4"
+  },
+  "prettier": {
+    "printWidth": 90,
+    "quoteProps": "consistent",
+    "bracketSpacing": false,
+    "parser": "babel"
+  }
+}

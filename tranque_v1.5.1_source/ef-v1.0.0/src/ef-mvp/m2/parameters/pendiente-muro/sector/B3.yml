@@ -1,0 +1,14 @@
+name: Evento B3 de pendiente del muro (aguas abajo)
+description: >-
+  La pendiente global del muro sobrepasa el valor umbral.
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/B3"
+
+script: common-scripts/al-menos-un-evento.js

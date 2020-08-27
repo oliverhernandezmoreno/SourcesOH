@@ -1,0 +1,29 @@
+# Deployment for frontend files
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: front-svr
+  name: front-svr
+  namespace: tranque
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: front-svr
+  template:
+    metadata:
+      labels:
+        app: front-svr
+    spec:
+      containers:
+      - image: tranqueacr1.azurecr.io/tranque/frontend:v1-5-1-smc
+        name: front-svr
+        resources:
+          limits:
+            cpu: 512m
+            memory: 256Mi
+          requests:
+            cpu: 256m
+            memory: 128Mi

@@ -1,0 +1,46 @@
+{
+  "name": "fake",
+  "version": "fake:aabbccddeeff00112233445566778899",
+  "groups": [
+    {
+      "name": "Fake things",
+      "canonical_name": "fake-things"
+    }
+  ],
+  "metagroups": [
+    {
+      "name": "Fake groups",
+      "canonical_name": "fake-groups"
+    }
+  ],
+  "entrypoints": [
+    "fake.isolation-test.isolated",
+    "fake.singleton",
+    "fake.compound"
+  ],
+  "parameters": {
+    "fake-parameter-1": {
+      "name": "Some fake parameter",
+      "schema": {
+        "type": "number"
+      }
+    },
+    "fake-parameter-2": {
+      "name": "Some other fake parameter",
+      "schema": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "fake-parameter-3": {
+      "name": "Some complicated fake parameter",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "thing": {"type": "string"},
+          "stuff": {"type": "number"}
+        }
+      }
+    }
+  }
+}

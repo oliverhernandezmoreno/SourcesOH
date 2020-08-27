@@ -1,0 +1,29 @@
+name: Evento C1 de Turbiedad del sistema de drenaje
+description: El Evento B3 se mantiene activo por un tiempo mayor a alfa
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Turbidímetros
+      canonical_name: turbidimetros
+
+inputs:
+  - "@ef-mvp/m2/parameters/turbiedad/B3"
+
+parameters:
+  - canonical_name: alfa-turbiedad
+    name: Tiempo máximo (en horas) de duración del evento B3 de turbiedad antes de escalar automáticamente
+    schema:
+      type: number
+      minimum: 0
+    value: 24  # por omisión es un día máximo

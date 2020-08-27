@@ -1,0 +1,31 @@
+name: Evento D2 de Condiciones asociadas a los escenarios de falla (Módulo 2) EI-02 Erosión interna producto de subsidencias en la cubeta del muro
+description: >-
+  Eventos Grupo C
+  a) Evento C1:
+    Se deben cumplir todos los eventos en un sector para activar el escenario de falla:
+      Eventos Módulo 2:
+        • Presencia subsidencia o socavón en el muro o cubeta del depósito: (Evento B2)
+        • Distancia mínima al muro de la laguna aguas claras: (Evento B1 o superior)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  # Condicion: Presencia subsidencia o socavón en el muro o cubeta del depósito: (Evento B2)
+  - "@ef-mvp/m2/parameters/integridad-externa/subsidencia/B2"
+  # Condicion: Distancia mínima al muro de la laguna aguas claras: (Evento B1 o superior)
+  - "@ef-mvp/m2/parameters/distancia-laguna/B2"
+  - "@ef-mvp/m2/parameters/distancia-laguna/C1"

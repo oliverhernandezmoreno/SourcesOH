@@ -1,0 +1,15 @@
+name: Evento A2 de pendiente del muro (aguas abajo)
+description: >-
+  La pendiente local entre dos puntos aguas abajo supera el valor
+  umbral.
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/local-aguas-abajo"
+
+script: ./A.js

@@ -1,0 +1,20 @@
+name: Evento A1 de Estado operativo del vertedero de emergencia
+description: >-
+  Evento B1: (Se deben cumplir ambos requisitos)
+  Se activa el evento gatillador asociado a que el vertedero de emergencia no está operativo.Está activo el Evento A1.
+  Está activo el evento gatillador “Lluvia en desarrollo” o “Pronóstico de lluvia”
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+inputs:
+  - "@ef-mvp/m2/parameters/vertedero/vertedero-no-operativo"
+  - "@ef-mvp/m1/triggers/forecasts/lluvia"
+  - "@ef-mvp/m2/parameters/variables/estado-lluvia"

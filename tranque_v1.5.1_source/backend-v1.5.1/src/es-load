@@ -1,0 +1,54 @@
+#!/usr/bin/env python
+from itertools import zip_longest
+import json
+import sys
+
+from elasticsearch import Elasticsearch
+
+
+def grouper(iterable, n, fillvalue=None):
+    "Collect data into fixed-length chunks or blocks"
+    args = [iter(iterable)] * n
+    return zip_longest(*args, fillvalue=fillvalue)
+
+
+def parseline(line, index):
+    try:
+        return json.loads(line.strip())
+    except Exception:
+        print(f"Invalid JSON at line {index}")
+        return None
+
+
+client = Elasticsearch([sys.argv[-1]])
+print(client)
+
+
+def bulk(batch):
+    try:
+        actions = [
+            nested
+            for pair in (
+                ({"index": {"_index": doc["_index"], **({"_id": doc["_id"]} if doc.get("_id") else {})}},
+                 doc["_source"])
+                for doc in batch
+            )
+            for nested in pair
+        ]
+        response = client.bulk(body=actions)
+        print("  Took", response["took"], "Errors", response["errors"], "Items", len(response["items"]))
+    except Exception as e:
+        print(e)
+
+
+for batch_index, batch in enumerate(grouper(enumerate(sys.stdin, start=1), 100), start=1):
+    data = [
+        entry
+        for entry in (
+            parseline(line, index)
+            for index, line in filter(bool, batch)
+        )
+        if entry is not None
+    ]
+    print(f"Batch {batch_index} has {len(data)} valid elements")
+    bulk(data)

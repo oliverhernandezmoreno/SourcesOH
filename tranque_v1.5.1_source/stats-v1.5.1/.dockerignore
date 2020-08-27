@@ -1,0 +1,8 @@
+# emacs
+*~
+
+# virtual env
+/env
+
+# python cache
+__pycache__

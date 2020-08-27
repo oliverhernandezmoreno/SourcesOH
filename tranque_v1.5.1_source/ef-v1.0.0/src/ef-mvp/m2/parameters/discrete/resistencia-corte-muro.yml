@@ -1,0 +1,36 @@
+name: Módulos de deformación y resistencia al corte del material de relleno del muro del depósito
+type: raw
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+
+# TODO: Reevisar alternativas reales
+choices:
+  - choice: Hay información detallada
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay información parcial
+    value:
+      choiceValue: 1
+      lt: 2
+  - choice: No hay información
+    value:
+      choiceValue: 2
+      gte: 2
+
+meta:
+  files:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        created_at:
+          type: string

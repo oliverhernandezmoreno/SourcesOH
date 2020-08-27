@@ -1,0 +1,142 @@
+target: cuarto
+
+groups:
+  - name: Punto de monitoreo de aguas
+    canonical_name: monitoreo-aguas
+  - name: Aguas arriba
+    canonical_name: aguas-arriba
+  - name: Aguas abajo
+    canonical_name: aguas-abajo
+  - name: Muestreo superficial
+    canonical_name: superficial
+  - name: Muestreo subterráneo
+    canonical_name: subterraneo
+  - name: Muestreo subterráneo aguas arriba
+    canonical_name: subterraneo-aguas-arriba
+  - name: Muestreo subterráneo aguas abajo
+    canonical_name: subterraneo-aguas-abajo
+  - name: Muestreo superficial aguas arriba
+    canonical_name: superficial-aguas-arriba
+  - name: Muestreo superficial aguas abajo
+    canonical_name: superficial-aguas-abajo
+
+sources:
+  - hardware_id: PUNTO-SUB-ARRIBA-1
+    name: Punto-sub-arriba-1
+    canonical_name: punto-sub-arriba-1
+    coords:
+      srid: 32719
+      x: 469023
+      y: 7379230
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - subterraneo
+      - subterraneo-aguas-arriba
+
+  - hardware_id: PUNTO-SUB-ARRIBA-2
+    name: Punto-sub-arriba-2
+    canonical_name: punto-sub-arriba-2
+    coords:
+      srid: 32719
+      x: 469435
+      y: 7378512
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - subterraneo
+      - subterraneo-aguas-arriba
+
+  - hardware_id: PUNTO-SUP-ARRIBA-1
+    name: Punto-sup-arriba-1
+    canonical_name: punto-sup-arriba-1
+    coords:
+      srid: 32719
+      x: 467949
+      y: 7379967
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - superficial
+      - superficial-aguas-arriba
+
+  - hardware_id: PUNTO-SUP-ARRIBA-2
+    name: Punto-sup-arriba-2
+    canonical_name: punto-sup-arriba-2
+    coords:
+      srid: 32719
+      x: 468676
+      y: 7379224
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - superficial
+      - superficial-aguas-arriba
+
+  - hardware_id: PUNTO-SUB-ABAJO-1
+    name: Punto-sub-abajo-1
+    canonical_name: punto-sub-abajo-1
+    coords:
+      srid: 32719
+      x: 469149
+      y: 7379171
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - subterraneo
+      - subterraneo-aguas-abajo
+
+  - hardware_id: PUNTO-SUB-ABAJO-2
+    name: Punto-sub-abajo-2
+    canonical_name: punto-sub-abajo-2
+    coords:
+      srid: 32719
+      x: 468620
+      y: 7378264
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - subterraneo
+      - subterraneo-aguas-abajo
+
+  - hardware_id: PUNTO-SUP-ABAJO-1
+    name: Punto-sup-abajo-1
+    canonical_name: punto-sup-abajo-1
+    coords:
+      srid: 32719
+      x: 468568
+      y: 7378528
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - superficial
+      - superficial-aguas-abajo
+
+  - hardware_id: PUNTO-SUP-ABAJO-2
+    name: Punto-sup-abajo-2
+    canonical_name: punto-sup-abajo-2
+    coords:
+      srid: 32719
+      x: 469326
+      y: 7378426
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - superficial
+      - superficial-aguas-abajo
+
+parameters:
+  - canonical_name: ir-reference
+    name: Punto de referencia para Índice de Riesgo
+    value:
+      srid: 32719
+      x: 468886
+      y: 7379038

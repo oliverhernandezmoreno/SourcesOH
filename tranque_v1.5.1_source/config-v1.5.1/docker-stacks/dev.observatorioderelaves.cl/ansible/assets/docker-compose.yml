@@ -1,0 +1,315 @@
+version:                   "3.4"
+
+x-logging:                 &logging
+  driver:                  "json-file"
+  options:
+    max-size:              "10m"
+    max-file:              "3"
+
+x-env-files:               &env-files
+  env_file:
+    - .env
+    - .secrets
+
+services:
+  postgis:
+    image:                 mdillon/postgis:10
+    <<:                    *env-files
+    volumes:
+      - /home/ec2-user/postgres-db:/var/lib/postgresql/data
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-postgres
+
+  postgis-exporter:
+    image:                 wrouesnel/postgres_exporter:v0.4.6
+    <<:                    *env-files
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+
+  django:
+    image:                 registry.gitlab.com/inria-chile/tranque/backend:dev
+    healthcheck:
+      test: nc -z localhost 8000 || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 120
+    <<:                    *env-files
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+    volumes:
+      - /home/ec2-user/stack/setup-package:/initial-setup
+    logging:               *logging
+    depends_on:
+      - postgis
+      - elasticsearch
+
+  django-amqpconsumer:
+    image:                 registry.gitlab.com/inria-chile/tranque/backend:dev
+    <<:                    *env-files
+    entrypoint:            ["/entrypoint.amqpconsumer.sh"]
+    command:               ["./manage.py", "runconsumer"]
+    logging:               *logging
+    depends_on:
+      - postgis
+      - elasticsearch
+      - amqpbroker
+
+  django-static:
+    image:                 registry.gitlab.com/inria-chile/tranque/backend/static-nginx:dev
+    <<:                    *env-files
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+
+  cron:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/cron:dev
+    <<:                    *env-files
+    logging:               *logging
+    depends_on:
+      - django
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+
+  frontend:
+    image:                 registry.gitlab.com/inria-chile/tranque/e700-frontend:dev
+    <<:                    *env-files
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+      restart_policy:
+        condition:         on-failure
+    logging:               *logging
+
+  proxy:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/secure-proxy:dev
+    <<:                    *env-files
+    depends_on:
+      - frontend
+      - django
+      - django-static
+    deploy:
+      mode:                global
+      placement:
+        constraints:
+          - node.role == manager
+      restart_policy:
+        condition:         on-failure
+    logging:               *logging
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+    - /home/ec2-user/nginx-certs:/certs
+    - /home/ec2-user/default.conf:/etc/nginx/conf.d/default.conf
+
+  amqpbroker:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/rabbitmq:dev
+    <<:                    *env-files
+    logging:               *logging
+    ports:
+      - 15671:15671
+      - 15672:15672
+      - 5671:5671
+      - 5672:5672
+    volumes:
+      - /home/ec2-user/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - /home/ec2-user/rabbitmq.definitions.json:/etc/rabbitmq/definitions.json
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-broker
+
+  amqpbroker-exporter:
+    image:                 kbudde/rabbitmq-exporter:v0.29.0
+    <<:                    *env-files
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+
+  elasticsearch:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/elasticsearch:dev
+    <<:                    *env-files
+    volumes:
+      - /home/ec2-user/elasticsearch-db:/usr/share/elasticsearch/data
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-elasticsearch
+
+  elasticsearch-exporter:
+    image:                 justwatch/elasticsearch_exporter:1.0.2
+    command:               '-es.uri=http://elasticsearch:9200'
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+
+  ts-stats-exporter:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/ts-stats:dev
+    depends_on:
+      - elasticsearch
+    logging:               *logging
+    environment:
+      NAME_PATTERN:        ".*heartbeat"
+      ELASTICSEARCH_HOST:  elasticsearch
+      STACK_ENVIRONMENT:   dev
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+
+  kibana:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/kibana:dev
+    depends_on:
+      - elasticsearch
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-kibana
+
+  logstash:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/logstash:master
+    <<:                    *env-files
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-broker
+    depends_on:
+      - elasticsearch
+      - amqpbroker
+      - redis
+    logging:               *logging
+
+  logstash-exporter:
+    image:                 alxrem/prometheus-logstash-exporter:latest
+    command:               '-logstash.host logstash'
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+
+  enrichment:
+    image:                 registry.gitlab.com/inria-chile/tranque/enrichment:dev
+    <<:                    *env-files
+    depends_on:
+      - elasticsearch
+      - amqpbroker
+      - django
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+
+  stats:
+    image:                 registry.gitlab.com/inria-chile/tranque/stats/r-base:dev
+    <<:                    *env-files
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+
+  redis:
+    image:                 redis:4-alpine
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-broker
+
+  redis-exporter:
+    image:                 oliver006/redis_exporter:v0.21.2
+    <<:                    *env-files
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+
+  fake-beats:
+    image:                 registry.gitlab.com/inria-chile/tranque/fake-beats:dev
+    <<:                    *env-files
+    depends_on:
+      - redis
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+
+  beats-consumer:
+    image:                 registry.gitlab.com/inria-chile/tranque/beats-consumer:dev
+    <<:                    *env-files
+    depends_on:
+      - redis
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend
+
+  docker-exporter:
+    image:                 google/cadvisor:v0.32.0
+    logging:               *logging
+    command:               --docker_only
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+    deploy:
+      mode:                global
+
+  blackbox-exporter:
+    image:                 registry.gitlab.com/inria-chile/tranque/config/blackbox-exporter:dev
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+
+  prometheus:
+    image:       prom/prometheus:v2.7.1
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=8w'
+    volumes:
+      - /home/ec2-user/prometheus.yml:/etc/prometheus/prometheus.yml
+      - /home/ec2-user/prometheus-data:/prometheus
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-monitor
+    ports:
+      - 9090:9090
+
+  archivist:
+    image:                 registry.gitlab.com/inria-chile/tranque/archivist:dev
+    <<:                    *env-files
+    environment:
+      - NAMESPACE=dev-stack
+    logging:               *logging
+    deploy:
+      placement:
+        constraints:
+          - engine.labels.tranque.server.type == worker-backend

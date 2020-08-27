@@ -1,0 +1,11 @@
+name: Cantidad de lluvia pronosticada
+type: raw
+
+unit:
+  id: millimeter
+  name: Milímetro
+  abbreviation: mm
+  si: false
+
+frequencies:
+  - minutes: 60  # 1 hora

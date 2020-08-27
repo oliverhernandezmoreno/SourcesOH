@@ -1,0 +1,14 @@
+name: Evento B1 de revancha operacional
+description: >-
+  La revancha operacional se acerca al umbral inferior
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-operacional/B1"
+
+script: common-scripts/al-menos-un-evento.js

@@ -1,0 +1,30 @@
+module.exports = {
+  title: 'Tranque Style Guide',
+  components: [
+    'src/@alerts_events/components/**/*.js',
+    'src/@app/components/**/*.js',
+    'src/@authorities/components/**/*.js',
+    'src/@communities/components/**/*.js',
+    'src/@e700/components/**/*.js',
+    'src/@miners/components/**/*.js'],
+  ignore: [
+    '**/__tests__/**',
+    '**/*.test.{js,jsx,ts,tsx}',
+    '**/*.spec.{js,jsx,ts,tsx}',
+    '**/*.d.ts',
+    'src/@app/components/utils/index.js',
+    'src/@app/components/utils/C40X.js',
+    'src/@app/components/utils/SnackbarContentWrapper.js',
+    'src/@app/components/utils/SubscribedComponent.js',
+    'src/@authorities/theme.js',
+    'src/@miners/components/EF/EF.labels.js',
+    'src/@miners/components/EF/IconHelp.js',
+    'src/@miners/components/utils/ChipStatusLegend.js',
+    'src/@miners/components/utils/ChipStatus.js',
+    'src/@miners/components/chart.js',
+    'src/@miners/components/CardChart.js',
+    'src/@miners/components/FrequencyCard.js',
+    'src/@miners/components/tableIconValue.js',
+    'src/@miners/components/SimpleTable.js'
+  ],
+};

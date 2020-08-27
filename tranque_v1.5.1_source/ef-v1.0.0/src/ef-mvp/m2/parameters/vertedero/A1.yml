@@ -1,0 +1,17 @@
+name: Evento A1 de Estado operativo del vertedero de emergencia
+description: >-
+  Evento A1:
+  Se activa el evento gatillador asociado a que el vertedero de emergencia no está operativo.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+inputs:
+  - "@ef-mvp/m2/parameters/vertedero/vertedero-no-operativo"

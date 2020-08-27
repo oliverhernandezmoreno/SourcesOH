@@ -1,0 +1,21 @@
+modules:
+  http_get:
+    prober: http
+    timeout: 10s
+    http:
+      method: GET
+      valid_status_codes: [200,301]
+  https_get:
+    prober: http
+    timeout: 10s
+    http:
+      method: GET
+      fail_if_ssl: false
+      fail_if_not_ssl: true
+  backend_healthcheck:
+    prober: http
+    timeout: 10s
+    http:
+      method: GET
+      headers:
+        Accept: "application/json"

@@ -1,0 +1,425 @@
+# declaración de entidades agrupadoras
+groups:
+  # declaraciónes del índice de estabilidad física
+  - import_from: ef
+    canonical_name: sectores
+
+  - import_from: ef
+    canonical_name: perfil-transversal
+
+  - import_from: ef
+    canonical_name: piezometros
+
+  - import_from: ef
+    canonical_name: turbidimetros
+
+  # sectores de muro
+  - name: "Sector {s}"
+    canonical_name: "sector-{s}"
+    with_s: ["A", "B", "C", "D", "E"]
+
+# inventario de instrumentos y puntos de medición
+sources:
+  # perfiles transverales de muro por sector
+  - hardware_id: perfil-950
+    name: Perfil transversal 950
+    canonical_name: perfil-950
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-D
+
+  - hardware_id: prefil-825
+    name: Perfil transversal 825
+    canonical_name: perfil-825
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-C
+
+  - hardware_id: perfil-700
+    name: Perfil transversal 700
+    canonical_name: perfil-700
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-B
+
+  - hardware_id: perfil-525
+    name: Perfil transversal 525
+    canonical_name: perfil-525
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-A
+
+  - hardware_id: perfil-QC-5
+    name: Perfil transversal QC-5
+    canonical_name: perfil-QC-5
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-E
+
+  # piezómetros
+  - hardware_id: "4320PZ{suffix}"
+    name: "PZ{suffix}"
+    canonical_name: "piezometro-PZ{suffix}"
+    type: online
+    groups:
+      - piezometros
+      - sector-A
+    with_suffix: ["013", "D1INF", "D1SUP"]
+
+  - hardware_id: 4320PZ004
+    name: PZ004
+    canonical_name: piezometro-PZ004
+    type: online
+    groups:
+      - piezometros
+      - sector-B
+
+  - hardware_id: 4320PZDE005
+    name: PZDE005
+    canonical_name: piezometro-PZDE005
+    type: online
+    groups:
+      - piezometros
+      - sector-B
+      - sector-C
+
+  - hardware_id: "4320PZ{suffix}"
+    name: "PZ{suffix}"
+    canonical_name: "piezometro-PZ{suffix}"
+    type: online
+    groups:
+      - piezometros
+      - sector-C
+    with_suffix: ["007", "008", "010", "D2SUP", "D3INF", "D3SUP", "D7INF", "DE004", "DE007"]
+
+  - hardware_id: "4320PZ{suffix}"
+    name: "PZ{suffix}"
+    canonical_name: "piezometro-PZ{suffix}"
+    type: online
+    groups:
+      - piezometros
+      - sector-D
+    with_suffix: ["009", "020", "021"]
+
+  - hardware_id: 4320PZ015
+    name: PZ015
+    canonical_name: piezometro-PZ015
+    type: online
+    groups:
+      - piezometros
+      - sector-E
+
+  - hardware_id: "4320PZ{suffix}"
+    name: "PZ{suffix}"
+    canonical_name: "piezometro-PZ{suffix}"
+    type: online
+    groups:
+      - piezometros
+      # fuera del muro
+    with_suffix: ["017", "022", "023", "DE008"]
+
+  # turbidímetros
+  - hardware_id: 4350AI3560
+    name: AI3560
+    canonical_name: turbidimetro-AI3560
+    type: online
+    groups:
+      - turbidimetros
+
+  - hardware_id: 4350AI3570
+    name: AI3570
+    canonical_name: turbidimetro-AI3570
+    type: online
+    groups:
+      - turbidimetros
+
+# parámetros de cálculo
+parameters:
+  - canonical_name: curva-embalse
+    name: Curva de embalse (cota de coronamiento [m.s.n.m.] vs volumen teórico de lamas y agua [Mm³])
+    value:
+      curve:
+        - {cotaCoronamiento: 798,   volumen: 0}
+        - {cotaCoronamiento: 805.9, volumen: 15}
+        - {cotaCoronamiento: 820.7, volumen: 65.8}
+        - {cotaCoronamiento: 838.5, volumen: 96.2}
+        - {cotaCoronamiento: 860.2, volumen: 188.2}
+        - {cotaCoronamiento: 875.2, volumen: 233.4}
+        - {cotaCoronamiento: 887.2, volumen: 287.4}
+        - {cotaCoronamiento: 897.6, volumen: 331}
+        - {cotaCoronamiento: 918.9, volumen: 506.6}
+        - {cotaCoronamiento: 935.5, volumen: 522.2}
+        - {cotaCoronamiento: 949.6, volumen: 598.2}
+        - {cotaCoronamiento: 962,   volumen: 633.8}
+        - {cotaCoronamiento: 973,   volumen: 731.4}
+        - {cotaCoronamiento: 975.1, volumen: 767.4}
+        - {cotaCoronamiento: 979.3, volumen: 981.4}
+        - {cotaCoronamiento: 980,   volumen: 1031.8}
+
+  - canonical_name: curva-capacidad-volumen-disponible
+    name: Curva de capacidad de volumen disponible (cota coronamiento [m.s.n.m.] vs volumen disponible [Mm³])
+    value:
+      curve:
+        - {cotaCoronamiento: 815,   volumen: 30.8}
+        - {cotaCoronamiento: 831.1, volumen: 94.3}
+        - {cotaCoronamiento: 845.4, volumen: 132.3}
+        - {cotaCoronamiento: 865.6, volumen: 247.3}
+        - {cotaCoronamiento: 880.2, volumen: 303.8}
+        - {cotaCoronamiento: 892.4, volumen: 371.3}
+        - {cotaCoronamiento: 902.2, volumen: 425.8}
+        - {cotaCoronamiento: 924.7, volumen: 645.3}
+        - {cotaCoronamiento: 939.2, volumen: 664.8}
+        - {cotaCoronamiento: 953.3, volumen: 759.8}
+        - {cotaCoronamiento: 965.1, volumen: 804.3}
+        - {cotaCoronamiento: 976.4, volumen: 926.3}
+        - {cotaCoronamiento: 978.7, volumen: 955.1}
+        - {cotaCoronamiento: 983,   volumen: 1126.3}
+
+  - canonical_name: areas-aportantes
+    name: Áreas aportantes que tributan al depósito
+    value:
+      - code: AA 1.0
+        area: 16200000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.1
+        area: 6000000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.2
+        area: 18200000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.4
+        area: 9800000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.5
+        area: 6400000
+        cr: 0.983
+        p: -0.0009875
+
+  - canonical_name: area-cubeta
+    name: Área de cubeta
+    value:
+      area: 21000000
+
+  - canonical_name: canales-perimetrales
+    name: Canales perimetrales
+    value:
+      - code: CP 1
+        desvio: 360
+        areaCode: AA 1.1
+        desvioConexion:
+          exterior: true
+      - code: CP 2
+        desvio: 360
+        areaCode: AA 1.2
+        desvioConexion:
+          embalseCode: Embalse 01
+      - code: CP 3
+        desvio: 3600
+        areaCode: AA 1.4
+        desvioConexion:
+          embalseCode: Embalse 01
+      - code: CP 4
+        desvio: 5400
+        areaCode: AA 1.5
+        desvioConexion:
+          exterior: true
+
+  - canonical_name: embalses
+    name: Embalses
+    value:
+      - code: Embalse 01
+        capacidad: 620000
+        areaCode: AA 1.0
+        descargaCanalCode: CP 1
+
+  - canonical_name: vertederos
+    name: Vertederos
+    value:
+      - code: Vertedero 01
+        capacidadDesvio: 36000
+        cotaInicioFuncionamiento: 841
+
+# configuración específica por variable
+timeseries:
+  - canonical_name: "{target}.s-4320PZ004.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 730.35
+        kind: cota-instalacion
+      - lower: 750.93
+        kind: cota-terreno
+      - upper: 798.1
+      - upper: 830.4
+
+  - canonical_name: "{target}.s-4320PZ007.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 735.01
+        kind: cota-instalacion
+      - lower: 735.01
+        kind: cota-terreno
+      - upper: 764
+      - upper: 802.4
+
+  - canonical_name: "{target}.s-4320PZ008.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 733.53
+        kind: cota-instalacion
+      - lower: 733.53
+        kind: cota-terreno
+      - upper: 746.6
+      - upper: 785.6
+
+  - canonical_name: "{target}.s-4320PZ009.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 740.23
+        kind: cota-instalacion
+      - lower: 778.43
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ010.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 731.52
+        kind: cota-instalacion
+      - lower: 731.52
+        kind: cota-terreno
+      - upper: 735.6
+      - upper: 772.9
+
+  - canonical_name: "{target}.s-4320PZ013.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 728.16
+        kind: cota-instalacion
+      - lower: 773.56
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ017.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 759
+        kind: cota-instalacion
+      - lower: 751.19
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ020.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 706.38
+        kind: cota-instalacion
+      - lower: 712.26
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ022.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 704.79
+        kind: cota-instalacion
+      - lower: 707
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ023.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 721.94
+        kind: cota-instalacion
+      - lower: 703.67
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZD1INF.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 741.9
+        kind: cota-instalacion
+      - lower: 843.03
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZD1SUP.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 791.9
+        kind: cota-instalacion
+      - lower: 843.04
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZD2SUP.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 735.89
+        kind: cota-instalacion
+      - lower: 730.52
+        kind: cota-terreno
+      - upper: 743.01
+      - upper: 774.76
+
+  - canonical_name: "{target}.s-4320PZD3INF.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 720.53
+        kind: cota-instalacion
+      - lower: 727.93
+        kind: cota-terreno
+      - upper: 730.37
+      - upper: 740.69
+
+  - canonical_name: "{target}.s-4320PZD3SUP.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 723.94
+        kind: cota-instalacion
+      - lower: 727.93
+        kind: cota-terreno
+      - upper: 730.37
+      - upper: 740.69
+
+  - canonical_name: "{target}.s-4320PZD7INF.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 719.59
+        kind: cota-instalacion
+      - lower: 719.78
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZDE004.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 727.51
+        kind: cota-instalacion
+      - lower: 728.03
+        kind: cota-terreno
+      - upper: 739.9
+      - upper: 761.3
+
+  - canonical_name: "{target}.s-4320PZDE005.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 722.86
+        kind: cota-instalacion
+      - lower: 724.31
+        kind: cota-terreno
+      - upper: 759
+      - upper: 767.9
+
+  - canonical_name: "{target}.s-4320PZDE007.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 724.07
+        kind: cota-instalacion
+      - lower: 722.67
+        kind: cota-terreno
+      - upper: 726
+      - upper: 726.7
+
+  - canonical_name: "{target}.s-4320PZ015.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 842.21
+        kind: cota-instalacion
+      - lower: 873.87
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ021.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 732
+        kind: cota-instalacion
+      - lower: 720.81
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZDE008.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 712.07
+        kind: cota-instalacion
+      - lower: 712.53
+        kind: cota-terreno

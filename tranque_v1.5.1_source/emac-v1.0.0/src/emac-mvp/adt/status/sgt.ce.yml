@@ -1,0 +1,7 @@
+name: CE -- Status ADT
+
+inputs:
+  - "@emac-mvp/sgt/ce"
+  - "@emac-mvp/adt/arima/sgt.ce"
+
+script: ./../adt.js

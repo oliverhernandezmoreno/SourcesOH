@@ -1,0 +1,23 @@
+name: Evidencia de problemas que afectan la integridad del estribo por sector
+type: manual
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+    - canonical_name: estribos
+      name: Estribos
+
+choices:
+  - choice: No hay evidencia
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay evidencia de problemas en el estribo
+    value:
+      choiceValue: 1
+      gte: 1
+
+frequencies:
+  - minutes: 1440  # 1 día

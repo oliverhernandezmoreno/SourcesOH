@@ -1,0 +1,15 @@
+name: Intensidad de lluvia
+range_gte: 0
+type: raw
+
+unit:
+  id: millimeters-hour
+  name: Milímetros por hora
+  abbreviation: mm/hr
+  si: false
+
+thresholds:
+  - upper: ~  # debe ser definido
+
+frequencies:
+  - minutes: 60  # 1 hora

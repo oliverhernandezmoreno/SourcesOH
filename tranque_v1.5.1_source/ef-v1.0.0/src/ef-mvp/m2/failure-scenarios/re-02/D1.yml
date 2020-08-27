@@ -1,0 +1,26 @@
+name: Evento D1 de Rebalse por ola debido a deslizamiento
+description: >-
+  a) Evento D1 (Por confirmación manual)
+    Se deben cumplir todos los eventos en un sector para activar el escenario de falla
+      Eventos Módulo 1
+        Evento gatillador: Deslizamiento inminente hacia el interior de la laguna (Evento C)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m1/triggers/deslizamiento-inminente"
+  - "@ef-mvp/m2/failure-scenarios/re-02/confirmacion-manual-D1"

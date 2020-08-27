@@ -1,0 +1,34 @@
+---
+- name:          60-run-setup
+  hosts:         all
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+
+  - name:        wait until storage service is healthy
+    command:     docker ps -f name=qa-storage -f health=healthy -q
+    register:    storage_container
+    retries:     30
+    delay:       10
+    until:       storage_container.stdout_lines|length == 1
+
+  - name:        wait until django service is healthy
+    command:     docker ps -f name=qa-django -f health=healthy -q
+    register:    django_container
+    retries:     30
+    delay:       10
+    until:       django_container.stdout_lines|length == 1
+
+  - name:        copy setup package into container
+    command:     docker cp ./stack/setup-package qa-django:/tmp/
+
+  - name:        run setup package
+    command:     docker exec qa-django /tmp/setup-package/setup.sh
+    register:    setup_output
+
+  - name:        log setup output
+    debug:
+      var:       setup_output.stdout_lines

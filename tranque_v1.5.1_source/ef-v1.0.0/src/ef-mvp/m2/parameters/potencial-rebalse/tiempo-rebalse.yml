@@ -1,0 +1,20 @@
+name: Tiempo de rebalse
+
+unit:
+  id: hour
+  name: Hora
+  abbreviation: hr
+  si: false
+
+frequencies:
+  - protocol: lluvia
+    minutes: 60  # 1 hora
+
+thresholds:
+  - lower: ~
+    kind: tiempo-evacuacion
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse/ingreso-real-acumulado"
+  - "@ef-mvp/m2/parameters/potencial-rebalse/ingreso-pronosticado"
+  - "@ef-mvp/m2/parameters/variables/volumen-disponible"

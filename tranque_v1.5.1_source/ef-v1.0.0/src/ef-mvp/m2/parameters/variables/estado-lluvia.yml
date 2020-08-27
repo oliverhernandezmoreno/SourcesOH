@@ -1,0 +1,18 @@
+name: Estado de lluvia
+
+thresholds:
+  - upper: 60  # minutes
+
+inputs:
+  - "@ef-mvp/m2/parameters/lluvia"
+  - "@ef-mvp/m1/triggers/important/lluvia"
+
+choices:
+  - choice: "Lloviendo"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No lloviendo"
+    value:
+      choiceValue: 0
+      lte: 0

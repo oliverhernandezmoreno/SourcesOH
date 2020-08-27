@@ -1,0 +1,13 @@
+s=${BACKEND_IMAGE}=fundacionchile.azurecr.io/tranque/backend:v1-4-0=
+s=${ENRICHMENT_IMAGE}=fundacionchile.azurecr.io/tranque/enrichment:v1-4-0=
+s=${STATS_IMAGE}=fundacionchile.azurecr.io/tranque/stats:v1-4-0=
+s=${CRON_IMAGE}=fundacionchile.azurecr.io/tranque/cron:v1-4-0=
+s=${LOGSTASH_IMAGE}=fundacionchile.azurecr.io/tranque/logstash:v1-4-0=
+s=${BEATS_CONSUMER_IMAGE}=fundacionchile.azurecr.io/tranque/beats-consumer:v1-4-0=
+s=${ELASTICSEARCH_IMAGE}=fundacionchile.azurecr.io/tranque/elasticsearch:v1-4-0=
+s=${RABBITMQ_IMAGE}=fundacionchile.azurecr.io/tranque/rabbitmq:v1-4-0=
+s=${STORAGE_IMAGE}=fundacionchile.azurecr.io/tranque/storage:v1-4-0=
+s=${FRONTEND_IMAGE}=fundacionchile.azurecr.io/tranque/frontend:v1-4-0-sml=
+s=${DJANGO_STATIC_IMAGE}=fundacionchile.azurecr.io/tranque/django-static:v1-4-0=
+s=${KIBANA_IMAGE}=fundacionchile.azurecr.io/tranque/kibana:v1-4-0=
+s=${PROXY_IMAGE}=fundacionchile.azurecr.io/tranque/proxy:v1-4-0=

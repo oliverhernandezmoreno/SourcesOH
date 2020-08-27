@@ -1,0 +1,31 @@
+name: Evento C1 de Módulos de deformación y resistencia al corte del material de relleno del muro del depósito
+description: >-
+  Evento C1: (Se informa por sector)
+  En caso de mantenerse activo por un tiempo “α” el Evento B1 se activa automáticamente.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/modulos-deformacion-resistencia-muro/detecta-B1"
+
+parameters:
+  - canonical_name: alfa-modulos-deformacion-resistencia-muro
+    name: "Corresponde a la máxima cantidad de tiempo que puede estar activo el evento especificado antes de activar una Alerta Amarilla automática."
+    schema:
+      type: number
+      exclusiveMinimum: 0
+    value: 2940 #hours

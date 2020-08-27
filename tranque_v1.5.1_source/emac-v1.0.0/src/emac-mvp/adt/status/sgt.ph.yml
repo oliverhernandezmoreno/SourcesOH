@@ -1,0 +1,7 @@
+name: pH -- Status ADT
+
+inputs:
+  - "@emac-mvp/sgt/ph"
+  - "@emac-mvp/adt/arima/sgt.ph"
+
+script: ./../adt.js

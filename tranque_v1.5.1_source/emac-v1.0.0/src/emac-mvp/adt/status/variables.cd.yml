@@ -1,0 +1,7 @@
+name: Cd -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/cd"
+  - "@emac-mvp/adt/arima/variables.cd"
+
+script: ./../adt.js

@@ -1,0 +1,11 @@
+# editor artifacts
+*~
+
+# build artifacts
+/node_modules
+/build
+build.tgz
+
+# non-full graphs
+/graphs/dependency
+/graphs/influence

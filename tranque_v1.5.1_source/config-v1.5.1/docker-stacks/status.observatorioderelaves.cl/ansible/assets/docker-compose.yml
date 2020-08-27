@@ -1,0 +1,47 @@
+version:         "3.4"
+
+x-logging:       &logging
+  driver:        "json-file"
+  options:
+    max-size:    "10m"
+    max-file:    "3"
+
+x-env-files:     &env-files
+  env_file:
+    - .env
+    - .secrets
+
+services:
+  postgres:
+    image:       postgres:9.5
+    <<:          *env-files
+    logging:     *logging
+    volumes:
+      - /home/ec2-user/statuspage-data/postgresql:/var/lib/postgresql/data
+    restart:     always
+
+  cachet:
+    image:       cachethq/docker:2.3.15
+    <<:          *env-files
+    logging:     *logging
+    depends_on:
+      - postgres
+    restart:     always
+
+  lets-nginx:
+    image:       smashwilson/lets-nginx
+    logging:     *logging
+    depends_on:
+      - cachet
+    restart:     always
+    volumes:
+      - /home/ec2-user/statuspage-data/letsencrypt/cache:/cache
+      - /home/ec2-user/statuspage-data/letsencrypt/letsencrypt:/etc/letsencrypt
+    environment:
+      EMAIL: "sistemas@inria.cl"
+      DOMAIN: "status.observatorioderelaves.cl"
+      UPSTREAM: "cachet:8000"
+      STAGING: 0
+    ports:
+      - 80:80
+      - 443:443

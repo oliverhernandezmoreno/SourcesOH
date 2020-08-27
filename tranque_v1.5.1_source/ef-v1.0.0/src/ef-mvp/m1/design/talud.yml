@@ -1,0 +1,26 @@
+name: Inclinación talud aguas abajo y aguas arriba del muro
+description: >-
+  El operador debe verificar que se cumple con la inclinación de los
+  taludes de aguas arriba y aguas abajo definidas por diseño,
+  verificando que no existan sectores puntuales que presenten un
+  evidente cambio de pendiente que modifique visualmente la geometría
+  del muro. En caso de detectar visualmente un problema de este tipo
+  es necesario activar este evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q06

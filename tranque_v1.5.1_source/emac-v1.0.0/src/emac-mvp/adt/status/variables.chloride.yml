@@ -1,0 +1,7 @@
+name: Cl -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/chloride"
+  - "@emac-mvp/adt/arima/variables.chloride"
+
+script: ./../adt.js

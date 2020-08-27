@@ -1,0 +1,32 @@
+name: Evento C1 de Condiciones asociadas a los escenarios de falla Módulo 2 Re-01 Rebalse por pérdida de revancha hidráulica durante lluvia intensa
+description: >-
+  Re-01 Rebalse por pérdida de revancha hidráulica durante lluvia intensa
+  Eventos Grupo C
+  a) Evento C1
+    Se deben cumplir todos los eventos en un sector para activar el escenario de falla
+      Eventos Módulo 1
+        Evento gatillador Lluvia en desarrollo (Evento B)
+      Eventos Módulo 2
+        Revancha hidráulica (Evento B1)
+        Potencial de rebalse (Evento B4)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/lluvia/B1"
+  - "@ef-mvp/m2/parameters/revancha-hidraulica/B1"
+  - "@ef-mvp/m2/parameters/potencial-rebalse/B4"

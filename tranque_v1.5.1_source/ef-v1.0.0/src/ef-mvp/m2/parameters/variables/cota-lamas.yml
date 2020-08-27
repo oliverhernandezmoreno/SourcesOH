@@ -1,0 +1,21 @@
+name: Cota de lamas
+description: Punto de encuentro del muro aguas-arriba con la playa de lamas
+range_gte: 0
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+frequencies:
+  - minutes: 10080  # 7 días
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/elevacion"

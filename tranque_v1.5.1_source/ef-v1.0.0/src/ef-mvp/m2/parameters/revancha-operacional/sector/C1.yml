@@ -1,0 +1,14 @@
+name: Evento C1 de revancha operacional
+description: >-
+  La revancha operacional excede el umbral inferior.
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-operacional/C1"
+
+script: common-scripts/al-menos-un-evento.js

@@ -1,0 +1,14 @@
+name: Exclusiones por afectación aguas arriba -- Vida Acuática
+
+scope: group
+groups:
+  items:
+    - name: Muestreo superficial
+      canonical_name: superficial
+    - name: Muestreo subterráneo
+      canonical_name: subterraneo
+
+inputs:
+  - "@emac-mvp/normalized-variables/vida-acuatica/*"
+
+script: ./exclusions.js

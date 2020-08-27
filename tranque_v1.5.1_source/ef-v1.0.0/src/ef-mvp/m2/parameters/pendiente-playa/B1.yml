@@ -1,0 +1,12 @@
+name: Evento B1 de pendiente de playa
+description: >-
+  La pendiente de playa se acerca al umbral
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-playa"

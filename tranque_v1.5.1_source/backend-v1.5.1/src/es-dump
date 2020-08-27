@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+# This script dumps the result of querying specific index patterns
+# into a nd-json stream (lines of json documents).
+# Usage:
+# ./es-dump.sh ELASTICSEARCH_HOST_AND_PORT INDEX_PATTERN > TARGET_FILE
+
+set -e
+
+batch_size=100
+es_host="$1"
+index="$2"
+
+initial=$(curl -sS -X POST -H "Content-Type: application/json" "${es_host}/${index}/_search?scroll=1m" -d"{
+  \"size\": ${batch_size},
+  \"query\": {\"match_all\": {}}
+}")
+scroll_id=$(echo -n "${initial}" | jq -M ._scroll_id)
+hits_fetched=$(echo -n "${initial}" | jq -M '.hits.hits|length')
+
+echo -n "${initial}" | jq -c -M '.hits.hits[] | {_index: ._index, _id: ._id, _source: ._source}'
+
+while test "${hits_fetched}" -eq "${batch_size}"
+do
+    results=$(curl -sS -X POST -H "Content-Type: application/json" "${es_host}/_search/scroll" -d"{
+  \"scroll\": \"1m\",
+  \"scroll_id\": ${scroll_id}
+}")
+    scroll_id=$(echo -n "${results}" | jq -M ._scroll_id)
+    hits_fetched=$(echo -n "${results}" | jq -M '.hits.hits|length')
+
+    echo -n "${results}" | jq -c -M '.hits.hits[] | {_index: ._index, _id: ._id, _source: ._source}'
+done

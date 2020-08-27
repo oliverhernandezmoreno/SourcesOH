@@ -1,0 +1,9 @@
+---
+- import_playbook: 00-install-docker.yml
+- import_playbook: 10-docker-labels.yml
+- import_playbook: 20-setup-elasticsearch.yml
+- import_playbook: 30-docker-registry.yml
+- import_playbook: 40-copy-files-smc.yml
+- import_playbook: 41-copy-files-sml-connected.yml
+- import_playbook: 42-copy-files-sml-disconnected.yml
+- import_playbook: 50-docker-compose-up.yml

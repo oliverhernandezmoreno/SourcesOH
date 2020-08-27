@@ -1,0 +1,13 @@
+name: CN -- Vida Acuática -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/cyanide"
+  - "@emac-mvp/valid-variables/cyanide"
+
+script: ./../normalization-vida-acuatica.js

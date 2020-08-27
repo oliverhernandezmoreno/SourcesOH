@@ -1,0 +1,26 @@
+name: Evento D1
+description: Se detecta superación de umbral de máxima aceleración medida en roca
+
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+
+scope: group
+groups:
+  items:
+    - canonical_name: roca
+      name: Roca del depósito
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/aceleracion-sismica"
+
+script: ef-mvp/m2/parameters/aceleracion-sismica/supera.js

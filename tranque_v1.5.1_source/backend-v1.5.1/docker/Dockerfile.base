@@ -1,0 +1,19 @@
+FROM python:3.6-buster
+
+ADD https://github.com/krallin/tini/releases/download/v0.18.0/tini /tini
+
+RUN chmod +x /tini && \
+  apt-get update && \
+  apt-get install -y \
+  graphviz \
+  libgdal-dev \
+  netcat && \
+  rm -rf /var/lib/apt/lists/* && \
+  wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64 && \
+  mv jq-linux64 /usr/bin/jq && \
+  chmod a+x /usr/bin/jq
+
+WORKDIR /usr/src/app
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt

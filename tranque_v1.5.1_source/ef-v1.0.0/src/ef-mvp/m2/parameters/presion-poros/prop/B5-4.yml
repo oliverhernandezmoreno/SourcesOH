@@ -1,0 +1,31 @@
+name: Presión de poros evento B5-4
+description: >-
+  Si un instrumento supera el segundo umbral (valor crítico) y un
+  instrumento en el mismo sector, pero en una ubicación distinta
+  supera el segundo umbral. Se informa por sector, por instrumento.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/t2.sector"
+
+script: ./B5-14.js
+
+meta:
+  others:
+    type: array
+    items: {type: string}

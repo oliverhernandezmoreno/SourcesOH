@@ -1,0 +1,148 @@
+version: "3.4"
+
+x-service: &service
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "3"
+  restart: on-failure
+
+x-service-with-env: &service-with-env
+  <<: *service
+  env_file:
+    - .env.defaults
+    - ../config/.env.secrets
+    - .env.fixed
+
+services:
+  # core application components
+
+  backend:
+    <<: *service-with-env
+    image: ${BACKEND_IMAGE}
+    healthcheck:
+      test: nc -z localhost 8000 || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 120
+    volumes:
+      - ../config/setup-package:/initial-setup
+      - backend_configuration_state:/configuration-state
+    depends_on:
+      - postgis
+
+  amqpconsumer:
+    <<: *service-with-env
+    image: ${BACKEND_IMAGE}
+    entrypoint: ["/entrypoint.amqpconsumer.sh"]
+    command: ["./manage.py", "runconsumer"]
+    depends_on:
+      - amqpbroker
+      - postgis
+
+  amqpconsumer-smc:
+    <<: *service-with-env
+    image: ${BACKEND_IMAGE}
+    entrypoint: ["/entrypoint.amqpconsumer.sh"]
+    command: ["./manage.py", "runconsumer", "--smc"]
+    depends_on:
+      - postgis
+
+  enrichment:
+    <<: *service-with-env
+    image: ${ENRICHMENT_IMAGE}
+    depends_on:
+      - amqpbroker
+      - postgis
+
+  stats:
+    <<: *service
+    image: ${STATS_IMAGE}
+
+  cron:
+    <<: *service-with-env
+    image: ${CRON_IMAGE}
+
+  logstash:
+    <<: *service-with-env
+    image: ${LOGSTASH_IMAGE}
+    depends_on:
+      - amqpbroker
+      - elasticsearch
+      - redis
+
+  beats-consumer:
+    <<: *service-with-env
+    image: ${BEATS_CONSUMER_IMAGE}
+    depends_on:
+      - redis
+
+  # core supporting services
+
+  postgis:
+    <<: *service-with-env
+    image: mdillon/postgis:10
+    volumes:
+      - database:/var/lib/postgresql/data
+
+  elasticsearch:
+    <<: *service-with-env
+    image: ${ELASTICSEARCH_IMAGE}
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+
+  amqpbroker:
+    <<: *service
+    image: ${RABBITMQ_IMAGE}
+
+  redis:
+    <<: *service
+    image: redis:4-alpine
+    volumes:
+      - redis:/data
+
+  storage:
+    <<: *service-with-env
+    image: ${STORAGE_IMAGE}
+    volumes:
+      - storage:/data
+
+  # frontends
+
+  frontend:
+    <<: *service
+    image: ${FRONTEND_IMAGE}
+
+  django-static:
+    <<: *service
+    image: ${DJANGO_STATIC_IMAGE}
+
+  kibana:
+    <<: *service
+    image: ${KIBANA_IMAGE}
+    depends_on:
+      - elasticsearch
+
+  proxy:
+    <<: *service
+    image: ${PROXY_IMAGE}
+    entrypoint: ["/entrypoint/subst.sh"]
+    command: ["nginx", "-g", "daemon off;"]
+    volumes:
+      - ./proxy:/entrypoint
+    depends_on:
+      - backend
+      - beats-consumer
+      - frontend
+      - django-static
+    ports:
+      - 80:80
+      - 443:443
+
+volumes:
+  backend_configuration_state:
+  database:
+  elasticsearch:
+  redis:
+  storage:

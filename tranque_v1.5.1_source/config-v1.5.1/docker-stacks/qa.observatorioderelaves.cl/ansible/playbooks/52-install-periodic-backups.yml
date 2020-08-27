@@ -1,0 +1,20 @@
+---
+- name:          52-install-periodic-backups
+  hosts:         all
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+    - name:      make backup file executable
+      file:
+        path:    "/home/{{ server_user }}/stack/backup.sh"
+        mode:    u+rwx,g+rx-w,o+rx-w
+
+    - name:      install cron job
+      cron:
+        name:    "full stack logical backup"
+        minute:  "0"
+        hour:    "1"
+        job:     "/home/{{ server_user }}/stack/backup.sh"

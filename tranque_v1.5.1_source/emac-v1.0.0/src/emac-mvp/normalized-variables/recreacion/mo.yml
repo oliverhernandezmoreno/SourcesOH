@@ -1,0 +1,13 @@
+name: Mo -- Recreación -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/mo"
+  - "@emac-mvp/valid-variables/mo"
+
+script: ./../normalization-recreacion.js

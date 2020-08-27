@@ -1,0 +1,31 @@
+name: Presión de poros evento C2-2
+description: >-
+  Si de dos instrumentos validables entre sí, uno de ellos supera el
+  primer umbral (valor irregular) es validado manualmente y el otro
+  supera el segundo umbral (valor critico). Se informa por sector, por
+  instrumento.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/t1.redundancia"
+  - "@ef-mvp/m2/parameters/presion-poros/t2.redundancia"
+
+meta:
+  others:
+    type: array
+    items: {type: string}

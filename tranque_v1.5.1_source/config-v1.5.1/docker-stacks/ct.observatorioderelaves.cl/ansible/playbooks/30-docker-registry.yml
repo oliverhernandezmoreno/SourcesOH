@@ -1,0 +1,14 @@
+---
+- name:           30-docker-registry
+  hosts:          all
+  remote_user:    ec2-user
+  become:         yes
+  become_user:    root
+  vars_files:
+    - ../variables/inria-chile-registry.secrets
+  tasks:
+  - name:         log into docker registry
+    docker_login:
+      registry:   "{{ registry_url }}"
+      username:   "{{ registry_user }}"
+      password:   "{{ registry_token }}"

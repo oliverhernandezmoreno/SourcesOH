@@ -1,0 +1,61 @@
+name: Evento D2 de Condiciones asociadas a los escenarios de falla (Módulo 2) EI-01 Erosión interna producto de filtración descontroladas
+description: >-
+  Eventos Grupo D
+  a) Evento D1:
+    Se deben cumplir todos los eventos en un sector para activar el escenario de falla:
+    Eventos Módulo 2:
+      • Presencia de filtraciones en el muro del depósito: (Evento C1 o C2)
+    Adicionalmente se cumple al menos uno de los siguientes:
+    Eventos Módulo 2:
+      • Distancia mínima al muro de la laguna aguas claras: (Evento B1 o superior)
+      • Presión de poros: (Evento B5 o superior)
+      • Turbiedad en el sistema de drenaje: (Evento B1, B2 o B3)
+      • Presencia de grietas en el muro del depósito: (Evento C1 o C2)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  # Condicion: Presencia de filtraciones en el muro del depósito: (Evento C1 o C2)
+  - "@ef-mvp/m2/parameters/integridad-externa/filtraciones/C1"
+  - "@ef-mvp/m2/parameters/integridad-externa/filtraciones/C2"
+  # Condicion: Distancia mínima al muro de la laguna aguas claras: (Evento B1 o superior)
+  - "@ef-mvp/m2/parameters/distancia-laguna/B2"
+  - "@ef-mvp/m2/parameters/distancia-laguna/C1"
+  # Condicion: Presión de poros: (Evento B5 o superior)
+  - "@ef-mvp/m2/parameters/presion-poros/B5-1"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-2"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-3"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-4"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-1"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-2"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-3"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-1"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-2"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-3"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-4"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-5"
+  - "@ef-mvp/m2/parameters/presion-poros/C2-1"
+  - "@ef-mvp/m2/parameters/presion-poros/C2-2"
+  - "@ef-mvp/m2/parameters/presion-poros/D1"
+  - "@ef-mvp/m2/parameters/presion-poros/D2"
+  # Condicion: Turbiedad en el sistema de drenaje: (Evento B1, B2 o B3)
+  - "@ef-mvp/m2/parameters/turbiedad/B1"
+  - "@ef-mvp/m2/parameters/turbiedad/B2"
+  - "@ef-mvp/m2/parameters/turbiedad/B3"
+  # Condicion: Presencia de grietas en el muro del depósito: (Evento C1 o C2)
+  - "@ef-mvp/m2/parameters/integridad-externa/grietas/C1"
+  - "@ef-mvp/m2/parameters/integridad-externa/grietas/C2"

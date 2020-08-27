@@ -1,0 +1,15 @@
+remotes:
+  - namespace: tracktec-sml
+    exchange: federated.tracktec-sml
+    bucket: dev-tranque-sml-inria
+    targets:
+      - dep01
+      - dep02
+      - dep03
+      - dep04
+      - dep05
+      - dep06
+      - dep07
+      - dep08
+      - dep09
+      - dep10

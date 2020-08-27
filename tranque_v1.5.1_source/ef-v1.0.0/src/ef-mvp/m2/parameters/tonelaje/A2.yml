@@ -1,0 +1,39 @@
+name: Evento A2 de Tonelaje de relaves o lamas depositados en la cubeta y muro
+description: >-
+  Si el Plan de depositación menos error es mayor que el tonelaje actual se activa
+  (Fuente: https://p3-programa-tranque.slack.com/archives/CDE99KXGX/p1588962307170500)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+inputs:
+  - "@ef-mvp/m2/parameters/tonelaje"
+
+parameters:
+  - canonical_name: plan-depositacion-proyecto
+    name: "Plan de depositación del proyecto [tonelaje vs tiempo]: Se utiliza una tabla de datos que relaciona el tonelaje acumulado en el depósito con respecto a la fecha en la cual el depósito debe alcanzar ese tonelaje de acuerdo al diseño o la planificación de la operación."
+    schema:
+      type: object
+      properties:
+        curve:
+          type: array
+          items:
+            type: object
+            properties:
+              date: {type: string}
+              value: {type: number}
+            required: ["date", "value"]
+
+  - canonical_name: error-permitido-tonelaje-plan-depositacion-proyecto
+    name: "Error permitido tonelaje con respecto al plan de depositación del proyecto."
+    schema:
+      type: number
+      exclusiveMinimum: 0
+    value: 4500

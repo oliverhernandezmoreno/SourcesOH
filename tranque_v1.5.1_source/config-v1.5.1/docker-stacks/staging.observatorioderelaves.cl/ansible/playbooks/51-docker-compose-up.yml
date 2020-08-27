@@ -1,0 +1,13 @@
+---
+- name:                        51-docker-compose-up
+  hosts:                       all
+  vars:
+    server_user:               ec2-user
+  remote_user:                 "{{ server_user }}"
+  become:                      yes
+  become_user:                 root
+  tasks:
+    - name:                    docker-compose up
+      docker_compose:
+        project_src:           "/home/{{ server_user }}/stack"
+        state:                 present

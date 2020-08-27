@@ -1,0 +1,13 @@
+name: Ancho de coronamiento máximo del depósito
+range_gte: 0
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+inputs:
+  - "@ef-mvp/m2/parameters/ancho-coronamiento/maximo-sector"
+
+script: common-scripts/maximo.js

@@ -1,0 +1,14 @@
+---
+- name:            20-setup-elasticsearch
+  hosts:           all
+  vars:
+    server_user:   ec2-user
+  remote_user:     "{{ server_user }}"
+  become:          yes
+  become_user:     root
+  tasks:
+    - name:        set vm max map count
+      sysctl:
+        name:      vm.max_map_count
+        value:     262144
+        state:     present

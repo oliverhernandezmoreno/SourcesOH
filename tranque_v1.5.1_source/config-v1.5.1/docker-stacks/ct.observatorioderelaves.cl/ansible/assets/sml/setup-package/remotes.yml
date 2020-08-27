@@ -1,0 +1,9 @@
+remotes:
+  - namespace: ct-sml
+    exchange: federated.ct-sml
+    bucket: sml
+    targets:
+      - primero
+      - segundo
+      - tercero
+      - cuarto

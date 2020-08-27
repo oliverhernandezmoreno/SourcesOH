@@ -1,0 +1,15 @@
+name: Evento A2 de altura del coronamiento del muro
+description: >-
+  La altura está muy por debajo de la proyectada por el plan de
+  crecimiento.
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/altura-muro/A2"
+
+script: common-scripts/al-menos-un-evento.js

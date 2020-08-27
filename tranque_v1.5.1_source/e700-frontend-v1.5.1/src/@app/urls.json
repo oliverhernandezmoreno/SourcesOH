@@ -1,0 +1,450 @@
+[
+  "/",
+  {
+    "home": "",
+    "glossary": "glosario",
+    "login": "login",
+    "e700": [
+      "e700/",
+      {
+        "form": "formulario/:target_canonical_name/:id/:step?",
+        "target": "deposito/:target_canonical_name",
+        "assign": "asignar-formulario",
+        "registry": [
+          "registro/",
+          {
+            "all": "todos",
+            "received": "recibidos",
+            "reviewed-no-comments": "revisados-sin-observacion",
+            "reviewed-with-comments": "revisados-con-observacion",
+            "not-received": "por-recibir",
+            "generated-cases": "casos",
+            "new-requests": "solicitudes"
+          }
+        ],
+        "detail": "detalle_registro/:id",
+        "case": "detalle_caso/:id"
+      }
+    ],
+    "miners": [
+      "mineras/",
+      {
+        "home": "",
+        "requests": [
+          "solicitudes/",
+          {
+            "pendingReceived": ["recibidas-pendientes/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}],
+            "resolvedReceived": ["recibidas-resueltas/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}],
+            "pendingRequested": ["solicitadas-pendientes/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}],
+            "resolvedRequested": ["solicitadas-resueltas/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}]
+          }
+        ],
+        "target": [
+          "deposito/:target/",
+          {
+            "ef": [
+              "estabilidad_deposito/",
+              {
+                "dashboard": "dashboard",
+                "dataLoad": [
+                  "datos/carga/:executor/",
+                  {
+                    "fromFile": "archivo/:operation?"
+                  }
+                ],
+                "registry": [
+                  "datos/registros/:executor/",
+                  {
+                    "operationList": "registro-ingresos"
+                  }
+                ],
+                "data": [
+                  "datos/",
+                  {
+                    "template": ":template"
+                  }
+                ],
+                "inspection-and-evaluation": [
+                  "inspeccion-y-evaluacion/",
+                  {
+                    "inspection": "inspeccion/:executor",
+                    "evaluation": "evaluacion/:executor",
+                    "registry": "historico",
+                    "voucher": "comprobante/:operation"
+                  }
+                ],
+                "tickets": [
+                  "incidentes/",
+                  {
+                    "open": [
+                      "activos/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "archived": [
+                      "archivados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "unevaluable": [
+                      "no-evaluables/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "closed": [
+                      "cerrados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "new": "nuevo/:module"
+                  }
+                ]
+              }
+            ],
+            "emac": [
+              "aguas_circundantes/",
+              {
+                "dashboard": "dashboard",
+                "massLoad": "datos/carga/:executor?/:operation?",
+                "data": [
+                  "datos/",
+                  {
+                    "load": "registro/",
+                    "iiSuperficial": "ii/superficial",
+                    "iiSubterranean": "ii/subterraneo",
+                    "irSuperficial": [
+                      "ir/superficial/",
+                      {
+                        "forUse": ":path",
+                        "riego": "riego",
+                        "aguaPotable": "agua-potable",
+                        "recreacion": "recreacion",
+                        "vidaAcuatica": "vida-acuatica"
+                      }
+                    ],
+                    "irSubterranean": [
+                      "ir/subterraneo/",
+                      {
+                        "forUse": ":path",
+                        "riego": "riego",
+                        "aguaPotable": "agua-potable",
+                        "recreacion": "recreacion",
+                        "vidaAcuatica": "vida-acuatica"
+                      }
+                    ],
+                    "ir": [
+                      "ir/:waterType/:indexType",
+                      {
+                        "detail": ":templateCN"
+                      }
+                    ],
+                    "raw": [
+                      "en-bruto/",
+                      {
+                        "byVariable": "por-variable",
+                        "bySource": "por-punto-monitoreo"
+                      }
+                    ]
+                  }
+                ],
+                "tickets": [
+                  "incidentes/",
+                  {
+                    "open": [
+                      "activos/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "archived": [
+                      "archivados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "unevaluable": [
+                      "no-evaluables/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "closed": [
+                      "cerrados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "new": "nuevo/:module"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "authorities": [
+      "autoridades/",
+      {
+        "home": "",
+        "map": "mapa",
+        "requests": [
+          "solicitudes/",
+          {
+            "pendingReceived": ["recibidas-pendientes/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}],
+            "resolvedReceived": ["recibidas-resueltas/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}],
+            "pendingRequested": ["solicitadas-pendientes/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}],
+            "resolvedRequested": ["solicitadas-resueltas/", {"ef-emac": "ef-emac", "ef": "ef", "emac": "emac"}]
+          }
+        ],
+        "tickets": [
+          "incidentes/",
+          {
+            "ef": [
+              "estabilidad_deposito/",
+              {
+                "open": [
+                  "activos/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "archived": [
+                  "archivados/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "unevaluable": [
+                  "no-evaluables/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "closed": [
+                  "cerrados/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "new": "nuevo/:module"
+              }
+            ],
+            "emac": [
+              "aguas-circundantes/",
+              {
+                "open": [
+                  "activos/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "archived": [
+                  "archivados/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "unevaluable": [
+                  "no-evaluables/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "closed": [
+                  "cerrados/",
+                  {
+                    "target": [
+                      ":target?/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ]
+                  }
+                ],
+                "new": "nuevo/:module"
+              }
+            ]
+          }
+        ],
+        "target": [
+          "deposito/:target/",
+          {
+            "info": "informacion-basica",
+            "tickets": [
+              "incidentes/",
+              {
+                "ef": [
+                  "estabilidad_deposito/",
+                  {
+                    "open": [
+                      "activos/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "archived": [
+                      "archivados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "unevaluable": [
+                      "no-evaluables/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "closed": [
+                      "cerrados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "new": "nuevo/:module"
+                  }
+                ],
+                "emac": [
+                  "aguas-circundantes/",
+                  {
+                    "open": [
+                      "activos/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "archived": [
+                      "archivados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "unevaluable": [
+                      "no-evaluables/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "closed": [
+                      "cerrados/",
+                      {
+                        "detail": ":ticketId?"
+                      }
+                    ],
+                    "new": "nuevo/:module"
+                  }
+                ]
+              }
+            ],
+            "data": [
+              "datos/",
+              {
+                "emac": [
+                  "aguas-circundantes/",
+                  {
+                    "rawByVariable": "Datos-por-variable",
+                    "rawBySource": "Datos-por-punto",
+                    "map": "Mapa-puntos-monitoreo"
+                  }
+                ],
+                "ef": [
+                  "estabilidad-fisica/",
+                  {
+                    "template": ":template",
+                    "inspections": [
+                      "registro-inspeccion",
+                      {
+                        "registry": "historico",
+                        "voucher": "comprobante/:operation"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "semaphores": [
+              "semaforos/",
+              {
+                "history": "historial",
+                "create": "alerta-manual",
+                "connection": "conexion"
+              }
+            ],
+            "indexes": [
+              "indices/",
+              {
+                "detail": ":templateName/"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "public": [
+      "publico/",
+      {
+        "home": "",
+        "targets": [
+          "depositos/:commune/",
+          {
+            "target": [
+              "deposito/:target/",
+              {
+                "monitor": [
+                  "monitoreo/",
+                  {
+                    "indexes": [
+                      "indices/",
+                      {
+                        "detail": ":templateName/"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+name: Evento C2
+description: Se detecta deformación de inclinómetro en el eje Y en suelo de fundación
+
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+
+scope: group
+groups:
+  parents:
+    - canonical_name: inclinometros
+      name: "Inclinometros"
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/suelo/inclinometro/eje-y/deformacion-inclinometro-z"
+  - "@ef-mvp/m2/parameters/deformacion-inclinometro-z-eje-y"

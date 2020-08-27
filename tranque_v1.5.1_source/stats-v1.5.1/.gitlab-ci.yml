@@ -1,0 +1,118 @@
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - linting
+  - build base
+  - test
+  - sonar
+  - push
+  - deploy
+
+lint:
+  stage: linting
+  image: python:3.6-alpine
+  script:
+    - pip install "flake8==3.7.7"
+    - flake8
+
+pre-build:
+  stage: build base
+  only:
+    refs:
+      - dev
+      - master
+      - tags
+    changes:
+      - docker/Dockerfile.base
+      - requirements.txt
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}/base:${CI_COMMIT_REF_SLUG}" -f docker/Dockerfile.base .
+    - docker push "${CI_REGISTRY_IMAGE}/base:${CI_COMMIT_REF_SLUG}"
+
+test:
+  stage: test
+  image: registry.gitlab.com/inria-chile/tranque/stats/base:dev
+  script:
+    - pip install -r requirements.dev.txt
+    - pytest --cov-report=xml
+    - mkdir coverage-reports
+    - mv coverage.xml coverage-reports/coverage-report.xml
+  artifacts:
+    paths:
+      - coverage-reports
+
+sonar:
+  stage: sonar
+  only:
+    - dev
+    - master
+  image:
+    name: newtmitch/sonar-scanner:3.2.0
+    entrypoint: ['']
+  script:
+    # install vault
+    - wget -q https://releases.hashicorp.com/vault/0.11.1/vault_0.11.1_linux_amd64.zip
+    - unzip -q vault_0.11.1_linux_amd64.zip
+    - rm -f vault_0.11.1_linux_amd64.zip
+    # get sonar login token from vault
+    - SONAR_TOKEN=$(./vault read -field=key secret/tranque/dev/sonarqube/login)
+    # - run sonar scanner
+    - sonar-scanner -Dsonar.projectBaseDir=$CI_PROJECT_DIR -Dsonar.host.url=https://sonar.dev.inria.cl -Dsonar.login=$SONAR_TOKEN -Dsonar.projectName="Tranque Stats" -Dsonar.projectKey=tranque-stats -Dsonar.projectVersion=$CI_COMMIT_SHA
+
+push-r-base:
+  stage: push
+  only:
+    refs:
+      - dev
+      - master
+      - tags
+    changes:
+      - docker/Dockerfile.R
+      - install-packages.R
+      - src-r/*
+      - test-r/*
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}/r-base:${CI_COMMIT_REF_SLUG}" -f docker/Dockerfile.R .
+    - docker push "${CI_REGISTRY_IMAGE}/r-base:${CI_COMMIT_REF_SLUG}"
+
+push-app:
+  stage: push
+  only:
+    - dev
+    - master
+    - tags
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" -f docker/Dockerfile --build-arg BASE_VARIANT=${CI_COMMIT_REF_SLUG} --build-arg CI_COMMIT_SHA=${CI_COMMIT_SHA} .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
+
+deploy:
+  stage: deploy
+  only:
+    - dev
+    - master
+  when: manual
+  image: alpine:3.8
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8017352/trigger/pipeline
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${CI_COMMIT_REF_SLUG} ${TRIGGER_URL}

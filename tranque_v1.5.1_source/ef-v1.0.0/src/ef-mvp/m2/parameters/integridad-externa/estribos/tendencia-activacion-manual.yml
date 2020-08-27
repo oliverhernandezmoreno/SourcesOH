@@ -1,0 +1,19 @@
+name: Activación manual - tendencia desfavorable, deformación en sector de estribo
+type: manual
+
+
+choices:
+  - choice: No hay evidencia
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay evidencia de tendencia desfavorable asociada a deformación en el estribo
+    value:
+      choiceValue: 1
+      gte: 1
+
+scope: group
+groups:
+  parents:
+    - canonical_name: estribos
+      name: Sectores que pertencen a los estribos

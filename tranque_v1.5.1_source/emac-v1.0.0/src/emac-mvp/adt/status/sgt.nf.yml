@@ -1,0 +1,7 @@
+name: NF -- Status ADT
+
+inputs:
+  - "@emac-mvp/sgt/nf"
+  - "@emac-mvp/adt/arima/sgt.nf"
+
+script: ./../adt.js

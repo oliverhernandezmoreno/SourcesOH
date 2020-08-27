@@ -1,0 +1,28 @@
+name: Revancha operacional e hidráulica
+description: >-
+  El operador debe verificar que se cumple con las revanchas mínimas,
+  tanto operacional asociada al relave como hidráulica asociada a la
+  laguna de aguas claras. Adicionalmente debe verificar que la
+  revancha operacional asociada al contacto con las lamas sea
+  constante a lo largo del muro y no presente sectores puntuales en
+  los que las lamas están peligrosamente cerca del coronamiento. En
+  caso de detectar visualmente un problema de este tipo es necesario
+  activar este evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q02

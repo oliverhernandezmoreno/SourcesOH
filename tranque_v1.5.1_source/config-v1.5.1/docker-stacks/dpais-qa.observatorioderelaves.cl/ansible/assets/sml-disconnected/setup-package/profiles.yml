@@ -1,0 +1,5 @@
+- username: qa-user
+  password: tranque-qa-user
+  group: mine
+  targets:
+    - dep11

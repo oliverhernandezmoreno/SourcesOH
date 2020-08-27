@@ -1,0 +1,158 @@
+name: Volumen de ingreso real de agua al depósito por hora
+
+unit:
+  id: cubic-meter-per-hour
+  name: Metro cúbico por hora
+  abbreviation: m³/h
+  si: false
+
+frequencies:
+  - protocol: lluvia
+    minutes: 60  # 1 hora
+
+inputs:
+  - "@ef-mvp/m2/parameters/lluvia"
+  - "@ef-mvp/m2/parameters/variables/tiempo-lloviendo"
+  - "@ef-mvp/m2/parameters/variables/cota-laguna"
+
+parameters:
+  - canonical_name: areas-aportantes
+    name: Áreas aportantes que tributan al depósito
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            minLength: 1
+          area:
+            type: number
+            minimum: 0
+          cr:
+            oneOf:
+              - {type: number, minimum: 0, maximum: 1}
+              - {type: "null"}
+          p:
+            oneOf:
+              - {type: number}
+              - {type: "null"}
+        required:
+          - code
+          - area
+
+  - canonical_name: area-aportante-directa
+    name: Área aportante de escorrentía directa
+    schema:
+      type: object
+      properties:
+        area:
+          type: number
+          minimum: 0
+        cr:
+          oneOf:
+            - {type: number, minimum: 0, maximum: 1}
+            - {type: "null"}
+        p:
+          oneOf:
+            - {type: number}
+            - {type: "null"}
+      required:
+        - area
+
+  - canonical_name: area-cubeta
+    name: Área de cubeta
+    schema:
+      type: object
+      properties:
+        area:
+          type: number
+          minimum: 0
+        cr:
+          oneOf:
+            - {type: number, minimum: 0, maximum: 1}
+            - {type: "null"}
+        p:
+          oneOf:
+            - {type: number}
+            - {type: "null"}
+      required:
+        - area
+
+  - canonical_name: canales-perimetrales
+    name: Canales perimetrales
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            minLength: 1
+          desvio:
+            type: number
+            minimum: 0
+          areaCode:
+            type: string
+            minLength: 1
+          desvioConexion:
+            oneOf:
+              - type: object
+                properties:
+                  embalseCode: {type: string, minLength: 1}
+                required: ["embalseCode"]
+              - type: object
+                properties:
+                  exterior: {const: true}
+                required: ["exterior"]
+        required:
+          - code
+          - desvio
+          - areaCode
+          - desvioConexion
+
+  - canonical_name: embalses
+    name: Embalses
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            minLength: 1
+          capacidad:
+            type: number
+            minimum: 0
+          areaCode:
+            type: string
+            minLength: 1
+          descargaCanalCode:
+            type: string
+            minLength: 1
+        required:
+          - code
+          - capacidad
+          - areaCode
+          - descargaCanalCode
+
+  - canonical_name: vertederos
+    name: Vertederos
+    schema:
+      type: array
+      items:
+        type: object
+        properties:
+          code:
+            type: string
+            minLength: 1
+          capacidadDesvio:
+            type: number
+            minimum: 0
+          cotaInicioFuncionamiento:
+            type: number
+            minimum: 0
+        required:
+          - code
+          - capacidadDesvio
+          - cotaInicioFuncionamiento

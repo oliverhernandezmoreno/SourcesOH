@@ -1,0 +1,11 @@
+name: Tiempo de lluvia pronosticado
+type: raw
+
+unit:
+  id: hour
+  name: Hora
+  abbreviation: hr
+  si: false
+
+frequencies:
+  - minutes: 60  # 1 hora

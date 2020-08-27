@@ -1,0 +1,39 @@
+name: Evento D2 de Condiciones asociadas a los escenarios de falla (Módulo 2) IT-06 Inestabilidad por deslizamiento del muro
+description: >-
+  Se deben cumplir todos los eventos en un sector para activar el escenario de falla:
+    Eventos Módulo 2:
+      • Escenario de falla IT-06: (Evento C1)
+
+    Adicionalmente se cumple al menos uno de los siguientes se debe solicitar confirmación manual de Alerta Roja:
+      • Presiones de poros: (Protocolo B5 o superior)
+      • Presiones de poros: (Protocolo B1 o B2)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  # Condicion: Se deben cumplir todos los eventos en un sector para activar el escenario de falla
+  - "@ef-mvp/m2/failure-scenarios/it-06/C1"
+  # Condicion: Presiones de poros: (Evento C1 o superior)
+  - "@ef-mvp/m2/parameters/presion-poros/B5-1"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-2"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-3"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-4"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-1"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-2"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-3"
+  - "@ef-mvp/m2/parameters/presion-poros/B1"
+  - "@ef-mvp/m2/parameters/presion-poros/B2"

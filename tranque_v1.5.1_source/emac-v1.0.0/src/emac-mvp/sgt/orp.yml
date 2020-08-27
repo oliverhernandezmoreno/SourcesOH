@@ -1,0 +1,26 @@
+name: ORP
+description: ORP (sensor)
+type: raw
+
+unit:
+  id: millivolt
+  name: Milivolt
+  abbreviation: mV
+  si: false
+  si_conversion_scale: 0.001
+  si_unit:
+    id: volt
+    name: Volt
+    abbreviation: V
+    si: true
+
+frequencies:
+  - minutes: 480
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-sgt

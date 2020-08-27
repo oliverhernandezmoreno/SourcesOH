@@ -1,0 +1,32 @@
+name: Ancho de coronamiento
+range_gte: 0
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+frequencies:
+  - minutes: 43200  # 30 días
+
+thresholds:
+  - lower: ~  # debe ser definido
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/elevacion"
+
+parameters:
+  - canonical_name: porcentaje-cercania-ancho-coronamiento
+    name: >-
+      Porcentaje del valor umbral que indica que el valor medido está
+      cerca del valor umbral (umbral * (1 + alfa)).
+    schema:
+      type: number
+      minimum: 0

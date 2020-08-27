@@ -1,0 +1,13 @@
+name: Pendiente de playa mínima del depósito
+range_gte: 0
+
+unit:
+  id: percent
+  name: Porcentaje
+  abbreviation: "%"
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-playa/minimo-sector"
+
+script: common-scripts/minimo.js

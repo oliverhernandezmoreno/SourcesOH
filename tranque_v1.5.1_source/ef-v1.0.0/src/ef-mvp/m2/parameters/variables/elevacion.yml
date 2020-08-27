@@ -1,0 +1,62 @@
+name: Elevación
+type: raw
+space_coords: x
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+x_unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+frequencies:
+  - minutes: 43200  # 30 días
+  - protocol: crecimiento-acelerado
+    minutes: 10080  # 7 días
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+parameters:
+  - canonical_name: label-vertice-pie-muro
+    name: "Etiqueta para el vértice de pie de muro de un perfil topográfico"
+    schema: {type: string, minLength: 1}
+    value: "Encuentro pie del talud - suelo de fundación"
+
+  - canonical_name: label-vertice-coronamiento-aguas-abajo
+    name: "Etiqueta para el vértice del coronamiento aguas abajo en un perfil topográfico"
+    schema: {type: string, minLength: 1}
+    value: "Vértice coronamiento aguas abajo"
+
+  - canonical_name: label-vertice-coronamiento-aguas-arriba
+    name: "Etiqueta para el vértice del coronamiento aguas arriba en un perfil topográfico"
+    schema: {type: string, minLength: 1}
+    value: "Vértice coronamiento aguas arriba"
+
+  - canonical_name: label-vertice-talud-cubeta
+    name: "Etiqueta para el vértice del encuentro talud-cubeta de un perfil topográfico"
+    schema: {type: string, minLength: 1}
+    value: "Encuentro talud-cubeta"
+
+  - canonical_name: label-segmento-talud-aguas-abajo
+    name: "Etiqueta para el segmento correspondiente al talud aguas abajo de un perfil topográfico"
+    schema: {type: string, minLength: 1}
+    value: "Talud aguas abajo"
+
+  - canonical_name: label-segmento-talud-aguas-arriba
+    name: "Etiqueta para el segmento correspondiente al talud aguas arriba de un perfil topográfico"
+    schema: {type: string, minLength: 1}
+    value: "Talud aguas arriba"
+
+  - canonical_name: label-segmento-coronamiento
+    name: "Etiqueta para el segmento correspondiente al coronamiento de un perfil topográfico"
+    schema: {type: string, minLength: 1}
+    value: "Coronamiento"

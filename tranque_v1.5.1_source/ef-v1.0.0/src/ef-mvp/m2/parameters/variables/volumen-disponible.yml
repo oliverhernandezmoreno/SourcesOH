@@ -1,0 +1,54 @@
+name: Volumen disponible actual
+
+unit:
+  id: million-cubic-meters
+  name: Millón de metros cúbicos
+  abbreviation: Mm³
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/cota-lamas/minimo"
+  - "@ef-mvp/m2/parameters/altura-muro/minimo"
+
+parameters:
+  - canonical_name: curva-embalse
+    name: >-
+      Curva de embalse, que relaciona la cota de coronamiento
+      [m.s.n.m.] con el volumen teórico contenido en la cubeta
+      correspondiente a lamas y agua [Mm³].
+    schema:
+      type: object
+      properties:
+        curve:
+          type: array
+          items:
+            type: object
+            properties:
+              cotaCoronamiento: {type: number}
+              volumen: {type: number}
+            required:
+              - cotaCoronamiento
+              - volumen
+          minItems: 1
+      required: ["curve"]
+
+  - canonical_name: curva-capacidad-volumen-disponible
+    name: >-
+      Curva de capacidad de volumen disponible, que relaciona la cota
+      de coronamiento del muro [m.s.n.m.] con la capacidad máxima
+      disponible de contención de relaves y agua en cubeta [Mm³].
+    schema:
+      type: object
+      properties:
+        curve:
+          type: array
+          items:
+            type: object
+            properties:
+              cotaCoronamiento: {type: number}
+              volumen: {type: number}
+            required:
+              - cotaCoronamiento
+              - volumen
+          minItems: 1
+      required: ["curve"]

@@ -1,0 +1,12 @@
+name: Porcentaje acumulado pasante por muestra de granulométrica
+range_gte: 0
+
+unit:
+  id: percent
+  name: Porcentaje
+  abbreviation: '%'
+  si: false
+
+
+inputs:
+  - '@ef-mvp/m2/parameters/granulometria/totales-por-muestra'

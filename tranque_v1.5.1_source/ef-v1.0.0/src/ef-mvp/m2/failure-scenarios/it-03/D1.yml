@@ -1,0 +1,25 @@
+name: Evento D1 de Condiciones asociadas a los escenarios de falla (Módulo 2) IT-03 Inestabilidad por licuación estática
+description: >-
+  a) Evento D1:
+    Se deben cumplir todos los eventos en un sector para activar el escenario de falla:
+      Eventos Módulo 2:
+        • Módulo de rigidez y resistencia al corte del muro: (Evento D1)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/modulos-deformacion-resistencia-muro/D1"

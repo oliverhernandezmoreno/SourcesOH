@@ -1,0 +1,262 @@
+groups:
+  - name: alerting_rules
+    interval: 5s
+    rules:
+      - alert: target-dev-down
+        expr: up{monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running container"
+        annotations:
+          summary: "monitoring target {{ $labels.job }}-dev is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: target-prod-down
+        expr: up{monitor="tranque-prod-monitor"} == 0
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running container"
+        annotations:
+          summary: "monitoring target {{ $labels.job }}-prod is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: amqpbroker-dev-down
+        expr: rabbitmq_up{monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-dev is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: amqpbroker-prod-down
+        expr: rabbitmq_up{monitor="tranque-prod-monitor"} == 0
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-prod is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: postgis-dev-down
+        expr: pg_up{monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-dev is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: postgis-prod-down
+        expr: pg_up{monitor="tranque-prod-monitor"} == 0
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-prod is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: frontend-dev-down
+        expr: probe_success{instance="http://frontend",job="frontends",monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "reachable endpoint"
+        annotations:
+          summary: "{{ $labels.job }}-dev healthcheck unsuccess"
+          description: "unreachable for 60 seconds"
+
+      - alert: frontend-prod-down
+        expr: probe_success{instance="http://frontend",job="frontends",monitor="tranque-prod-monitor"} == 0
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "reachable endpoint"
+        annotations:
+          summary: "{{ $labels.job }}-prod healthcheck unsuccess"
+          description: "unreachable for 60 seconds"
+
+      - alert: operations-frontend-dev-down
+        expr: probe_success{instance="http://operations-frontend/ops/",job="frontends",monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "reachable endpoint"
+        annotations:
+          summary: "{{ $labels.job }}-dev healthcheck unsuccess"
+          description: "unreachable for 60 seconds"
+
+      - alert: backend-dev-down
+        expr: probe_success{job="backend",monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "reachable endpoint"
+        annotations:
+          summary: "{{ $labels.job }}-dev healthcheck unsuccess"
+          description: "for 60 seconds"
+
+      - alert: backend-prod-down
+        expr: probe_success{job="backend",monitor="tranque-prod-monitor"} == 0
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "reachable endpoint"
+        annotations:
+          summary: "{{ $labels.job }}-prod healthcheck unsuccess"
+          description: "for 60 seconds"
+
+      - alert: elasticsearch-dev-down
+        expr: elasticsearch_cluster_health_up{monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-dev is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: elasticsearch-prod-down
+        expr: elasticsearch_cluster_health_up{monitor="tranque-prod-monitor"} == 0
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-prod is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: logstash-dev-down
+        expr: logstash_node_process_cpu_total_seconds_total{monitor="tranque-dev-monitor"} < 1
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-dev is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: logstash-prod-down
+        expr: logstash_node_process_cpu_total_seconds_total{monitor="tranque-prod-monitor"} < 1
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-prod is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: redis-dev-down
+        expr: redis_up{monitor="tranque-dev-monitor"} == 0
+        for: 60s
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-dev is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: redis-prod-down
+        expr: redis_up{monitor="tranque-prod-monitor"} == 0
+        for: 60s
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.job }}-prod is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: amsa-connector-dev-down
+        expr: timeseries_last_event_age_seconds{name="el-mauro.h-MLPCHAAPP15.heartbeat",monitor="tranque-dev-monitor"} > 600
+        labels:
+          severity: important
+          environment: dev
+          for: 600s
+          component: "last refresh"
+        annotations:
+          summary: "{{ $labels.name }} is down"
+          description: "not sending events for 10 minutes"
+
+      - alert: proxy-dev-down
+        expr: time() - max(container_last_seen{container_label_com_docker_swarm_service_name="tranque-dev_proxy"}) > 60
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.container_label_com_docker_swarm_service_name }} is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: proxy-prod-down
+        expr: time() - max(container_last_seen{container_label_com_docker_swarm_service_name="tranque-prod_proxy"}) > 60
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.container_label_com_docker_swarm_service_name }} is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: enrichment-dev-down
+        expr: time() - max(container_last_seen{container_label_com_docker_swarm_service_name="tranque-dev_enrichment"}) > 60
+        labels:
+          severity: important
+          environment: dev
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.container_label_com_docker_swarm_service_name }} is down"
+          description: "unreachable for 60 seconds"
+
+      - alert: enrichment-prod-down
+        expr: time() - max(container_last_seen{container_label_com_docker_swarm_service_name="tranque-prod_enrichment"}) > 60
+        labels:
+          severity: critical
+          environment: prod
+          for: 60s
+          component: "running application"
+        annotations:
+          summary: "{{ $labels.container_label_com_docker_swarm_service_name }} is down"
+          description: "unreachable for 60 seconds"

@@ -1,0 +1,20 @@
+---
+- name:          10-docker-labels
+  hosts:         all
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+  - name:        update docker options
+    lineinfile:
+      path:      /etc/sysconfig/docker
+      regexp:    '^OPTIONS='
+      line:      'OPTIONS="--default-ulimit nofile=65536:65536 --default-ulimit nproc=65536:65536 --default-ulimit memlock=-1:-1"'
+    register:    update_docker_options_output
+  - name:        enable and start docker
+    when:        update_docker_options_output.changed
+    service:
+      name:      docker
+      state:     restarted

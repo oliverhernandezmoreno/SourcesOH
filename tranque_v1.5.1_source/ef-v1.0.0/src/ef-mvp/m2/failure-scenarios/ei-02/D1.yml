@@ -1,0 +1,28 @@
+name: Evento D2 de Condiciones asociadas a los escenarios de falla (Módulo 2) EI-02 Erosión interna producto de subsidencias en la cubeta del muro
+description: >-
+  Eventos Grupo D
+  a) Evento D1: (Por confirmación manual)
+  Se deben cumplir todos los eventos en un sector para activar el escenario de falla:
+    Eventos Módulo 2:
+      • Escenario de falla EI-02: Evento C1
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  # Condicion: Escenario de falla EI-02: Evento C1
+  - "@ef-mvp/m2/failure-scenarios/ei-02/confirmacion-manual"
+  - "@ef-mvp/m2/failure-scenarios/ei-02/C1"

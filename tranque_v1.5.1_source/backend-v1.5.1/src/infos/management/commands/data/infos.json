@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "title": "¿Qué son los Depósitos de Relaves?",
+    "image": "assets/tranque.jpg",
+    "description": "Son obras de ingeniería que contienen los desechos finos del proceso minero. Están diseñados para satisfacer exigencias legales, de modo que se aislen completamente los sólidos (relaves) depositados del ecosistema circundante."
+  },
+  {
+    "id": 2,
+    "title": "¿Cómo se monitorean?",
+    "image": "assets/monitoreo.jpg",
+    "description": "El sistema de monitoreo contempla la vigilancia permanente de la composición de aguas y estabilidad física del muro del depósito de relave, mediante sensores y mediciones periódicas."
+  },
+  {
+    "id": 3,
+    "title": "¿Cómo funcionan las alertas?",
+    "image": "assets/alertas.jpg",
+    "description": "El sistema está diseñado para alertar tempranamente, cuando pase un evento que ponga en riesgo la seguridad de la población cercana a los depósitos. De acuerdo a la gravedad de la situación, hay alertas preventivas (amarillas) y de emergencia (rojas)."
+  },
+  {
+    "id": 4,
+    "title": "¿Qué hacer ante una emergencia?",
+    "image": "assets/queHace.jpg",
+    "description": "De acuerdo al tipo de alerta (amarilla o roja) el sistema envía mensajes y brinda recomendaciones. Además, cada depósito cuenta con un Plan de Emergencia que puedes consultar."
+  },
+  {
+    "id": 5,
+    "title": "Observatorio de Relaves",
+    "image": "assets/logo_tranque.png",
+    "description": "Es la iniciativa público-privada encargada de dar seguimiento a la actividad de los depósitos de relave a nivel nacional. Si bien hay varios organismos públicos participantes, el principal actor es el Servicio Nacional de Geología y Minería."
+  }
+]

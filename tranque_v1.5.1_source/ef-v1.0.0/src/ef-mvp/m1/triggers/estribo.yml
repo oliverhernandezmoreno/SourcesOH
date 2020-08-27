@@ -1,0 +1,26 @@
+name: Problemas de estabilidad de los estribos del muro
+description: >-
+  Los estribos están asociados al sector de contacto entre el terreno
+  natural y los extremos del muro, se considera que cualquier problema
+  asociado a filtraciones, humedad, deformaciones o grietas en esta
+  zona de contacto afecta la estabilidad de los estribos. En caso de
+  detectar visualmente alguna de estas condiciones, se debe activar el
+  evento gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q04

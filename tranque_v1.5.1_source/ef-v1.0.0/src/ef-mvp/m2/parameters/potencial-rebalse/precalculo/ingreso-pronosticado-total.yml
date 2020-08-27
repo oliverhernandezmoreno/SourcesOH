@@ -1,0 +1,16 @@
+name: Precálculo del volumen de ingreso acumulado pronosticado
+description: >-
+  Esta variable sólo considera el pronóstico de lluvia. No toma en
+  cuenta las mediciones de lluvia en curso.
+
+unit:
+  id: cubic-meter
+  name: Metro cúbico
+  abbreviation: m³
+  si: true
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/cota-laguna"
+  - "@ef-mvp/m2/parameters/variables/pronostico-cantidad-lluvia"
+  - "@ef-mvp/m2/parameters/variables/pronostico-tiempo-lluvia"
+  - "@ef-mvp/m2/parameters/variables/volumen-disponible"

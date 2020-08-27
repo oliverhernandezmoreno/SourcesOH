@@ -1,0 +1,36 @@
+# Regular application variables are stored here
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configs
+  namespace: tranque
+data:
+  static-url: https://static.onr.cl/static/
+  s3-access-key-id: sysadmin
+  s3-bucket-name: smc
+  s3-endpoint-url: http://172.30.3.4/
+  redis-host: redis-tranque-2.redis.cache.windows.net
+  redis-port: "6380"
+  redis-ssl: "1"
+  s3-access-key-id: sysadmin
+  s3-bucket-name: smc
+  s3-endpoint-url: http://172.30.3.4/
+
+  
+# Modificar o agregar valores 
+  
+  #Este dato se obtiene desde el private-link   
+  postgres-host: 172.30.4.7 # tranque-2.postgres.database.azure.com
+  postgres-user: sysadmin@tranque-2
+  
+  #Estos datos se obtienen una vez creado los servicios
+  elasticsearch-host: 172.30.4.8
+  elasticsearch-user: sysadmin
+
+  amqp-host: sassy-tiger.rmq.cloudamqp.com
+  amqp-ssl: "1"
+  amqp-username: ffzeosss
+  amqp-port: "5671"
+  amqp-vhost: /ffzeosss
+  amqp-federated-queue: central-queue

@@ -1,0 +1,12 @@
+name: Evento B2 de pendiente del muro (aguas arriba)
+description: >-
+  La pendiente global del muro aguas arriba se acerca al valor umbral.
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/global-aguas-arriba"

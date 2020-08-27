@@ -1,0 +1,114 @@
+name: Curva granulométrica
+range_gte: 0
+type: raw
+
+unit:
+  id: gram
+  name: Gramo
+  abbreviation: g
+  si: false
+  si_conversion_scale: 0.001
+  si_unit:
+    id: kilogram
+    name: Kilogramo
+    abbreviation: kg
+    si: true
+
+frequencies:
+  - minutes: 10080  # 7 días
+
+meta:
+  malla:
+    type: string
+  muestra:
+    type: string
+  abertura:
+    type: number
+
+
+parameters:
+  - canonical_name: banda-granulometrica-superior
+    name: Límite superior de la granulometría de las arenas del muro.
+    schema:
+      type: object
+      properties:
+        curve:
+          type: array
+          items:
+            type: object
+            properties:
+              abertura:
+                type: object
+                properties:
+                  value: {type: number}
+                  unit:
+                    type: object
+                    properties:
+                      id:
+                        const: millimeters
+                      name:
+                        const: Milímetros
+                      abbreviation:
+                        const: mm
+                      si:
+                        const: false
+              pasa:
+                type: object
+                properties:
+                  value: {type: number}
+                  unit:
+                    type: object
+                    properties:
+                      id:
+                        const: percent
+                      name:
+                        const: Porcentaje
+                      abbreviation:
+                        const: "%"
+                      si:
+                        const: false
+            required: ["abertura", "pasa"]
+      required: ["curve"]
+
+  - canonical_name: banda-granulometrica-inferior
+    name: Límite inferior de la granulometría de las arenas del muro.
+    schema:
+      type: object
+      properties:
+        curve:
+          type: array
+          items:
+            type: object
+            properties:
+              abertura:
+                type: object
+                properties:
+                  value: {type: number}
+                  unit:
+                    type: object
+                    properties:
+                      id:
+                        const: millimeters
+                      name:
+                        const: Milímetros
+                      abbreviation:
+                        const: mm
+                      si:
+                        const: false
+              pasa:
+                type: object
+                properties:
+                  value: {type: number}
+                  unit:
+                    type: object
+                    properties:
+                      id:
+                        const: percent
+                      name:
+                        const: Porcentaje
+                      abbreviation:
+                        const: "%"
+                      si:
+                        const: false
+            required: ["abertura", "pasa"]
+      required: ["curve"]

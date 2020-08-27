@@ -1,0 +1,19 @@
+name: Revancha operacional mínima por sector
+range_gte: 0
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-operacional"
+
+script: common-scripts/minimo.js

@@ -1,0 +1,25 @@
+name: Falla del sistema de recuperación de aguas claras
+description: >-
+  Corresponde a un problema de cualquier índole en el sistema de
+  recuperación de aguas claras, que tenga como consecuencia que no se
+  encuentre operativo. En caso de detectar mediante un reporte o
+  comunicación con otros operadores este tipo de evento es necesario
+  activar el evento gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q07

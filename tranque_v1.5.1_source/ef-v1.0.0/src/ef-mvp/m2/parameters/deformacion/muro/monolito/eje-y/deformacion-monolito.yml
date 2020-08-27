@@ -1,0 +1,13 @@
+name: Deformación de monolito en el eje Y de muro
+
+scope: spread
+groups:
+  items:
+    - canonical_name: talud
+      name: "Talud"
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion-monolito-eje-y"
+
+script: common-scripts/copy-events.js

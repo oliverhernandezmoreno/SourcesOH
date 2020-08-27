@@ -1,0 +1,15 @@
+name: Índice de impacto -- Monitoreo subterráneo
+highlight: true
+
+thresholds:
+  - upper: 1.0
+
+inputs:
+  - "@emac-mvp/ii/subterraneo.aguas-arriba.cr"
+  - "@emac-mvp/ii/subterraneo.aguas-abajo.cr"
+
+script: ./ii.js
+
+category:
+  - emac-index
+  - impact-index

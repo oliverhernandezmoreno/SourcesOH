@@ -1,0 +1,14 @@
+name: Evento B4 de pendiente del muro (aguas arriba)
+description: >-
+  La pendiente global del muro aguas arriba sobrepasa el valor umbral.
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/B4"
+
+script: common-scripts/al-menos-un-evento.js

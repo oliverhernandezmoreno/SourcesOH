@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+# This script loads a kibana-artifacts file into kibana.
+# Usage:
+# ./kbn-load.sh KIBANA_HOST_AND_PORT KIBANA_ARTIFACTS_FILE
+
+set -e
+
+kibana_host="$1"
+file_ndjson="$2"
+
+curl -sS \
+     -X POST \
+     -H "kbn-xsrf: true" \
+     -H "Content-Type: application/json" \
+     "http://${kibana_host}/api/saved_objects/index-pattern/general-pattern?overwrite=true" \
+     -d '{"attributes":{"title":"derived-*","timeFieldName":"@timestamp"}}'
+echo
+
+curl -sS \
+     -X POST \
+     -H "kbn-xsrf: true" \
+     "http://${kibana_host}/api/saved_objects/_import?overwrite=true" \
+     --form "file=@${file_ndjson}"
+echo

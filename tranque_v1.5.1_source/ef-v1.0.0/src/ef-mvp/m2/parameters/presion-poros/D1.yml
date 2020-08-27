@@ -1,0 +1,25 @@
+name: Presión de poros evento D1
+description: >-
+  Si dos instrumentos validables entre si superan el segundo umbral
+  (valor critico). Se informa por sector, por instrumento.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/prop"
+
+script: ./from-prop.js

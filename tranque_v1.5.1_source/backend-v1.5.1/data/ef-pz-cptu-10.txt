@@ -1,0 +1,11 @@
+2019-02-01T00:00:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 760
+2019-02-01T00:00:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 761
+2019-02-01T00:10:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 768
+2019-02-01T00:20:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 762
+2019-02-01T00:30:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 762
+2019-02-01T00:40:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 762
+2019-02-01T00:50:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 763
+2019-02-01T01:00:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 764
+2019-02-01T01:10:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 767
+2019-02-01T01:20:00Z el-mauro.s-CPTU-10.ef-mvp.m2.parameters.presion-poros 769
+

@@ -1,0 +1,12 @@
+name: Isolated variable
+
+scope: spread
+groups:
+  items:
+    - canonical_name: fake-things
+      name: Fake things
+
+inputs:
+  - "@fake/isolation-test/group"
+
+script_version: "fake:aabbccddeeff00112233445566778899"

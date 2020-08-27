@@ -1,0 +1,26 @@
+name: Detección de si el instrumento esta validado o no
+description: >-
+  Corresponde a la detección de forma visual del instrumento. En
+  caso de detectar mediante un reporte, con otros operadores o
+  visualmente este tipo de situaciones es necesario activar el evento
+  gatillador.
+type: raw
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+frequencies:
+  - minutes: 60  # 60 min = 1 hr
+
+scope: spread
+groups:
+  items:
+    - name: Drenes
+      canonical_name: drenes

@@ -1,0 +1,7 @@
+name: Evento A2 de potencial de rebalse
+description: >-
+  Se detecta un potencial de rebalse mayor a 1 en el pre-cálculo del
+  pronóstico de lluvia.
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse/precalculo"

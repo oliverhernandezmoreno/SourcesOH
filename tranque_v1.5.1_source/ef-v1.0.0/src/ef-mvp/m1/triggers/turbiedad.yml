@@ -1,0 +1,26 @@
+name: Detección de material particulado a la salida del sistema de drenaje
+description: >-
+  Corresponde a la detección de forma visual de material particulado a
+  la salida del sistema de drenaje del muro, esto incluye cualquier
+  tipo de material fino o grueso detectado a la salida del dren. En
+  caso de detectar mediante un reporte, con otros operadores o
+  visualmente este tipo de situaciones es necesario activar el evento
+  gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q11

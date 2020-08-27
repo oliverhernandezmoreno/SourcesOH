@@ -1,0 +1,44 @@
+ARG BASE_VARIANT=dev
+FROM registry.gitlab.com/inria-chile/tranque/backend/base:${BASE_VARIANT}
+
+WORKDIR /usr/src/app
+
+COPY src .
+COPY docker/entrypoint.sh docker/entrypoint.amqpconsumer.sh /
+
+ARG CI_COMMIT_SHA=local
+ENV COMMIT ${CI_COMMIT_SHA}
+
+ENV PROFILES_BASE /usr/src/app/profiles
+ENV PROFILES_FORMAT yml
+RUN mkdir -p "${PROFILES_BASE}"
+
+# Copy the EF stability index
+COPY --from=registry.gitlab.com/inria-chile/tranque/ef:master /build.tgz /tmp/ef.tgz
+RUN tar xzvf /tmp/ef.tgz -C /tmp && \
+    cp -R /tmp/build/* "${PROFILES_BASE}/" && \
+    rm -rf /tmp/build && \
+    rm /tmp/ef.tgz
+
+# Copy the EMAC stability index
+COPY --from=registry.gitlab.com/inria-chile/tranque/emac:master /build.tgz /tmp/emac.tgz
+RUN tar xzvf /tmp/emac.tgz -C /tmp && \
+    cp -R /tmp/build/* "${PROFILES_BASE}/" && \
+    rm -rf /tmp/build && \
+    rm /tmp/emac.tgz
+
+# Generate static content
+RUN ./manage.py collectstatic --noinput
+
+# Copy a default, overridable setup script
+RUN mkdir -p /initial-setup
+COPY docker/default-setup.sh /initial-setup/default-setup.sh
+
+EXPOSE 8000
+
+ENV DEBUG 0
+ENV NUM_WORKERS 2
+ENV GUNICORN_CMD_ARGS "-w ${NUM_WORKERS} --bind=0.0.0.0:8000"
+
+ENTRYPOINT ["/tini", "--", "/entrypoint.sh"]
+CMD ["gunicorn", "backend.wsgi"]

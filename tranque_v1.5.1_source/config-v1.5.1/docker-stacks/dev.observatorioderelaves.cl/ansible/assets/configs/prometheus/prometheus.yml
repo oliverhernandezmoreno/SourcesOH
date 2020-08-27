@@ -1,0 +1,88 @@
+global:
+  external_labels:
+      monitor: 'tranque-dev-monitor'
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'docker'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    dns_sd_configs:
+    - names:
+      - 'tasks.docker-exporter'
+      type: 'A'
+      port: 8080
+
+  - job_name: 'postgis'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['postgis-exporter:9187']
+
+  - job_name: 'elasticsearch'
+    scrape_interval: 10s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['elasticsearch-exporter:9108']
+
+  - job_name: 'amqpbroker'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['amqpbroker-exporter:9090']
+
+  - job_name: 'logstash'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['logstash-exporter:9304']
+
+  - job_name: 'redis'
+    scrape_interval: 5s
+    metrics_path: /metrics
+    static_configs:
+      - targets: ['redis-exporter:9121']
+
+  - job_name: 'ts-stats'
+    scrape_interval: 5s
+    scrape_timeout: 5s
+    metrics_path: /
+    static_configs:
+      - targets: ['ts-stats-exporter:8000']
+
+  - job_name: 'frontends'
+    scrape_interval: 5s
+    metrics_path: /probe
+    params:
+      module: [http_get]
+    static_configs:
+      - targets:
+        - http://frontend
+        - http://operations-frontend/ops/
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+  - job_name: 'backend'
+    scrape_interval: 5s
+    metrics_path: /probe
+    params:
+      module: [backend_healthcheck]
+    static_configs:
+      - targets:
+        - http://django:8000/api/health
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115

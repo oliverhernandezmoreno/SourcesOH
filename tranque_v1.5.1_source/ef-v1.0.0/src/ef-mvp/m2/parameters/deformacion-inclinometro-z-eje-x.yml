@@ -1,0 +1,21 @@
+name: Deformación de inclinómetro(Z) en el eje X
+type: raw
+
+frequencies:
+  - minutes: 10080  # 7 días
+
+
+unit:
+  id: millimeters
+  name: Milímetros
+  abbreviation: mm
+  si: false
+
+thresholds:
+  - upper: ~  # Debe ser definido en configuracion sitio especifico
+
+scope: spread
+groups:
+  parents:
+    - canonical_name: inclinometros
+      name: "Inclinometros"

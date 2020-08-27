@@ -1,0 +1,57 @@
+---
+- name:          60-copy-managers-files - leader
+  hosts:         role_docker-leader
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+  - name:        copy docker-compose.yml
+    copy:
+      src:       ../assets/docker-compose.yml
+      dest:      "/home/{{ server_user }}/docker-compose.yml"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+    register:    copy_docker_compose_output
+  - name:        copy .env
+    copy:
+      src:       ../assets/.env
+      dest:      "/home/{{ server_user }}/.env"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+    register:    copy_env_output
+  - name:        copy .secrets
+    copy:
+      src:       ../assets/.secrets
+      dest:      "/home/{{ server_user }}/.secrets"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+    register:    copy_secrets_output
+  - name:        copy default.conf
+    copy:
+      src:       ../assets/default.conf
+      dest:      "/home/{{ server_user }}/default.conf"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+    register:    copy_default_conf_output
+
+- name:          60-copy-managers-files - manager
+  hosts:         role_docker-manager
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+  - name:        copy default.conf
+    copy:
+      src:       ../assets/default.conf
+      dest:      "/home/{{ server_user }}/default.conf"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx

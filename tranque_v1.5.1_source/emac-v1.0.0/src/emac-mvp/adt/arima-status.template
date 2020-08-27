@@ -1,0 +1,7 @@
+name: __NAME__ -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/__VARIABLE__"
+  - "@emac-mvp/adt/arima/variables.__VARIABLE__"
+
+script: ./../adt.js

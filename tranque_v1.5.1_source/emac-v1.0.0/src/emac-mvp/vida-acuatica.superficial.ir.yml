@@ -1,0 +1,36 @@
+name: Índice de riesgo -- Vida Acuática
+highlight: true
+
+scope: group
+groups:
+  operator: and
+  items:
+    - name: Muestreo superficial
+      canonical_name: superficial
+    - name: Aguas abajo
+      canonical_name: aguas-abajo
+
+thresholds:
+  - upper: 0.0
+
+inputs:
+  - "@emac-mvp/normalized-variables/vida-acuatica/*"
+  - "@emac-mvp/ir/vida-acuatica.point-risk"
+
+script: ./ir.js
+
+category:
+  - emac-index
+  - risk-index
+
+parameters:
+  - canonical_name: ir-reference
+    name: "Punto de referencia de índice de riesgo"
+    schema:
+      type: object
+      properties:
+        srid: {type: number}
+        x: {type: number}
+        y: {type: number}
+      additionalProperties: false
+      required: ["x", "y"]

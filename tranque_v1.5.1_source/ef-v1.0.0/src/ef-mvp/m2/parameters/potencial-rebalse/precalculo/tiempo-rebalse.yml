@@ -1,0 +1,11 @@
+name: Precálculo del tiempo de rebalse
+
+unit:
+  id: hour
+  name: Hora
+  abbreviation: hr
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse/precalculo/ingreso-pronosticado-total"
+  - "@ef-mvp/m2/parameters/variables/volumen-disponible"

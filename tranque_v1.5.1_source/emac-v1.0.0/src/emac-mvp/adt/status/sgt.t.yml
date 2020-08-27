@@ -1,0 +1,7 @@
+name: Temperatura -- Status ADT
+
+inputs:
+  - "@emac-mvp/sgt/t"
+  - "@emac-mvp/adt/arima/sgt.t"
+
+script: ./../adt.js

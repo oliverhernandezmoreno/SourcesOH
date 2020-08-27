@@ -1,0 +1,13 @@
+name: Se -- Vida Acuática -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/se"
+  - "@emac-mvp/valid-variables/se"
+
+script: ./../normalization-vida-acuatica.js

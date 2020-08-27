@@ -1,0 +1,117 @@
+stages:
+  - test
+  - code quality
+  - docs
+  - push
+  - deploy
+
+jest:
+  stage: test
+  only:
+    - dev
+    - master
+  image: node:lts-buster
+  variables:
+    ELASTICSEARCH_HOST: elasticsearch
+    ELASTICSEARCH_PORT: 9200
+    ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+    POSTGRES_DB: backend
+    POSTGRES_USER: backend
+    POSTGRES_PASSWORD: backend
+    DATABASE_HOST: postgres
+  services:
+    - name: docker.elastic.co/elasticsearch/elasticsearch-oss:7.3.1
+      alias: elasticsearch
+      command: ["elasticsearch", "-Ediscovery.type=single-node"]
+    - name: mdillon/postgis:10
+      alias: postgres
+  script:
+    - yarn install --non-interactive
+    - ./scripts/setup-elasticsearch.sh
+    - ./scripts/setup-postgres.sh
+    - yarn test --silent --forceExit --coverage
+  artifacts:
+    paths:
+      - coverage
+
+lint:
+  stage: code quality
+  image: node:lts-alpine
+  script:
+    - yarn install --non-interactive
+    - yarn lint
+
+sonar:
+  stage: code quality
+  only:
+    - dev
+    - master
+  allow_failure: true
+  image:
+    name: newtmitch/sonar-scanner:3.2.0
+    entrypoint: ['']
+  script:
+    # install vault
+    - wget -q https://releases.hashicorp.com/vault/0.11.1/vault_0.11.1_linux_amd64.zip
+    - unzip -q vault_0.11.1_linux_amd64.zip
+    - rm -f vault_0.11.1_linux_amd64.zip
+    # get sonar login token from vault
+    - SONAR_TOKEN=$(./vault read -field=key secret/tranque/dev/sonarqube/login)
+    # run sonar scanner
+    - sonar-scanner -Dsonar.projectBaseDir="$CI_PROJECT_DIR"
+                    -Dsonar.host.url=https://sonar.dev.inria.cl
+                    -Dsonar.login="$SONAR_TOKEN"
+                    -Dsonar.projectName="Tranque Enrichment"
+                    -Dsonar.projectKey=tranque-enrichment
+                    -Dsonar.projectVersion="$CI_COMMIT_SHA"
+                    -Dsonar.sources="$CI_PROJECT_DIR/lib,$CI_PROJECT_DIR/impl"
+                    -Dsonar.tests="$CI_PROJECT_DIR/lib,$CI_PROJECT_DIR/impl"
+                    -Dsonar.exclusions=**/*.test.js,**/*.mock.js,__mocks__/*.*
+                    -Dsonar.test.inclusions=**/*.test.js,**/*.mock.js,__mocks__/*.*
+                    -Dsonar.javascript.lcov.reportPaths="$CI_PROJECT_DIR/coverage/lcov.info"
+
+pages:
+  stage: docs
+  only:
+    - /^doc.*$/
+  image: python:3.6-jessie
+  script:
+    - cd doc
+    - pip install -r requirements.txt
+    - make html
+    - mv build/html/ ../public
+  artifacts:
+    paths:
+      - public
+
+docker-push:
+  stage: push
+  only:
+    - dev
+    - master
+    - tags
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  before_script:
+    - apk add --update --no-cache bash
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+  script:
+    - scripts/pull-indices.sh
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
+
+deploy:
+  stage: deploy
+  only:
+    - dev
+    - master
+  when: manual
+  image: alpine:3.8
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8017352/trigger/pipeline
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${CI_COMMIT_REF_SLUG} ${TRIGGER_URL}

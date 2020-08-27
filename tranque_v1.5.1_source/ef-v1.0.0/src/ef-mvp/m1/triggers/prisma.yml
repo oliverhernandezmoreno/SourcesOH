@@ -1,0 +1,25 @@
+name: Reducción del prisma resistente en el pie del muro
+description: >-
+  Corresponde a cualquier tipo de daño, deformación o deslizamiento en
+  el sector aguas abajo del muro. Específicamente en el área cercana
+  al contacto entre el terreno natural y el muro. En caso de detectar
+  visualmente algunas de las condiciones antes descritas, se debe
+  activar este evento gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q01

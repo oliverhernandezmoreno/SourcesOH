@@ -1,0 +1,12 @@
+name: Isolated grouping
+
+scope: group
+groups:
+  parents:
+    - canonical_name: fake-groups
+      name: Fake groups
+
+inputs:
+  - "@fake/isolation-test/raw"
+
+script_version: "fake:aabbccddeeff00112233445566778899"

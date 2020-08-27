@@ -1,0 +1,13 @@
+name: Pendiente de playa máxima del depósito
+range_gte: 0
+
+unit:
+  id: percent
+  name: Porcentaje
+  abbreviation: "%"
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-playa/maximo-sector"
+
+script: common-scripts/maximo.js

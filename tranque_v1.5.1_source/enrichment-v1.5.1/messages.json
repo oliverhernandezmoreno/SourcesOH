@@ -1,0 +1,22 @@
+{
+  "index_patterns": ["messages-*"],
+  "settings": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0
+  },
+  "mappings": {
+    "dynamic": false,
+    "_source": {
+      "includes": [
+        "@timestamp",
+        "payload",
+        "eventCount"
+      ]
+    },
+    "properties": {
+      "@timestamp": {"type": "date"},
+      "payload": {"type": "object", "enabled": false},
+      "eventCount": {"type": "integer"}
+    }
+  }
+}

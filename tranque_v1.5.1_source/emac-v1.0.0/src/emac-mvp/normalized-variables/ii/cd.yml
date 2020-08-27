@@ -1,0 +1,13 @@
+name: Cd -- Impacto -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/cd"
+  - "@emac-mvp/valid-variables/cd"
+
+script: ./../normalization-ii.js

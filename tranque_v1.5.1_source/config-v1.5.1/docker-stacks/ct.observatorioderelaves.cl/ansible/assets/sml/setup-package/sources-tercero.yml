@@ -1,0 +1,204 @@
+target: tercero
+
+groups:
+  - name: Sector A
+    canonical_name: sector-a
+  - name: Sector B
+    canonical_name: sector-b
+  - name: Sector C
+    canonical_name: sector-c
+  - name: Sector D
+    canonical_name: sector-d
+  - name: Sector E
+    canonical_name: sector-e
+
+  - name: Perfil transversal a muro
+    canonical_name: perfil-transversal
+  - name: Piezómetros
+    canonical_name: piezometros
+  - name: Turbidímetros
+    canonical_name: turbidimetros
+
+sources:
+  - hardware_id: PZ-80
+    name: PZ-80
+    canonical_name: pz-80
+    type: online
+    groups:
+      - piezometros
+      - sector-a
+
+  - hardware_id: PZ-81
+    name: PZ-81
+    canonical_name: pz-81
+    type: online
+    groups:
+      - piezometros
+      - sector-a
+
+  - hardware_id: PZ-82
+    name: PZ-82
+    canonical_name: pz-82
+    type: online
+    groups:
+      - piezometros
+      - sector-a
+
+  - hardware_id: PZ-83
+    name: PZ-83
+    canonical_name: pz-83
+    type: online
+    groups:
+      - piezometros
+      - sector-a
+
+  - hardware_id: PZ-84
+    name: PZ-84
+    canonical_name: pz-84
+    type: online
+    groups:
+      - piezometros
+      - sector-b
+
+  - hardware_id: PZ-85
+    name: PZ-85
+    canonical_name: pz-85
+    type: online
+    groups:
+      - piezometros
+      - sector-b
+
+  - hardware_id: PZ-86
+    name: PZ-86
+    canonical_name: pz-86
+    type: online
+    groups:
+      - piezometros
+      - sector-b
+
+  - hardware_id: PZ-87
+    name: PZ-87
+    canonical_name: pz-87
+    type: online
+    groups:
+      - piezometros
+      - sector-b
+
+  - hardware_id: PZ-88
+    name: PZ-88
+    canonical_name: pz-88
+    type: online
+    groups:
+      - piezometros
+      - sector-c
+
+  - hardware_id: PZ-89
+    name: PZ-89
+    canonical_name: pz-89
+    type: online
+    groups:
+      - piezometros
+      - sector-c
+
+  - hardware_id: PZ-90
+    name: PZ-90
+    canonical_name: pz-90
+    type: online
+    groups:
+      - piezometros
+      - sector-c
+
+  - hardware_id: PZ-91
+    name: PZ-91
+    canonical_name: pz-91
+    type: online
+    groups:
+      - piezometros
+      - sector-c
+
+  - hardware_id: PZ-92
+    name: PZ-92
+    canonical_name: pz-92
+    type: online
+    groups:
+      - piezometros
+      - sector-d
+
+  - hardware_id: PZ-93
+    name: PZ-93
+    canonical_name: pz-93
+    type: online
+    groups:
+      - piezometros
+      - sector-d
+
+  - hardware_id: PZ-94
+    name: PZ-94
+    canonical_name: pz-94
+    type: online
+    groups:
+      - piezometros
+      - sector-d
+
+  - hardware_id: PZ-95
+    name: PZ-95
+    canonical_name: pz-95
+    type: online
+    groups:
+      - piezometros
+      - sector-e
+
+  - hardware_id: TURB-1
+    name: TURB-1
+    canonical_name: turb-1
+    type: online
+    groups:
+      - turbidimetros
+
+  - hardware_id: TURB-2
+    name: TURB-2
+    canonical_name: turb-2
+    type: online
+    groups:
+      - turbidimetros
+
+
+  - hardware_id: perfil-aa
+    name: Perfil transversal AA
+    canonical_name: perfil-aa
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-a
+
+  - hardware_id: prefil-ba
+    name: Perfil transversal BA
+    canonical_name: perfil-ba
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-b
+
+  - hardware_id: perfil-ca
+    name: Perfil transversal CA
+    canonical_name: perfil-ca
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-c
+
+  - hardware_id: perfil-da
+    name: Perfil transversal DA
+    canonical_name: perfil-da
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-d
+
+  - hardware_id: perfil-ea
+    name: Perfil transversal EA
+    canonical_name: perfil-ea
+    type: reference
+    groups:
+      - perfil-transversal
+      - sector-e
