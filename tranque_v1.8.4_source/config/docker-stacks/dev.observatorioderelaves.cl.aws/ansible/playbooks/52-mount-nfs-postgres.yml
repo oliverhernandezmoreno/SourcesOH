@@ -1,0 +1,14 @@
+---
+- name:               52-mount-nfs-postgres
+  hosts:              role_docker-worker-postgres
+  vars:
+    server_user:      ec2-user
+  remote_user:        "{{ server_user }}"
+  become:             yes
+  become_user:        root
+  tasks: []
+
+  # Postgres no longer uses EFS for persistence. In fact, it doesn't
+  # use anything, it simply stores its data in the instance's disk,
+  # which is ephemeral. If the instance goes down, the only option is
+  # to restore from a backup.

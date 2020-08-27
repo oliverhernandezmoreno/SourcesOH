@@ -1,0 +1,182 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "This is the main entrypoint for external sensor data to enter the Tranque platform. The data consumed by this component is fed to the data queue, which indexes a backup and schedules the data for identification and computation.",
+    "version": "{version}",
+    "title": "Tranque Beats Consumer"
+  },
+  "components": {
+    "securitySchemes": {
+      "token": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    },
+    "schemas": {
+      "Event": "{event}",
+      "HealthyHealthResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "pass"
+            ]
+          },
+          "details": {
+            "type": "object",
+            "properties": {
+              "redis:connected": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "pass"
+                      ]
+                    },
+                    "time": {
+                      "description": "The time at which the healthcheck was completed.",
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "minItems": 1
+              }
+            }
+          }
+        }
+      },
+      "UnhealthyHealthResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "fail"
+            ]
+          },
+          "details": {
+            "type": "object",
+            "properties": {
+              "redis:connected": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "fail"
+                      ]
+                    },
+                    "time": {
+                      "description": "The time at which the healthcheck was completed.",
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "minItems": 1
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Adds the received events to the data queue",
+        "description": "The received events or 'beats' are forwarded to the aggregator, which then later forwards them for identification.",
+        "operationId": "consume",
+        "requestBody": {
+          "description": "Events list to be consumed",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Event"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Events consumed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "description": "The amount of events received.",
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "success": {
+                      "type": "boolean",
+                      "enum": [
+                        true
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Invalid credentials"
+          },
+          "500": {
+            "description": "Unknown server error"
+          }
+        },
+        "security": [
+          {
+            "token": []
+          }
+        ]
+      }
+    },
+    "/health/": {
+      "get": {
+        "summary": "Retrieves the health status",
+        "description": "Checks the health of the consumer. A healthy consumer is one which can establish a connection with its Redis buffer.",
+        "operationId": "probe",
+        "responses": {
+          "200": {
+            "description": "The consumer is healthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HealthyHealthResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "The consumer is unhealthy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnhealthyHealthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

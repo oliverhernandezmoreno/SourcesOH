@@ -1,0 +1,5 @@
+CustomDatePicker example:
+
+```jsx
+<CustomDatePicker/>
+```

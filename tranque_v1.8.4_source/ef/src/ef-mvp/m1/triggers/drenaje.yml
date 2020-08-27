@@ -1,0 +1,26 @@
+name: Falla en sistema de drenaje
+description: >-
+  Corresponde a cualquier tipo de falla detectada a la salida del
+  sistema de drenaje del muro, la falla puede ser producto de
+  problemas en el caudal de salida como por ejemplo variaciones
+  bruscas de caudal o la ausencia de este. En caso de detectar
+  mediante un reporte, comunicación con otros operadores o visualmente
+  este tipo de situaciones es necesario activar el evento gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q10

@@ -1,0 +1,13 @@
+name: Pendiente global del muro aguas abajo máxima del depósito
+range_gte: 0
+
+unit:
+  id: h-v-ratio
+  name: "Razón H:V"
+  abbreviation: "H:V"
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/global-aguas-arriba/maximo-sector"
+
+script: common-scripts/maximo.js

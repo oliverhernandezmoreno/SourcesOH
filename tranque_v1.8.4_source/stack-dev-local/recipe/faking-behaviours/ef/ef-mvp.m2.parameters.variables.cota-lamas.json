@@ -1,0 +1,162 @@
+[
+  {
+    "timeseries": "el-mauro.s-perfil-A1.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [793, 827, 849]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-A2.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [793, 827, 849]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-B1.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [793, 828, 849]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-B2.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [793, 828, 849]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-C1.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [793, 828, 850]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-C2.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [793, 828, 850]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-H1.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [792, 850.5]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-H2.ef-mvp.m2.parameters.variables.cota-lamas",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [792, 850.5]
+    }
+  }
+]

@@ -1,0 +1,19 @@
+name: Caudal máximo por sector que contiene al instrumento
+range_gte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+unit:
+  id: liter-per-second
+  name: Litros por segundo
+  abbreviation: l/s
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/caudal"
+
+script: common-scripts/maximo.js

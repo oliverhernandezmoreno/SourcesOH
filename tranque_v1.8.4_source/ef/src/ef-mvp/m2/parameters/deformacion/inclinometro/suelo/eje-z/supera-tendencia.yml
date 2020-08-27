@@ -1,0 +1,22 @@
+name: Superacion de tendencia por inclinometro-z
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  parents:
+    - canonical_name: inclinometros
+      name: "Inclinometros"
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/inclinometro/suelo/eje-z/tendencia"
+
+script: ef-mvp/m2/parameters/deformacion/inclinometro/supera-tendencia.js

@@ -1,0 +1,19 @@
+name: Pendiente global del muro aguas arriba máxima por sector
+range_gte: 0
+
+unit:
+  id: h-v-ratio
+  name: "Razón H:V"
+  abbreviation: "H:V"
+  si: false
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/global-aguas-arriba"
+
+script: common-scripts/maximo.js

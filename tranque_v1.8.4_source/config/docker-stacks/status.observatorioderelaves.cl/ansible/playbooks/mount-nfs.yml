@@ -1,0 +1,43 @@
+---
+- name:               create grafana NFS directory
+  hosts:              role_tranque-statuspage
+  vars:
+    server_user:      ec2-user
+  remote_user:        "{{ server_user }}"
+  become:             yes
+  become_user:        root
+  tasks:
+  # create nfs directory
+  - name:             create nfs directory
+    file:
+      path:           /home/{{ server_user }}/statuspage-data
+      state:          directory
+      mode:           0755
+      owner:          472
+      group:          472
+  # install nfs-utils
+  - name:             install NFS common
+    package:
+      name:           nfs-utils
+      state:          present
+  # mount NFS directory
+  - name:             get current AZ from AWS
+    uri:
+      url:            http://169.254.169.254/latest/meta-data/placement/availability-zone
+      return_content: yes
+    register:         aws_current_az
+  - name:             mount NFS directory
+    mount:
+      name:           /home/{{ server_user }}/statuspage-data
+      src:            "{{ aws_current_az.content }}.fs-79bb6460.efs.us-west-1.amazonaws.com:/"
+      fstype:         nfs4
+      opts:           nfsvers=4.1,defaults
+      state:          mounted
+  # set mounted folder permissions
+  - name:             set mounted folder permissions
+    file:
+      path:           /home/{{ server_user }}/statuspage-data
+      state:          directory
+      mode:           0755
+      owner:          472
+      group:          472

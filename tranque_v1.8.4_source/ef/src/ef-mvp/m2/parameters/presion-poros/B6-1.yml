@@ -1,0 +1,23 @@
+name: Presión de poros evento B6-1
+description: >-
+  Si un instrumento que superó el primer umbral (valor irregular) es
+  validado manualmente. Se informa por sector, por instrumento.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/t1"

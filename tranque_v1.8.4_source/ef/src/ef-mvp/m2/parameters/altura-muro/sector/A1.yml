@@ -1,0 +1,15 @@
+name: Evento A1 de altura del coronamiento del muro
+description: >-
+  La altura excede el plan de crecimiento, incluyendo el error máximo
+  permitido.
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/altura-muro/A1"
+
+script: common-scripts/al-menos-un-evento.js

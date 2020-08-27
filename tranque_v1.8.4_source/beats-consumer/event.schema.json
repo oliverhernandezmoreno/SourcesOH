@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "An 'event', which is the single data unit for the Tranque Platform. An event is a value within a time series.",
+  "type": "object",
+  "properties": {
+    "@timestamp": {
+      "description": "The time of the event, must be a valid datetime string as specified by the Date.parse function. The format is described in https://tc39.es/ecma262/#sec-date-time-string-format.",
+      "type": "string",
+      "minLength": 4
+    },
+    "name": {
+      "description": "The canonical name of the timeseries, which may be obtained from the platform's administration interface.",
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {
+      "description": "The value for the event.",
+      "type": "number"
+    },
+    "coords": {
+      "description": "The event coordinates, if applicable. The coordinate system is determined by the application.",
+      "type": "object",
+      "properties": {
+        "x": {"type": "number"},
+        "y": {"type": "number"},
+        "z": {"type": "number"}
+      },
+      "additionalProperties": false
+    },
+    "labels": {
+      "description": "A set of labels used to describe an event. They're not actively used by the platform, but can be used to store trace information for later event identification.",
+      "type": "array",
+      "items": {
+        "description": "Each label is stored as a <key, value> entry.",
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": ["key", "value"],
+        "additionalProperties": false
+      }
+    },
+    "meta": {
+      "description": "A variant field where producers may store any kind of information. Depending on the variable, it may be expected to be able to find specific properties whithin.",
+      "type": "object"
+    }
+  },
+  "required": ["@timestamp", "name", "value"],
+  "additionalProperties": false
+}

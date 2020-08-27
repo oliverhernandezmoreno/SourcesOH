@@ -1,0 +1,68 @@
+target: primero
+
+timeseries:
+  # Set specific frequencies for superficial
+
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.ce
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.t
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.orp
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.nf
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.ph
+    frequencies:
+      - minutes: 60
+
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.ce
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.t
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.orp
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.nf
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.ph
+    frequencies:
+      - minutes: 60
+
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.ce
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.t
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.orp
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.nf
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.ph
+    frequencies:
+      - minutes: 60
+
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.ce
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.t
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.orp
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.nf
+    frequencies:
+      - minutes: 60
+  - canonical_name: primero.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.ph
+    frequencies:
+      - minutes: 60

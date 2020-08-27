@@ -1,0 +1,8 @@
+name: >-
+  Evento C por deslizamiento significativo de material superficial del
+  muro que afecta la geometría de los taludes
+
+inputs:
+  - "@ef-mvp/m1/triggers/critical/deslizamiento-mayor"
+
+script: "../../trigger-C.js"

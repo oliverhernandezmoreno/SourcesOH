@@ -1,0 +1,28 @@
+name: Evento B6
+description: >-
+  Se detecta tendencia desfavorable de deformación de monolito en el eje Z
+  en coronamiento de muro y han indicado la ocurrencia de un sismo
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+
+scope: spread
+groups:
+  items:
+    - name: Prismas y Monolitos
+      canonical_name: prismas-monolitos
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/monolito/coronamiento/eje-z/B3"
+  - "@ef-mvp/m2/parameters/deformacion/monolito/coronamiento/sismo"
+
+script: ef-mvp/m2/parameters/deformacion/monolito/evento-tendencia-sismo.js

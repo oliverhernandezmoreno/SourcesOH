@@ -1,0 +1,23 @@
+---
+- name:          55-copy-broker-files
+  hosts:         role_docker-worker-broker
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+  - name:        copy rabbitmq.conf
+    copy:
+      src:       ../assets/configs/rabbitmq/rabbitmq.conf
+      dest:      "/home/{{ server_user }}/rabbitmq.conf"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+  - name:        copy rabbitmq.conf
+    copy:
+      src:       ../assets/configs/rabbitmq/definitions.json.secrets
+      dest:      "/home/{{ server_user }}/rabbitmq.definitions.json"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx

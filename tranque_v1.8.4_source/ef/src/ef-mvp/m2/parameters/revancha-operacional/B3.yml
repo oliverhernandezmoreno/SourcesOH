@@ -1,0 +1,12 @@
+name: Evento C1 de revancha operacional
+description: >-
+  La revancha operacional excede el umbral inferior.
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-operacional"

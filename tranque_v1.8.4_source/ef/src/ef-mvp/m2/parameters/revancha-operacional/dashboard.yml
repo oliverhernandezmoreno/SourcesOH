@@ -1,0 +1,13 @@
+name: Revancha operacional mínima (promedio cota lamas)
+range_gte: 0
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-operacional"
+  - "@ef-mvp/m2/parameters/altura-muro"
+  - "@ef-mvp/m2/parameters/variables/cota-lamas"

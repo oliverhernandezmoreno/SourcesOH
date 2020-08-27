@@ -1,0 +1,7 @@
+name: Zn -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/zn"
+  - "@emac-mvp/adt/arima/variables.zn"
+
+script: ./../adt.js

@@ -1,0 +1,25 @@
+name: Evento B2
+description: >-
+  Se detecta tendencia desfavorable de deformación de inclinometro en el eje Y
+  en suelo fundación
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: group
+groups:
+  parents:
+    - canonical_name: inclinometros
+      name: "Inclinometros"
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/inclinometro/suelo/eje-y/supera-tendencia"
+
+script: common-scripts/al-menos-un-evento.js

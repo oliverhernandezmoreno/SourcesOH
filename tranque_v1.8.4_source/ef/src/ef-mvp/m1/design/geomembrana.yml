@@ -1,0 +1,25 @@
+name: Instalación y estado de la geomembrana
+description: >-
+  El operador debe verificar que el estado de la geomembrana sea el
+  correcto, para esto debe inspeccionar la geomembrana desde un sector
+  seguro en busca de algún tipo de daño. En caso de detectar
+  visualmente un problema de este tipo es necesario activar este
+  evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q08

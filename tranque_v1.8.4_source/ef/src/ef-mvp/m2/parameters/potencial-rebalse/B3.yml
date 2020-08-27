@@ -1,0 +1,6 @@
+name: Evento B3 de potencial de rebalse
+description: >-
+  Tiempo de rebalse es menor que el tiempo de evacuación
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse/tiempo-rebalse"

@@ -1,0 +1,26 @@
+name: Revancha hidráulica
+description: >-
+  La revancha corresponde a la diferencia menor, en cota, entre la
+  línea de coronamiento del muro de contención y la superficie del
+  agua de la laguna, que se produce en los tranques y embalses de
+  agua.
+range_gte: 0
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+# Tres umbrales que deben ser definidos
+thresholds:
+  - lower: ~
+  - lower: ~
+  - lower: ~
+
+frequencies:
+  - minutes: 60  # 1 hora
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/elevacion"
+  - "@ef-mvp/m2/parameters/variables/cota-laguna"

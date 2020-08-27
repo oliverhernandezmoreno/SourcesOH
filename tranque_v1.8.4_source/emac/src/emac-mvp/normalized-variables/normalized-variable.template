@@ -1,0 +1,13 @@
+name: __NAME__ -- __NORM_NAME__ -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/__VARIABLE__"
+  - "@emac-mvp/valid-variables/__VARIABLE__"
+
+script: ./../normalization-__NORM__.js

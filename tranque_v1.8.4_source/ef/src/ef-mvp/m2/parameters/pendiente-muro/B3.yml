@@ -1,0 +1,14 @@
+name: Evento B3 de pendiente del muro (aguas abajo)
+description: >-
+  La pendiente global del muro sobrepasa el valor umbral.
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/global-aguas-abajo"
+
+script: ./B-directo.js

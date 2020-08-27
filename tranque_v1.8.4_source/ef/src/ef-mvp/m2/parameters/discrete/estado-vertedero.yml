@@ -1,0 +1,15 @@
+name: Estado operativo del vertedero de emergencia
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: Vertedero operativo
+    value:
+      choiceValue: 0
+      lt: 2
+  - choice: Vertedero no operativo o inexistente
+    value:
+      choiceValue: 2
+      gte: 2

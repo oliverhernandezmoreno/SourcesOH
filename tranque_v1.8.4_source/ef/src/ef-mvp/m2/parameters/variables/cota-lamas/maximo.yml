@@ -1,0 +1,13 @@
+name: Cota de lamas máxima del depósito
+range_gte: 0
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/cota-lamas/maximo-sector"
+
+script: common-scripts/maximo.js

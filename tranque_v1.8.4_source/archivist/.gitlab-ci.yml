@@ -1,0 +1,103 @@
+stages:
+  - lint
+  - build base
+  - test
+  - sonar
+  - build
+
+flake8:
+  stage: lint
+  image: python:3.6-alpine
+  script:
+    - pip install "flake8==3.7.9"
+    - flake8
+
+base-image:
+  stage: build base
+  only:
+    refs:
+      - dev
+    changes:
+      - requirements.txt
+      - docker/Dockerfile.base
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}/base:latest" -f ./docker/Dockerfile.base .
+    - docker push "${CI_REGISTRY_IMAGE}/base:latest"
+
+test:
+  stage: test
+  only:
+    - dev
+    - master
+    - tags
+  image: registry.gitlab.com/inria-chile/tranque/archivist/base:latest
+  variables:
+    POSTGRES_DB: backend
+    POSTGRES_USER: backend
+    POSTGRES_PASSWORD: backend
+    MINIO_ACCESS_KEY: storagekey
+    MINIO_SECRET_KEY: storagesecret
+  services:
+    - name: mdillon/postgis:10
+      alias: postgis
+    - name: docker.elastic.co/elasticsearch/elasticsearch-oss:7.3.1
+      alias: elasticsearch
+      command: ["elasticsearch", "-Ediscovery.type=single-node"]
+    - name: minio/minio:RELEASE.2019-04-23T23-50-36Z
+      alias: storage
+      command: ["server", "/data"]
+  script:
+    - pip install -r requirements.dev.txt
+    - pytest --cov-report=xml
+    - mkdir coverage-reports
+    - mv coverage.xml coverage-reports/coverage-report.xml
+  artifacts:
+    paths:
+      - coverage-reports
+
+sonar:
+  stage: sonar
+  only:
+    - dev
+    - master
+  image:
+    name: newtmitch/sonar-scanner:3.2.0
+    entrypoint: ['']
+  script:
+    # install vault
+    - wget -q https://releases.hashicorp.com/vault/0.11.1/vault_0.11.1_linux_amd64.zip
+    - unzip -q vault_0.11.1_linux_amd64.zip
+    - rm -f vault_0.11.1_linux_amd64.zip
+    # get sonar login token from vault
+    - SONAR_TOKEN=$(./vault read -field=key secret/tranque/dev/sonarqube/login)
+    # - run sonar scanner
+    - sonar-scanner -Dsonar.projectBaseDir=$CI_PROJECT_DIR
+                    -Dsonar.host.url=https://sonar.dev.inria.cl
+                    -Dsonar.login=$SONAR_TOKEN
+                    -Dsonar.projectName="Tranque Archivist"
+                    -Dsonar.projectKey=tranque-archivist
+                    -Dsonar.projectVersion=$CI_COMMIT_SHA
+
+build-final:
+  stage: build
+  only:
+    - dev
+    - master
+    - tags
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  before_script:
+    - wget https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+    - mv jq-linux64 /usr/bin/jq
+    - chmod a+x /usr/bin/jq
+  script:
+    - "jq -M '. | with_entries({key: .key, value: env[.key]})' ci-env.json > ci-env.json.replaced"
+    - mv ci-env.json.replaced ci-env.json
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" -f ./docker/Dockerfile .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"

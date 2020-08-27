@@ -1,0 +1,9 @@
+name: Fake compound variable
+
+inputs:
+  - "@fake/raw"
+
+script_version: "fake:aabbccddeeff00112233445566778899"
+category:
+  - fake-index
+  - something-else

@@ -1,0 +1,11 @@
+name: Concentración de eventos de presión de poros
+description: >-
+  Variable auxiliar para ejecutar la reflexión de las condiciones
+  asimétricas de los eventos de presión de poros.
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/prop/*"
+
+meta:
+  table:
+    type: object

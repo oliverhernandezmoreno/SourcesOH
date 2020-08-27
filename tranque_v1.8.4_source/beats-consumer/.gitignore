@@ -1,0 +1,13 @@
+# editor artifacts
+*~
+
+# build artifacts
+/node_modules
+*.js
+
+# test artifacts
+coverage
+
+# doc artifacts
+openapi.built.json
+doc.html

@@ -1,0 +1,34 @@
+---
+- name: 00-install-docker
+  hosts: role_gitlab-runner
+  vars:
+    server_user: ec2-user
+  remote_user: "{{ server_user }}"
+  become: yes
+  become_user: root
+  tasks:
+    - name: install docker
+      package:
+        name: docker
+        state: latest
+    - name: enable and start docker
+      service:
+        name: docker
+        state: started
+        enabled:  yes
+    - name: add user to docker group
+      user:
+        name: "{{ server_user }}"
+        group: docker
+        append: yes
+    - name: install pip
+      include_role:
+        name: geerlingguy.pip
+      vars:
+        - pip_install_packages:
+          - docker
+    - name: install docker machine
+      get_url:
+        url: https://github.com/docker/machine/releases/download/v0.16.0/docker-machine-Linux-x86_64
+        dest: /usr/local/bin/docker-machine
+        mode: u+rwx,go+rx-w

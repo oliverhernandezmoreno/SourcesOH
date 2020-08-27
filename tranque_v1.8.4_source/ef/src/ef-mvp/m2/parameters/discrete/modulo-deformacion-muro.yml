@@ -1,0 +1,18 @@
+name: Módulo de deformación del muro del depósito
+type: raw
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+
+choices:
+  - choice: Acorde al diseño
+    value:
+      choiceValue: 0
+      lt: 2
+  - choice: No es acorde al diseño
+    value:
+      choiceValue: 2
+      gte: 2

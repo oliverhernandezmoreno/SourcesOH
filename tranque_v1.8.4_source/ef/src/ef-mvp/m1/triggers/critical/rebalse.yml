@@ -1,0 +1,28 @@
+name: Rebalse de lamas o aguas claras
+description: >-
+  Corresponde a la evidencia de un rebalse del muro ya sea de aguas
+  claras o lamas desde la playa del depósito. En caso de detectar
+  visualmente o por medio de la comunicación con otro operador este
+  tipo de situación, es necesario activar el evento gatillador.
+type: raw
+
+choices:
+  - choice: "Sí, gatillará una alerta roja"
+    value:
+      choiceValue: 2
+      gt: 1
+  - choice: "Sí, gatillará una alerta amarilla"
+    value:
+      choiceValue: 1
+      gt: 0
+      lte: 1
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+category:
+  - m1-critical-triggers

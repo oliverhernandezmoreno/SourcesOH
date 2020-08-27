@@ -1,0 +1,7 @@
+name: Hg -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/hg"
+  - "@emac-mvp/adt/arima/variables.hg"
+
+script: ./../adt.js

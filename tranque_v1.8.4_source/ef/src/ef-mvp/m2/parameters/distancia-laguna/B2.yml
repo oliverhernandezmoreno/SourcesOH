@@ -1,0 +1,12 @@
+name: Evento B2 de distancia de laguna
+description: >-
+  Mínima distancia laguna-muro < Segundo valor umbral
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/distancia-laguna"

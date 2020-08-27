@@ -1,0 +1,37 @@
+name: NF -- ARIMA
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/sgt/nf"
+
+script: ./../arima-daily.js
+
+meta:
+  arima:
+    type: object
+  interval:
+    type: string
+  values:
+    type: array
+    items:
+      type: number
+  predictions:
+    type: array
+    items:
+      type: object
+      properties:
+        value:
+          type: number
+
+parameters:
+  - name: Lambda parameter for Box-Cox for SGT NF
+    canonical_name: box-cox-lambda-sgt-nf
+    schema:
+      oneOf:
+        - type: number
+        - type: "null"

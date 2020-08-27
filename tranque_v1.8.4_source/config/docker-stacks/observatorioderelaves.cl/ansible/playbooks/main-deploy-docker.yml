@@ -1,0 +1,5 @@
+---
+- import_playbook: 55-copy-broker-files.yml
+- import_playbook: 60-copy-managers-files.yml
+- import_playbook: 61-clean-up-docker.yml
+- import_playbook: 62-stack-deploy.yml

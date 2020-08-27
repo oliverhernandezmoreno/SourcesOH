@@ -1,0 +1,19 @@
+name: Activación manual - deslizamiento
+type: manual
+
+
+choices:
+  - choice: No hay evidencia
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay evidencia de deslizamiento
+    value:
+      choiceValue: 1
+      gte: 1
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro

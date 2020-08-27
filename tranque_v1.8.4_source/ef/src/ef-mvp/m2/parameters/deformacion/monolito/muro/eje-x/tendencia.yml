@@ -1,0 +1,26 @@
+name: Tendencia desfavorable en Eje X
+description: La tendencia desfavorable en eje X para medición en monolito del muro
+
+
+unit:
+  id: tendencia
+  name: Coefficient slope de la Regression Lineal intersection
+  abbreviation: slope
+  si: true
+
+scope: spread
+groups:
+  items:
+    - name: Prismas y Monolitos
+      canonical_name: prismas-monolitos
+
+thresholds:
+  - upper: ~  # CriticalTime Debe ser definido en configuracion sitio especifico
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/monolito/muro/eje-x/deformacion-monolito"
+  - "@ef-mvp/m2/parameters/deformacion-monolito-eje-x"
+
+
+script: ef-mvp/m2/parameters/deformacion/monolito/tendencia.js

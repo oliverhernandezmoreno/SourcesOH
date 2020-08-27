@@ -1,0 +1,16 @@
+name: Promedio del caudal en una ventana móvil
+
+scope: spread
+groups:
+  items:
+    - name: Caudalímetros
+      canonical_name: caudalimetros
+
+unit:
+  id: liter-per-second
+  name: Litros por segundo
+  abbreviation: l/s
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/caudal"

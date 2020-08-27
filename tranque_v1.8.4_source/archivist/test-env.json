@@ -1,0 +1,26 @@
+{
+  "LOG_LEVEL": "debug",
+  "BACKUPS_KEPT": 7,
+
+  "DATABASE_NAME": "backend",
+  "DATABASE_HOST": "localhost",
+  "DATABASE_USER": "backend",
+  "DATABASE_PASSWORD": "backend",
+  "DATABASE_PORT": "5432",
+
+  "ELASTICSEARCH_PROTOCOL": "http",
+  "ELASTICSEARCH_HOST": "localhost",
+  "ELASTICSEARCH_PORT": "9200",
+  "ELASTICSEARCH_BULK_KWARGS": {"refresh": "true"},
+
+  "S3_ACCESS_KEY_ID": "storagekey",
+  "S3_SECRET_ACCESS_KEY": "storagesecret",
+  "S3_BUCKET_NAME": "test-s3",
+  "S3_ENDPOINT_URL": "http://localhost:9000",
+
+  "BACKUP_ACCESS_KEY_ID": "storagekey",
+  "BACKUP_SECRET_ACCESS_KEY": "storagesecret",
+  "BACKUP_BUCKET_NAME": "test-backup",
+  "BACKUP_ENDPOINT_URL": "http://localhost:9000",
+  "NAMESPACE": "test-namespace"
+}

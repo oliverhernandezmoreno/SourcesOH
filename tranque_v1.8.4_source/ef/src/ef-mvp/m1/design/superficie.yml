@@ -1,0 +1,27 @@
+name: Superficie del muro y cubeta del depósito
+description: >-
+  El operador debe verificar que la superficie ocupada por el muro y
+  la playa están ubicadas acorde con los límites establecidos por el
+  plan de depositación, en general el operador debe determinar si la
+  superficie afectada por la deposición de lamas y el crecimiento del
+  muro no se están aumentando de forma irregular. En caso de detectar
+  visualmente un problema de este tipo es necesario activar este
+  evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q04

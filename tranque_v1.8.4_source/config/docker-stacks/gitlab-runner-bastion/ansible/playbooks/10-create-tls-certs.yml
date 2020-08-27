@@ -1,0 +1,22 @@
+---
+- name: 10-create-tls-certs
+  hosts: role_gitlab-runner
+  vars:
+    server_user: ec2-user
+  remote_user: "{{ server_user }}"
+  become: yes
+  become_user: root
+  tasks:
+    - name: create /certs folder
+      file:
+        path: /certs
+        state: directory
+    - name: create self-signed TLS certificates
+      docker_container:
+        name: omgwtfssl
+        image: paulczar/omgwtfssl
+        recreate: true
+        volumes:
+          - /certs:/certs
+        env:
+          SSL_SUBJECT: "ci-tranque-gitlab-runner-bastion.observatorioderelaves.cl"

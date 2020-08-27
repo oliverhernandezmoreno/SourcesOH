@@ -1,0 +1,20 @@
+name: Indicación de ocurrencia de un sismo en monolito de talud
+type: manual
+
+
+choices:
+  - choice: No hay ocurrencia de sismo
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay ocurrencia de sismo
+    value:
+      choiceValue: 1
+      gte: 1
+
+
+scope: spread
+groups:
+  items:
+    - name: Prismas y Monolitos
+      canonical_name: prismas-monolitos

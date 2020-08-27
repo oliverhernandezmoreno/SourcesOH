@@ -1,0 +1,13 @@
+name: Evento A2 de revancha operacional
+description: >-
+  La revancha operacional excede el umbral que representa el límite
+  hipotético de depositación horizontal.
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-operacional"

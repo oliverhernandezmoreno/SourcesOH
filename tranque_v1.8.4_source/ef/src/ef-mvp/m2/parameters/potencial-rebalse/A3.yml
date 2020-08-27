@@ -1,0 +1,6 @@
+name: Evento A3 de potencial de rebalse
+description: >-
+  Se detecta un potencial de rebalse entre 0,8 y 1
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse"

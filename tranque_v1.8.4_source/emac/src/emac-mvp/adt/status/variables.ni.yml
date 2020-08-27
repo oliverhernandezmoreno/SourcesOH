@@ -1,0 +1,7 @@
+name: Ni -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/ni"
+  - "@emac-mvp/adt/arima/variables.ni"
+
+script: ./../adt.js

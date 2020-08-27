@@ -1,0 +1,13 @@
+name: Isolation test raw variable
+type: raw
+
+scope: spread
+groups:
+  items:
+    - canonical_name: fake-things
+      name: Fake things
+
+script_version: "fake:aabbccddeeff00112233445566778899"
+
+category:
+  - fake-variable

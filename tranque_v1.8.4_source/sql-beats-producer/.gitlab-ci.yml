@@ -1,0 +1,36 @@
+stages:
+  - code quality
+  - test
+  - build
+
+lint:
+  stage: code quality
+  image: clojure:openjdk-8-lein-2.8.1-alpine
+  script:
+    - mkdir -p ~/.lein
+    - echo '{:user {:plugins [[jonase/eastwood "0.3.5"]]}}' > ~/.lein/profiles.clj
+    - lein eastwood
+
+test:
+  stage: test
+  image: clojure:openjdk-8-lein-2.8.1-alpine
+  script:
+    - lein test
+
+docker-build:
+  stage: build
+  tags:
+    - docker
+  only:
+    - master
+    - dev
+    - tags
+  image: docker:19.03.0
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"

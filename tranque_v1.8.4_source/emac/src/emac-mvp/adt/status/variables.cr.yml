@@ -1,0 +1,7 @@
+name: Cr -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/cr"
+  - "@emac-mvp/adt/arima/variables.cr"
+
+script: ./../adt.js

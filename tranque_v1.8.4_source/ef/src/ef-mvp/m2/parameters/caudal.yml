@@ -1,0 +1,26 @@
+name: Caudal de salida del sistema de drenaje
+range_gte: 0
+type: raw
+
+scope: spread
+groups:
+  items:
+    - name: Caudalímetros
+      canonical_name: caudalimetros
+
+frequencies:
+  - minutes: 60  # 1 hora
+
+unit:
+  id: liter-per-second
+  name: Litros por segundo
+  abbreviation: l/s
+  si: false
+
+thresholds:
+  - upper: ~
+    kind: coeficiente-variacion-linea-base
+  - upper: ~
+    kind: porcentaje-variacion
+  - upper: ~
+    kind: ventana-movil

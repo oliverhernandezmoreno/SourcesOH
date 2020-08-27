@@ -1,0 +1,6 @@
+name: Evento B2 de revancha hidráulica
+description: >-
+  La revancha hidráulica supera el segundo umbral
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-hidraulica"

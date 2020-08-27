@@ -1,0 +1,7 @@
+name: Evaluación de la adecuada caracterización geotécnica del suelo de fundación
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores

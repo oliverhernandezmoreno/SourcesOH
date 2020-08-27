@@ -1,0 +1,23 @@
+name: Evento A1 de Nivel freático de la cubeta del depósito
+description: >-
+  Se detecta la presencia de nivel freático. Por piezómetro, Se
+  informa por sector.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Instrumento de medición de nivel freático
+      canonical_name: instrumentos-nivel-freatico
+
+inputs:
+  - "@ef-mvp/m2/parameters/nivel-freatico-cubeta-deposito"

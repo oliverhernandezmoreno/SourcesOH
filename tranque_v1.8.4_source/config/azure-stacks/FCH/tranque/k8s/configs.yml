@@ -1,0 +1,37 @@
+# Regular application variables are stored here
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configs
+  namespace: tranque
+data:
+  api-base: https://w2.trq-dev.cl/api
+  static-url: https://static.trq-dev.cl/static/
+
+  s3-access-key-id: sysadmin
+  s3-bucket-name: smc
+  s3-endpoint-url: http://172.30.3.4/
+  
+  redis-host: redis-tranque-3.redis.cache.windows.net
+  redis-port: "6380"
+  redis-ssl: "1"
+
+  amqp-host: 172.30.4.35
+  amqp-username: admin
+  amqp-ssl: "0"
+  amqp-port: "5672"
+  amqp-vhost: /
+  amqp-federated-queue: central-queue
+
+# Modificar o agregar valores
+
+  # Este dato se obtiene desde el private-link
+  postgres-host: 172.30.4.7 # tranque-3.postgres.database.azure.com
+  postgres-user: sysadmin@tranque-3
+
+  # Estos datos se obtienen una vez creado los servicios
+  elasticsearch-protocol: http
+  elasticsearch-host: 172.30.4.8
+  elasticsearch-port: "9200"
+  elasticsearch-user: sysadmin

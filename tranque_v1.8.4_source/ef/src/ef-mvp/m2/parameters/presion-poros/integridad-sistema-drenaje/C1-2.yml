@@ -1,0 +1,23 @@
+name: Evento C1 de Integridad del sistema de drenaje. Por instrumento.
+description: Validación manual de un instrumento en Evento B3
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/integridad-sistema-drenaje/C1-2"
+
+script: common-scripts/copy-events.js

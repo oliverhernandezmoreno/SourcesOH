@@ -1,0 +1,16 @@
+[
+  {
+    "model": "documents.documenttype",
+    "pk": "ficha",
+    "fields": {
+      "description": "Contiene informacion descriptiva de algun objeto como una variable de una serie de tiempo, por ejemplo."
+    }
+  },
+  {
+    "model": "documents.documenttype",
+    "pk": "medicion",
+    "fields": {
+      "description": "Resultados de mediciones de algun instrumento reportados en archivos."
+    }
+  }
+]

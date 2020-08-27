@@ -1,0 +1,22 @@
+{
+  "name": "index-builder",
+  "version": "1.0.0",
+  "description": "A set of build tools for tranque indices",
+  "main": "build.js",
+  "author": "Inria Chile",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "ajv": "^6.10.2",
+    "browser-pack": "^6.1.0",
+    "commander": "^2.20.0",
+    "detective": "^5.2.0",
+    "eslint": "^5.16.0",
+    "jest": "^24.9.0",
+    "js-yaml": "^3.13.0"
+  },
+  "scripts": {
+    "build": "node build.js build",
+    "test": "jest --useStderr --passWithNoTests --verbose"
+  }
+}

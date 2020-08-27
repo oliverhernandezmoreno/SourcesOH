@@ -1,0 +1,51 @@
+target: desconocido-illapel
+
+groups:
+  - import_from: fake
+    canonical_name: fake-groups
+
+  - name: Fake group 1
+    canonical_name: fake-group-1
+    parents:
+      - fake-groups
+
+  - name: Fake group 2
+    canonical_name: fake-group-2
+    parents:
+      - fake-groups
+
+  - import_from: fake
+    canonical_name: fake-things
+
+sources:
+  - hardware_id: "{name}"
+    name: "Thing {name}"
+    coords:
+      srid: 32719
+      x: 310554
+      y: 6458839
+    groups:
+      - fake-things
+      - fake-group-1
+    with_name: ["aaaaaa", "bbbbbb", "cccccc", "dddddd"]
+
+  - hardware_id: "{name}"
+    name: "Thing {name}"
+    coords:
+      srid: 32719
+      x: 310554
+      y: 6458839
+    groups:
+      - fake-things
+      - fake-group-2
+    with_name: ["eeeeee", "ffffff", "000000", "111111"]
+
+  - hardware_id: "{name}"
+    name: "Thing {name}"
+    coords:
+      srid: 32719
+      x: 310554
+      y: 6458839
+    groups:
+      - fake-things
+    with_name: ["222222", "333333", "444444", "555555", "666666"]

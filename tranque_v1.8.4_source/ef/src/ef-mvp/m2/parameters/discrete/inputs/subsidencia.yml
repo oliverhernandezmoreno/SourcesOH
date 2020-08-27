@@ -1,0 +1,21 @@
+name: Subsidencia o socavación en el muro o en la cubeta cercana al muro
+type: manual
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+
+choices:
+  - choice: No hay subsidencia
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay subsidencia riesgosa
+    value:
+      choiceValue: 1
+      gte: 1
+
+frequencies:
+  - minutes: 1440  # 1 día

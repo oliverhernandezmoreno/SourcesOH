@@ -1,0 +1,32 @@
+name: Pendiente global del muro aguas arriba
+range_gte: 0
+
+unit:
+  id: h-v-ratio
+  name: "Razón H:V"
+  abbreviation: "H:V"
+  si: false
+
+frequencies:
+  - minutes: 43200  # 30 días
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/elevacion"
+
+thresholds:
+  - lower: ~  # debe ser definido
+
+parameters:
+  - canonical_name: porcentaje-cercania-pendiente-aguas-arriba
+    name: >-
+      Porcentaje del valor umbral que indica que el valor medido está
+      cerca del valor umbral.
+    schema:
+      type: number
+      minimum: 0

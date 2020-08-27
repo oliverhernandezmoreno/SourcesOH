@@ -1,0 +1,64 @@
+---
+- name:               20-swarm-init - leader
+  hosts:              role_docker-leader
+  remote_user:        ec2-user
+  become:             yes
+  become_user:        root
+  tasks:
+  - name:             get leader IP address
+    uri:
+      url:            http://169.254.169.254/latest/meta-data/local-ipv4
+      return_content: yes
+    register:         swarm_init_leader_ip
+  - name:             init swarm as leader
+    docker_swarm:
+      state:          present
+      advertise_addr: "{{ swarm_init_leader_ip.content }}"
+  - name:             get manager token
+    docker_swarm:
+      state:          inspect
+    register:         swarm_info
+  - debug:            var=swarm_info.swarm_facts.JoinTokens.Manager
+  - debug:            var=swarm_info.swarm_facts.JoinTokens.Worker
+
+- name:               20-swarm-init - manager
+  hosts:              role_docker-manager
+  remote_user:        ec2-user
+  become:             yes
+  become_user:        root
+  vars:
+    join_token:       "{{ hostvars[groups['role_docker-leader'][0]]['swarm_info']['swarm_facts']['JoinTokens']['Manager'] }}"
+    leader_ip:        "{{ hostvars[groups['role_docker-leader'][0]]['swarm_init_leader_ip']['content'] }}"
+  tasks:
+  - name:             get manager IP address
+    uri:
+      url:            http://169.254.169.254/latest/meta-data/local-ipv4
+      return_content: yes
+    register:         swarm_init_manager_ip
+  - name:             join swarm as manager
+    docker_swarm:
+      state:          join
+      advertise_addr: "{{ swarm_init_manager_ip.content }}"
+      join_token:     "{{ join_token }}"
+      remote_addrs:   [ "{{ leader_ip }}:2377" ]
+
+- name:               20-swarm-init - workers
+  hosts:              role_docker-worker-*
+  remote_user:        ec2-user
+  become:             yes
+  become_user:        root
+  vars:
+    join_token:       "{{ hostvars[groups['role_docker-leader'][0]]['swarm_info']['swarm_facts']['JoinTokens']['Worker'] }}"
+    leader_ip:        "{{ hostvars[groups['role_docker-leader'][0]]['swarm_init_leader_ip']['content'] }}"
+  tasks:
+  - name:             get worker IP address
+    uri:
+      url:            http://169.254.169.254/latest/meta-data/local-ipv4
+      return_content: yes
+    register:         swarm_init_worker_ip
+  - name:             join swarm as workers
+    docker_swarm:
+      state:          join
+      advertise_addr: "{{ swarm_init_worker_ip.content }}"
+      join_token:     "{{ join_token }}"
+      remote_addrs:   [ "{{ leader_ip }}:2377" ]

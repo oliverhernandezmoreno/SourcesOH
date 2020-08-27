@@ -1,0 +1,18 @@
+name: Evento A1 de Cumplimiento de las características de diseño del sistema de drenaje
+description: >-
+  Evento A1:
+  No se ha realizado la validación de la información asociada a la caracterización
+  geotécnica del suelo de fundación.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+inputs:
+  - "@ef-mvp/m2/parameters/evaluacion-adecuada-caracterizacion-geotc/validado"

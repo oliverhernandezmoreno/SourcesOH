@@ -1,0 +1,21 @@
+[
+  {
+    "timeseries": "__REPLACED_TARGET__.s-PUNTO-SUB-ARRIBA-2.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  }
+]

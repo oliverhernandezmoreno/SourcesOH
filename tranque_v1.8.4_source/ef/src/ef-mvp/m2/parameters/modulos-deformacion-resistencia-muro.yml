@@ -1,0 +1,7 @@
+name: Módulos de deformación y resistencia al corte del material de relleno del muro del depósito
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores

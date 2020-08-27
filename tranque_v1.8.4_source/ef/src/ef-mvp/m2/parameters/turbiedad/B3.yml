@@ -1,0 +1,22 @@
+name: Evento B3 de Turbiedad del agua en el sistema de drenaje
+description: Se activan simultáneamente los eventos asociados a los Eventos B1 Y B2
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Turbidímetros
+      canonical_name: turbidimetros
+
+inputs:
+  - "@ef-mvp/m2/parameters/turbiedad/B1"
+  - "@ef-mvp/m2/parameters/turbiedad/B2"

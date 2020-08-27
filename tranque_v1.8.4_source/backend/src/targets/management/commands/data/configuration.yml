@@ -1,0 +1,335 @@
+$schema: http://json-schema.org/draft-07/schema#
+$id: config
+title: Target configuration
+description: >-
+  Configuration is performed first by declaring an inventory. Said
+  inventory is declared in terms of three types of entities: _groups_,
+  _sources_ and _parameters_. After the inventory is declared, the
+  stability indices may be applied to the system. Afterwards, final
+  adjustments may be performed to the individual _time series_
+  generated, such as threshold and frequency definition. **This
+  schema** governs the first and third phases of the process.
+
+
+definitions:
+  Pattern:
+    title: Expansion pattern
+    description: >-
+      An expression to expand definitions with, it uses the
+      elements within to generate several copies of the definition
+      with the altered placeholders according to the variable used
+      (e.g. with_n replaces 'n' in templates). Several
+      replacements produce a cross-product of replacements, so two
+      replacements with two and three values each would produce
+      six copies of the declaration.
+    oneOf:
+      - type: array
+        title: List of items
+        items:
+          oneOf: [{"type": "number"}, {"type": "string"}]
+      - type: object
+        title: Range specification
+        properties:
+          range:
+            title: Range object
+            type: object
+            properties:
+              start: {"type": "integer"}
+              stop: {"type": "integer"}
+              step: {"type": "integer"}
+        required: ["range"]
+
+  Group-Import:
+    type: object
+    title: Group import
+    description: Reference to a group definition within an index
+    properties:
+      import_from:
+        type: string
+        minLength: 1
+        description: "The index's name (whithin its manifest)."
+      canonical_name:
+        type: string
+        minLength: 1
+        description: "The imported group's canonical name."
+    patternProperties:
+      "^with_": {$ref: '#/definitions/Pattern'}
+    required: ["import_from", "canonical_name"]
+
+  Group:
+    type: object
+    title: Group declaration
+    properties:
+      canonical_name:
+        type: string
+        minLength: 1
+        description: The canonical name of the group.
+      name:
+        type: string
+        minLength: 1
+        description: The human-readable name of the group.
+      meta:
+        type: object
+        title: Group metadata
+        description: Any kind of metadata to store alongside the group.
+      parents:
+        description: >-
+          References to other groups in the inventory file, which will
+          be _parents_ of this one.
+        type: array
+        title: List of group parents
+        items: {"type": "string", "minLength": 1}
+    patternProperties:
+      "^with_": {$ref: '#/definitions/Pattern'}
+    required: ["canonical_name", "name"]
+
+  Source:
+    type: object
+    title: Source (DataSource) declaration
+    properties:
+      hardware_id:
+        type: string
+        minLength: 1
+        description: >-
+          External ID of the data source, should be unique for any
+          given target.
+      name:
+        type: string
+        minLength: 1
+        description: The human-readable name of the data source.
+      canonical_name:
+        type: string
+        minLength: 1
+        description: >-
+          A platform-canonical name for this data source, will be
+          automatically generated if omitted.
+      coords:
+        title: Source coordinates
+        description: "The data source's location, according to some coordinate system."
+        type: object
+        properties:
+          x: {"type": "number"}
+          y: {"type": "number"}
+          srid:
+            type: number
+            description: >-
+              The coordinate system ID according to
+              https://spatialreference.org/ref/epsg/
+      type:
+        type: string
+        enum: ["online", "offline", "reference"]
+        description: >-
+          The type of data source, only used for reference.
+      meta:
+        title: Source metadata
+        type: object
+        description: Any kind of metadata to store alongside the source.
+      groups:
+        title: List of source groups
+        description: >-
+          Canonical names of groups present in this inventory file,
+          which will be linked to the source.
+        type: array
+        items: {"type": "string", "minLength": 1}
+    patternProperties:
+      "^with_": {$ref: '#/definitions/Pattern'}
+    required: ["hardware_id", "name"]
+
+  Parameter:
+    type: object
+    title: Platform Parameter
+    description: >-
+      A very specific value used by the platform, which can be
+      modified by this inventory file according to configuration.
+    properties:
+      canonical_name:
+        type: string
+        minLength: 1
+        description: The canonical name of the parameter.
+      name:
+        type: string
+        minLength: 1
+        description: A human-readable name for the parameter.
+      value:
+        description: >-
+          "The value for the parameter, which may assume any shape
+          (according to the parameter's schema)."
+    patternProperties:
+      "^with_": {$ref: '#/definitions/Pattern'}
+    required: ["canonical_name"]
+
+  Timeseries:
+    type: object
+    title: Timeseries configuration
+    description: >-
+      Only used on the third phase of the configuration sequence, it
+      describes the alterations required for a specific time series.
+    properties:
+      canonical_name:
+        type: string
+        minLength: 1
+        description: The canonical name of the time series.
+      active:
+        type: boolean
+        description: >-
+          "Whether the timeseries should be active (defaults to
+          true). An inactive timeseries doesn't take part in the
+          Platform's internal operation."
+      thresholds:
+        title: List of thresholds
+        description: List of thresholds to configure.
+        type: array
+        items:
+          title: Time Series Threshold
+          type: object
+          properties:
+            upper: {"type": "number"}
+            lower: {"type": "number"}
+            kind: {"type": "string"}
+      frequencies:
+        title: List of frequencies
+        description: List of frequencies to configure.
+        type: array
+        items:
+          title: Time Series Frequency
+          type: object
+          properties:
+            protocol: {"type": "string"}
+            minutes: {"type": "number", "minimum": 0}
+            tolerance_lower: {"type": "number"}
+            tolerance_upper: {"type": "number"}
+          required: ["minutes"]
+    patternProperties:
+      "^with_": {$ref: '#/definitions/Pattern'}
+    required: ["canonical_name"]
+
+
+type: object
+properties:
+  target:
+    type: string
+    minLength: 1
+    description: >-
+      An optional reference to the target being described. May be
+      omitted to define a parametric inventory
+
+  groups:
+    title: List of groups to define
+    type: array
+    items:
+      oneOf:
+        - $ref: '#/definitions/Group-Import'
+        - $ref: '#/definitions/Group'
+
+  sources:
+    title: List of sources to define
+    type: array
+    items:
+      - $ref: '#/definitions/Source'
+
+  parameters:
+    title: List of parameters to define
+    type: array
+    items:
+      - $ref: '#/definitions/Parameter'
+
+  timeseries:
+    title: List of timeseries to configure after index application
+    type: array
+    items:
+      - $ref: '#/definitions/Timeseries'
+
+examples:
+  - groups:
+      - import_from: ef
+        canonical_name: sectores
+
+      - name: "Sector {s}"
+        canonical_name: "sector-{s}"
+        parents:
+          - sectores
+        with_s: ["A", "B", "C"]
+
+      - import_from: ef
+        canonical_name: piezometros
+
+    sources:
+      - hardware_id: "AU63F"
+        name: "Piezómetro 63F"
+        groups:
+          - piezometros
+          - sector-A
+
+      - hardware_id: "AU64F"
+        name: "Piezómetro 64F"
+        groups:
+          - piezometros
+          - sector-A
+
+      - hardware_id: "AU{n}H"
+        name: "Piezómetro {n}H"
+        groups:
+          - piezometros
+          - sector-B
+        with_n:
+          range:
+            start: 1
+            stop: 3
+
+    parameters:
+      - canonical_name: superficie-muro
+        name: Estimado de la superficie del muro
+        value: 1000300
+
+    timeseries:
+      - canonical_name: "{target}.s-AU64F.ef-mvp.m2.parameters.presion-poros"
+        thresholds:
+          - upper: 802
+            kind: cota-instalacion
+
+  - groups:
+      - import_from: emac
+        canonical_name: monitoreo-aguas
+
+      - import_from: emac
+        canonical_name: aguas-abajo
+
+      - import_from: emac
+        canonical_name: subterraneo
+
+      - import_from: emac
+        canonical_name: superficial
+
+    sources:
+      - hardware_id: "PTO11SUBAB"
+        name: "Punto de monitoreo 11"
+        groups:
+          - monitoreo-aguas
+          - aguas-abajo
+          - subterraneo
+
+      - hardware_id: "PTO13SUBAB"
+        name: "Punto de monitoreo 11"
+        groups:
+          - monitoreo-aguas
+          - aguas-abajo
+          - subterraneo
+
+      - hardware_id: "PTO75SUBAB"
+        name: "Punto de monitoreo 11"
+        groups:
+          - monitoreo-aguas
+          - aguas-abajo
+          - superficial
+
+    parameters:
+      - canonical_name: referencia-ir
+        name: Punto de referencia para el cálculo de distancias
+        value:
+          x: 1000
+          y: 2000
+
+    timeseries:
+      - canonical_name: "{target}.g-superficial.emac-mvp.ir.agua-potable"
+        frequencies:
+          - minutes: 60

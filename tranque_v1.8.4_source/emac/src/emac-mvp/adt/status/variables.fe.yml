@@ -1,0 +1,7 @@
+name: Fe -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/fe"
+  - "@emac-mvp/adt/arima/variables.fe"
+
+script: ./../adt.js

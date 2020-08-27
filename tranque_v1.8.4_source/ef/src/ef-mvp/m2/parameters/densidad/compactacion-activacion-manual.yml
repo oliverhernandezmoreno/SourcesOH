@@ -1,0 +1,21 @@
+name: Activación manual - Informes de compactación del material de empréstito
+  del muro
+type: manual
+
+choices:
+  - choice: Cumplen con las densidades de diseño
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: No cumplen con las densidades de diseño
+    value:
+      choiceValue: 1
+      gte: 1
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+    - canonical_name: emprestito
+      name: Emprestito

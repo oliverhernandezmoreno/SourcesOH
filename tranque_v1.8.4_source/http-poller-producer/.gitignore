@@ -1,0 +1,12 @@
+# emacs
+*~
+
+# virtual env
+env
+
+# cache
+__pycache__
+*.pyc
+
+# coverage reports
+.coverage*

@@ -1,0 +1,22 @@
+name: Balance iónico
+description: Valida un conjunto de muestras
+highlight: true
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+thresholds:
+  - upper: 10
+
+inputs:
+  - "@emac-mvp/variables/sulfates"
+  - "@emac-mvp/variables/chloride"
+  - "@emac-mvp/ionic-balance/ca"
+  - "@emac-mvp/ionic-balance/na"
+  - "@emac-mvp/ionic-balance/k"
+  - "@emac-mvp/ionic-balance/mg"
+  - "@emac-mvp/ionic-balance/bicarbonates"
+  - "@emac-mvp/ionic-balance/carbonates"

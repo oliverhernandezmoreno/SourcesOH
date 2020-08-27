@@ -1,0 +1,21 @@
+FROM python:3.6-buster
+
+ENV PYTHONUNBUFFERED 1
+
+WORKDIR /usr/src/app
+
+# API port
+EXPOSE 8000
+
+RUN apt-get update && \
+  apt-get install -y \
+  graphviz \
+  libgdal-dev \
+  netcat && \
+  rm -rf /var/lib/apt/lists/*
+
+COPY ./backend/requirements.txt /usr/src/app/requirements.txt
+COPY ./backend/requirements.dev.txt /usr/src/app/requirements.dev.txt
+RUN pip install -r requirements.dev.txt
+
+WORKDIR /usr/src/app/src

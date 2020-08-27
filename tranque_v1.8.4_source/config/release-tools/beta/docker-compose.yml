@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  dev:
+    build: .
+    volumes: 
+      - .:/usr/src/app
+    entrypoint: ["sh"]
+
+  release:
+    build: .
+    volumes:
+      - .:/usr/src/app
+    entrypoint: ["python", "release.py"]

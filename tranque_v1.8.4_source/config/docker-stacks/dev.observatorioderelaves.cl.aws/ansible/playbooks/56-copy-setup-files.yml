@@ -1,0 +1,23 @@
+---
+- name:          56-copy-setup-files
+  hosts:         role_docker-worker-backend
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+  - name:        create root folder
+    file:
+      path:      "/home/{{ server_user }}/stack"
+      state:     directory
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rwx,g+rx-w,o+rx-w
+  - name:        copy setup package
+    copy:
+      src:       ../assets/setup-package
+      dest:      "/home/{{ server_user }}/stack"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      preserve

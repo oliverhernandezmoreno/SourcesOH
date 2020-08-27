@@ -1,0 +1,11 @@
+name: Cota espejo de agua
+type: raw
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+frequencies:
+  - minutes: 10080  # 7 días

@@ -1,0 +1,150 @@
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - code quality
+  - build base
+  - test
+  - sonar
+  - push-backend
+  - push-backend-static
+  - deploy
+
+.lint: &lint
+  stage: code quality
+  image: python:3.6-buster
+  script:
+    - pip install "flake8==3.6.0"
+    - flake8
+
+lint-manual:
+  <<: *lint
+  when: manual
+
+lint-main:
+  <<: *lint
+  only:
+    - dev
+    - master
+
+docker-pre-build:
+  stage: build base
+  only:
+    refs:
+      - dev
+      - master
+      - tags
+    changes:
+      - docker/Dockerfile.base
+      - requirements.txt
+  tags:
+    - docker
+  image: docker:19.03.0
+  variables:
+    DOCKER_REGISTRY: registry.gitlab.com/inria-chile
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${DOCKER_REGISTRY}
+    - docker build -t "${DOCKER_REGISTRY}/tranque/backend/base:${CI_COMMIT_REF_SLUG}" -f ./docker/Dockerfile.base .
+    - docker push "${DOCKER_REGISTRY}/tranque/backend/base:${CI_COMMIT_REF_SLUG}"
+
+.test: &test
+  stage: test
+  image: registry.gitlab.com/inria-chile/tranque/backend/base:dev
+  variables:
+    POSTGRES_DB: backend
+    POSTGRES_USER: backend
+    POSTGRES_PASSWORD: backend
+    DATABASE_HOST: postgres
+    ELASTICSEARCH_HOST: elasticsearch
+    ELASTICSEARCH_PORT: 9200
+    ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+  services:
+    - name: mdillon/postgis:10
+      alias: postgres
+    - name: docker.elastic.co/elasticsearch/elasticsearch-oss:7.3.1
+      alias: elasticsearch
+      command: ["elasticsearch", "-Ediscovery.type=single-node"]
+  script:
+    - pip install -r requirements.dev.txt
+    - coverage run --branch --source=src src/manage.py test -v 2 --failfast
+    - coverage xml -i
+    - mkdir coverage-reports
+    - mv coverage.xml coverage-reports/coverage-report.xml
+
+test-manual:
+  <<: *test
+  when: manual
+
+test-main:
+  <<: *test
+  only:
+    - dev
+    - master
+  artifacts:
+    paths:
+      - coverage-reports
+
+sonar:
+  stage: sonar
+  only:
+    - dev
+    - master
+  image:
+    name: newtmitch/sonar-scanner:3.2.0
+    entrypoint: ['']
+  script:
+    # install vault
+    - wget -q https://releases.hashicorp.com/vault/0.11.1/vault_0.11.1_linux_amd64.zip
+    - unzip -q vault_0.11.1_linux_amd64.zip
+    - rm -f vault_0.11.1_linux_amd64.zip
+    # get sonar login token from vault
+    - SONAR_TOKEN=$(./vault read -field=key secret/tranque/dev/sonarqube/login)
+    # - run sonar scanner
+    - sonar-scanner -Dsonar.projectBaseDir=$CI_PROJECT_DIR -Dsonar.host.url=https://sonar.dev.inria.cl -Dsonar.login=$SONAR_TOKEN -Dsonar.projectName="Tranque Backend" -Dsonar.projectKey=tranque-backend -Dsonar.projectVersion=$CI_COMMIT_SHA
+
+docker-image-backend:
+  stage: push-backend
+  only:
+    - dev
+    - master
+    - tags
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" --build-arg "BASE_VARIANT=${CI_COMMIT_REF_SLUG}" --build-arg "CI_COMMIT_SHA=${CI_COMMIT_SHA}" -f ./docker/Dockerfile.backend .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
+
+docker-image-static-nginx:
+  stage: push-backend-static
+  only:
+    - dev
+    - master
+    - tags
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}/static-nginx:${CI_COMMIT_REF_SLUG}" -f ./docker/Dockerfile.static-nginx .
+    - docker push "${CI_REGISTRY_IMAGE}/static-nginx:${CI_COMMIT_REF_SLUG}"
+
+deploy:
+  stage: deploy
+  only:
+    - dev
+    - master
+  image: alpine:3.8
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8017352/trigger/pipeline
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${CI_COMMIT_REF_SLUG} ${TRIGGER_URL}

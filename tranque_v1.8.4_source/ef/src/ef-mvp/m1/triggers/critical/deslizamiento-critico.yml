@@ -1,0 +1,29 @@
+name: Remoción en masa de terreno natural hacia el muro o hacia sectores críticos
+description: >-
+  Corresponde a un evento de remoción en masa producto de un
+  deslizamiento del terreno natural colindante al depósito sobre el
+  muro o sobre instalaciones que pongan en riesgo la operación o la
+  integridad del muro debido a la incerteza asociada al grado de daños
+  provocados.
+type: raw
+
+choices:
+  - choice: "Sí, gatillará una alerta roja"
+    value:
+      choiceValue: 2
+      gt: 1
+  - choice: "Sí, gatillará una alerta amarilla"
+    value:
+      choiceValue: 1
+      gt: 0
+      lte: 1
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+category:
+  - m1-critical-triggers

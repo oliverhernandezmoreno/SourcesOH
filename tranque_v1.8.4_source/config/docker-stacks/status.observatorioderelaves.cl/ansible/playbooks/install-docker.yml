@@ -1,0 +1,36 @@
+---
+- hosts:          role_tranque-statuspage
+  vars:
+    server_user:  ec2-user
+  remote_user:    "{{ server_user }}"
+  become:         yes
+  become_user:    root
+  tasks:
+  # install docker
+  - name:         install docker
+    package:
+      name:       docker
+      state:      latest
+
+  # enable and start docker
+  - name:         enable and start docker
+    service:
+      name:       docker
+      state:      started
+      enabled:    yes
+
+  # add user to docker group
+  - name:         add user to docker group
+    user:         name={{ server_user }}
+                  groups=docker
+                  append=yes
+
+  # install pip to use docker-compose commands
+  - name:         install pip
+    include_role:
+      name:       geerlingguy.pip
+    vars:
+      - pip_install_packages:
+        - docker
+        - docker-compose
+        - jsondiff

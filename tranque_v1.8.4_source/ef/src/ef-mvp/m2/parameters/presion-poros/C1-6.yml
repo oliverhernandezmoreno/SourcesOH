@@ -1,0 +1,28 @@
+name: Presión de poros evento C1-6
+description: >-
+  Si de dos instrumentos, validables entre sí uno supera el primer
+  umbral (valor irregular) y el otro supera el segundo umbral y al
+  mismo tiempo un instrumento en el mismo sector, pero en distinta
+  ubicación supera el segundo umbral (valor critico) y su validador
+  supera el primer umbral. Se informa por sector, por instrumento.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/prop"
+
+script: ./from-prop.js

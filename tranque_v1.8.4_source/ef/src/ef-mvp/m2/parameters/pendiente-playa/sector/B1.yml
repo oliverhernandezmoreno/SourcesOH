@@ -1,0 +1,14 @@
+name: Evento B1 de pendiente de playa
+description: >-
+  La pendiente de playa se acerca al umbral
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-playa/B1"
+
+script: common-scripts/al-menos-un-evento.js

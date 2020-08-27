@@ -1,0 +1,191 @@
+[
+  {
+    "timeseries": "el-mauro.g-sector-A.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-B.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-C.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-D.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-E.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-F.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-G.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-H.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  },
+  {
+    "timeseries": "el-mauro.g-sector-I.ef-mvp.m2.parameters.distancia-laguna.minimo-sector",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.05
+      },
+      "fitMin": 0,
+      "factor": 210
+    }
+  }
+]

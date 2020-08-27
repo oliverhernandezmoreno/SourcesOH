@@ -1,0 +1,15 @@
+name: Índice de impacto -- Monitoreo superficial
+highlight: true
+
+thresholds:
+  - upper: 1.0
+
+inputs:
+  - "@emac-mvp/ii/superficial.aguas-arriba.cr"
+  - "@emac-mvp/ii/superficial.aguas-abajo.cr"
+
+script: ./ii.js
+
+category:
+  - emac-index
+  - impact-index

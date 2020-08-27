@@ -1,0 +1,24 @@
+name: Evento B2 de Integridad del sistema de drenaje
+description: Se detecta una variación brusca de caudal.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Caudalímetros
+      canonical_name: caudalimetros
+
+inputs:
+  - "@ef-mvp/m2/parameters/caudal"
+  - "@ef-mvp/m2/parameters/caudal/std"
+  - "@ef-mvp/m2/parameters/caudal/media"
+  - "@ef-mvp/m2/parameters/caudal/variacion-brusca"

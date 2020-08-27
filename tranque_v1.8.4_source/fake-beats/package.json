@@ -1,0 +1,33 @@
+{
+  "name": "fake-beats",
+  "version": "1.0.0",
+  "description": "Fake beats for the tranque platform, for testing purposes",
+  "main": "index.js",
+  "author": "Inria Chile",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "find lib -regex \".*\\.ts\" | xargs tsc --lib ES2019 --target ES2019 --module commonjs index.ts",
+    "lint": "tslint -c tslint.json index.ts 'lib/**/*.ts'",
+    "start": "node index.js",
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.3",
+    "@types/node": "^10.11.4",
+    "jest": "^23.6.0",
+    "tslint": "^5.11.0",
+    "typescript": "^3.1.1"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.4.0",
+    "axios": "^0.19.0",
+    "commander": "^2.18.0",
+    "glob": "^7.1.5",
+    "js-yaml": "^3.13.1",
+    "jstat": "^1.9.2",
+    "raven": "^2.6.4",
+    "redis": "^2.8.0",
+    "winston": "^3.1.0"
+  }
+}

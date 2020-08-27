@@ -1,0 +1,6 @@
+name: Evento D por rebalse de lamas o aguas claras
+
+inputs:
+  - "@ef-mvp/m1/triggers/critical/rebalse"
+
+script: "../../trigger-D.js"

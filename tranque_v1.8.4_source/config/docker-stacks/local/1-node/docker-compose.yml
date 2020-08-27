@@ -1,0 +1,164 @@
+version:          "3.4"
+
+x-env-files:      &env-files
+  env_file:
+    - .env
+    - .secrets
+
+x-logging:        &logging
+  driver:         json-file
+  options:
+    max-size:     "100m"
+    max-file:     "5"
+
+services:
+  storage:
+    image:        minio/minio:RELEASE.2019-04-23T23-50-36Z
+    <<:           *env-files
+    restart:      always
+    logging:      *logging
+    ports:
+      - 9000:9000
+    volumes:
+      - "minio:/data"
+    command:      "server /data"
+
+  kibana:
+    build:        ../../../docker-images/kibana
+    restart:      always
+    depends_on:
+      - elasticsearch
+    logging:      *logging
+
+  frontend:
+    image:        registry.gitlab.com/inria-chile/tranque/e700-frontend:dev
+    <<:           *env-files
+    restart:      always
+    depends_on:
+      - django
+    logging:      *logging
+
+  proxy:
+    build:        ../../../docker-images/proxy
+    restart:      always
+    depends_on:
+      - frontend
+      - django
+      - django-static
+      - kibana
+    logging:      *logging
+    ports:
+      - 80:80
+
+  cron:
+    build:        ../../../docker-images/cron
+    <<:           *env-files
+    restart:      always
+    depends_on:
+      - django
+    logging:      *logging
+
+  django:
+    image:        "registry.gitlab.com/inria-chile/tranque/backend:dev"
+    healthcheck:
+      test: nc -z localhost 8000 || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 120
+    <<:           *env-files
+    volumes:
+      - "./volumes/setup-package:/initial-setup"
+    restart:      always
+    depends_on:
+      - postgis
+      - elasticsearch
+    logging:      *logging
+
+  django-static:
+    image:        registry.gitlab.com/inria-chile/tranque/backend/static-nginx:dev
+    <<:           *env-files
+    restart:      always
+    logging:      *logging
+
+  postgis:
+    image:        "mdillon/postgis:10"
+    <<:           *env-files
+    restart:      always
+    volumes:
+      - "database:/var/lib/postgresql/data"
+    logging:      *logging
+
+  elasticsearch:
+    build:        ../../../docker-images/elasticsearch
+    <<:           *env-files
+    restart:      always
+    volumes:
+      - "esdata:/usr/share/elasticsearch/data"
+    logging:      *logging
+
+  enrichment:
+    image:        "registry.gitlab.com/inria-chile/tranque/enrichment:dev"
+    <<:           *env-files
+    restart:      always
+    depends_on:
+      - elasticsearch
+      - amqpbroker
+      - django
+    logging:      *logging
+
+  amqpbroker:
+    image:        registry.gitlab.com/inria-chile/tranque/config/rabbitmq:dev
+    <<:           *env-files
+    restart:      always
+    logging:      *logging
+
+  stats:
+    image:        "registry.gitlab.com/inria-chile/tranque/stats/r-base:dev"
+    <<:           *env-files
+    restart:      always
+    logging:      *logging
+
+  logstash:
+    build:        ../../../docker-images/logstash
+    <<:           *env-files
+    restart:      always
+    depends_on:
+      - elasticsearch
+      - amqpbroker
+      - redis
+    logging:      *logging
+
+  redis:
+    image:        "redis:4-alpine"
+    restart:      always
+    logging:      *logging
+
+  fake-beats:
+    image:        "registry.gitlab.com/inria-chile/tranque/fake-beats:dev"
+    <<:           *env-files
+    restart:      always
+    depends_on:
+      - redis
+    volumes:
+      - "./volumes/faking:/tmp/faking"
+    logging:      *logging
+
+  beats-consumer:
+    image:        "registry.gitlab.com/inria-chile/tranque/beats-consumer:dev"
+    <<:           *env-files
+    restart:      always
+    depends_on:
+      - redis
+    logging:      *logging
+
+  archivist:
+    image:        "registry.gitlab.com/inria-chile/tranque/archivist:dev"
+    command:      ["sleep", "infinity"]
+    <<:           *env-files
+    restart:      always
+    logging:      *logging
+
+volumes:
+  database:
+  esdata:
+  minio:

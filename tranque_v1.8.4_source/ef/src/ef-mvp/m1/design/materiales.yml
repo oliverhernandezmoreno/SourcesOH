@@ -1,0 +1,27 @@
+name: Materiales apropiados
+description: >-
+  El operador debe verificar que se cumple con la utilización de los
+  materiales indicados por diseño para el crecimiento del muro del
+  depósito, verificando que la depositación del material que conforma
+  el muro sea el correcto, detectando problemas como la deposición de
+  lamas en el sector del muro, por ejemplo. En caso de detectar
+  visualmente un problema de este tipo es necesario activar este
+  evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q07

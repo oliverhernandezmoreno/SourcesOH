@@ -1,0 +1,40 @@
+[
+  {
+    "timeseries": "el-mauro.s-DGA1.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-DGA2.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  }
+]

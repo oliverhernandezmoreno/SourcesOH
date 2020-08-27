@@ -1,0 +1,21 @@
+name: Presión de poros asociada a sistemas de drenaje
+
+scope: group
+groups:
+  parents:
+    - name: Drenes
+      canonical_name: drenes
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros"
+  - "@ef-mvp/m2/parameters/presion-poros/validado"
+
+meta:
+  vars:
+    type: array
+    items: {type: object}
+  heads:
+    type: array
+    items: {type: object}
+
+script: common-scripts/concentrate.js

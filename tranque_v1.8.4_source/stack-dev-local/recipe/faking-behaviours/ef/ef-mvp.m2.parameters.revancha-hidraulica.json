@@ -1,0 +1,62 @@
+[
+  {
+    "timeseries": "el-mauro.none.ef-mvp.m2.parameters.revancha-hidraulica",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 5.5,
+        "std": 1
+      },
+      "fitMin": 0
+    }
+  },
+  {
+    "timeseries": "el-mauro.none.ef-mvp.m2.parameters.variables.cota-laguna",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [795.5, 849.5]
+    }
+  },
+  {
+    "timeseries": "el-mauro.none.ef-mvp.m2.parameters.altura-muro.minimo",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 86400000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.2
+      },
+      "staticCurve": [801, 855]
+    }
+  }
+]

@@ -1,0 +1,5 @@
+<!-- CaseComments example:
+
+```jsx
+<CaseComments/>
+``` -->

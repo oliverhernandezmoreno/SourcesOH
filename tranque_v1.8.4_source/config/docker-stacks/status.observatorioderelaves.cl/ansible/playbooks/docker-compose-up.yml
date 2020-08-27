@@ -1,0 +1,63 @@
+---
+- name:               docker compose up
+  hosts:              role_tranque-statuspage
+  vars:
+    server_user:      ec2-user
+  remote_user:        "{{ server_user }}"
+  become:             yes
+  become_user:        root
+  tasks:
+  # copy docker-compose.yml
+  - name:             copy docker-compose.yml
+    copy:
+      src:            ../assets/docker-compose.yml
+      dest:           "/home/{{ server_user }}/docker-compose.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_docker_compose_output
+
+  # copy .env
+  - name:             copy .env
+    copy:
+      src:            ../assets/.env
+      dest:           "/home/{{ server_user }}/.env"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_env_output
+
+  # copy .secrets
+  - name:             copy .secrets
+    copy:
+      src:            ../assets/.secrets
+      dest:           "/home/{{ server_user }}/.secrets"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_secrets_output
+
+  # docker-compose down
+  - name:             docker-compose down
+    when:             copy_docker_compose_output.changed or copy_env_output.changed
+    docker_service:
+      project_src:    "/home/{{ server_user }}"
+      state:          absent
+
+  # docker-compose up
+  - name:             docker-compose up
+    when:             copy_docker_compose_output.changed or copy_env_output.changed
+    docker_service:
+      project_src:    "/home/{{ server_user }}"
+      state:          present
+
+  # docker system prune
+  - name:             docker system prune
+    docker_prune:
+      containers:     yes
+      images:         yes
+      images_filters:
+        dangling:     false  #this forces to remove dangling and non-dangling images
+      networks:       yes
+      volumes:        yes
+      builder_cache:  yes

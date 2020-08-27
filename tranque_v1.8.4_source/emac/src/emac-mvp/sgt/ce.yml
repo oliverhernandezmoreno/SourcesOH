@@ -1,0 +1,27 @@
+name: CE
+description: CE (sensor)
+range_gte: 0
+type: raw
+
+unit:
+  id: microsiemes-centimeter
+  name: Microsiemens por centímetro
+  abbreviation: "\xB5S/cm"
+  si: false
+  si_conversion_scale: 0.0001
+  si_unit:
+    id: siemens-meter
+    name: Siemens por metro
+    abbreviation: S/m
+    si: true
+
+frequencies:
+  - minutes: 480
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-sgt

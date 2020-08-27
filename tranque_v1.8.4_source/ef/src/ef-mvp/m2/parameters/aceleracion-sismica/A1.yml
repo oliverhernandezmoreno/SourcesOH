@@ -1,0 +1,26 @@
+name: Evento A1
+description: Se detecta aceleración medida en algun aceleración sísmica
+
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+
+# scope: spread
+# groups:
+#   items:
+#     - canonical_name: acelerografos
+#       name: Acelerógrafos
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/aceleracion-sismica"
+
+script: common-scripts/al-menos-un-evento.js

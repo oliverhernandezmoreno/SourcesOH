@@ -1,0 +1,191 @@
+---
+- name:               docker compose up
+  hosts:              role_tranque-monitor
+  vars:
+    server_user:      ec2-user
+  remote_user:        "{{ server_user }}"
+  become:             yes
+  become_user:        root
+  tasks:
+  # copy docker-compose.yml
+  - name:             copy docker-compose.yml
+    copy:
+      src:            ../assets/docker-compose.yml
+      dest:           "/home/{{ server_user }}/docker-compose.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_docker_compose_output
+
+  # copy .env
+  - name:             copy .env
+    copy:
+      src:            ../assets/.env
+      dest:           "/home/{{ server_user }}/.env"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_env_output
+
+  # copy .secrets
+  - name:             copy .secrets
+    copy:
+      src:            ../assets/.secrets
+      dest:           "/home/{{ server_user }}/.secrets"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_secrets_output
+
+  # create configs/grafana directory
+  - name:             create configs/grafana directory
+    file:
+      path:           /home/{{ server_user }}/configs/grafana
+      state:          directory
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rwx,g+rx-w,o+rx-w
+
+  # copy dashboard.yml
+  - name:             copy dashboard.yml
+    copy:
+      src:            ../assets/configs/grafana/dashboard.yml
+      dest:           "/home/{{ server_user }}/configs/grafana/dashboard.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_dashboard_output
+
+  # copy grafana.ini
+  - name:             copy grafana.ini
+    copy:
+      src:            ../assets/configs/grafana/grafana.ini
+      dest:           "/home/{{ server_user }}/configs/grafana/grafana.ini"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_grafana_ini_output
+
+  # copy prometheus-datasource.yml
+  - name:             copy prometheus-datasource.yml
+    copy:
+      src:            ../assets/configs/grafana/prometheus-datasource.yml
+      dest:           "/home/{{ server_user }}/configs/grafana/prometheus-datasource.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_prometheus_datasource_output
+
+  # copy tranque-dev-horizontal-dashboard.json
+  - name:             copy tranque-dev-horizontal-dashboard.json
+    copy:
+      src:            ../assets/configs/grafana/tranque-dev-horizontal-dashboard.json
+      dest:           "/home/{{ server_user }}/configs/grafana/tranque-dev-horizontal-dashboard.json"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_tranque_dev_horizontal_dashboard_output
+
+  # copy tranque-dev-vertical-dashboard.json
+  - name:             copy tranque-dev-vertical-dashboard.json
+    copy:
+      src:            ../assets/configs/grafana/tranque-dev-vertical-dashboard.json
+      dest:           "/home/{{ server_user }}/configs/grafana/tranque-dev-vertical-dashboard.json"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_tranque_dev_vertical_dashboard_output
+
+  # copy tranque-prod-horizontal-dashboard.json
+  - name:             copy tranque-prod-horizontal-dashboard.json
+    copy:
+      src:            ../assets/configs/grafana/tranque-prod-horizontal-dashboard.json
+      dest:           "/home/{{ server_user }}/configs/grafana/tranque-prod-horizontal-dashboard.json"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_tranque_prod_horizontal_dashboard_output
+
+  # copy tranque-prod-vertical-dashboard.json
+  - name:             copy tranque-prod-vertical-dashboard.json
+    copy:
+      src:            ../assets/configs/grafana/tranque-prod-vertical-dashboard.json
+      dest:           "/home/{{ server_user }}/configs/grafana/tranque-prod-vertical-dashboard.json"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_tranque_prod_vertical_dashboard_output
+
+  # create configs/prometheus directory
+  - name:             create configs/prometheus directory
+    file:
+      path:           /home/{{ server_user }}/configs/prometheus
+      state:          directory
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rwx,g+rx-w,o+rx-w
+
+  # copy prometheus.yml
+  - name:             copy prometheus.yml
+    copy:
+      src:            ../assets/configs/prometheus/prometheus.yml
+      dest:           "/home/{{ server_user }}/configs/prometheus/prometheus.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_prometheus_yml_output
+
+  # copy alerting_rules.yml
+  - name:             copy alerting_rules.yml
+    copy:
+      src:            ../assets/configs/prometheus/alerting_rules.yml
+      dest:           "/home/{{ server_user }}/configs/prometheus/alerting_rules.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_alerting_rules_yml_output
+
+  # create configs/alertmanager directory
+  - name:             create configs/alertmanager directory
+    file:
+      path:           /home/{{ server_user }}/configs/alertmanager
+      state:          directory
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rwx,g+rx-w,o+rx-w
+
+  # copy alertmanager.yml
+  - name:             copy alertmanager.yml
+    copy:
+      src:            ../assets/configs/alertmanager/alertmanager.yml
+      dest:           "/home/{{ server_user }}/configs/alertmanager/alertmanager.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_alertmanager_yml_output
+
+  # docker-compose down
+  - name:             docker-compose down
+    when:             copy_docker_compose_output.changed or copy_env_output.changed or copy_secrets_output.changed or copy_dashboard_output.changed or copy_grafana_ini_output.changed or copy_prometheus_datasource_output.changed or copy_tranque_dev_horizontal_dashboard_output.changed or copy_tranque_dev_vertical_dashboard_output.changed or copy_tranque_prod_horizontal_dashboard_output.changed or copy_tranque_prod_vertical_dashboard_output.changed or copy_prometheus_yml_output.changed or copy_alerting_rules_yml_output.changed or copy_alertmanager_yml_output.changed
+    docker_service:
+      project_src:    "/home/{{ server_user }}"
+      state:          absent
+      remove_volumes: yes
+
+  # docker-compose up
+  - name:             docker-compose up
+    when:             copy_docker_compose_output.changed or copy_env_output.changed or copy_secrets_output.changed or copy_dashboard_output.changed or copy_grafana_ini_output.changed or copy_prometheus_datasource_output.changed or copy_tranque_dev_horizontal_dashboard_output.changed or copy_tranque_dev_vertical_dashboard_output.changed or copy_tranque_prod_horizontal_dashboard_output.changed or copy_tranque_prod_vertical_dashboard_output.changed or copy_prometheus_yml_output.changed or copy_alerting_rules_yml_output.changed or copy_alertmanager_yml_output.changed
+    docker_service:
+      project_src:    "/home/{{ server_user }}"
+      state:          present
+
+  # docker system prune
+  - name:             docker system prune
+    docker_prune:
+      containers:     yes
+      images:         yes
+      images_filters:
+        dangling:     false  #this forces to remove dangling and non-dangling images
+      networks:       yes
+      volumes:        yes
+      builder_cache:  yes

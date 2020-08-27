@@ -1,0 +1,64 @@
+# postgis variables
+POSTGRES_DB=backend
+POSTGRES_USER=backend
+
+# django variables
+DATABASE_HOST=postgis
+STATIC_ROOT=/var/www/static
+MEDIA_ROOT=/var/www/media
+SSL_ENABLED=1
+DEBUG=1
+KIBANA_HOST=kibana
+KIBANA_PORT=5601
+NUM_WORKERS=5
+# django storages (S3)
+DEFAULT_FILE_STORAGE=storages.backends.s3boto3.S3Boto3Storage
+
+# frontend variables
+REACT_APP_API_HOST=/api
+
+# amqpbroker-exporter variables
+RABBIT_URL=http://amqpbroker:15672
+RABBIT_USER=guest
+
+# elasticsearch variables
+ES_JAVA_OPTS=-Xmx4g -Xms4g
+http.host=0.0.0.0
+transport.host=127.0.0.1
+
+# cron variables
+BACKEND_HOST=django
+BACKEND_PORT=8000
+BACKEND_API_VERSION=v1
+
+# logstash variables
+# LS_JAVA_OPTS=-Xmx256m -Xms256m
+ELASTICSEARCH_HOST=elasticsearch
+ELASTICSEARCH_PORT=9200
+
+# logstash / fake-beats variables
+REDIS_HOST=redis
+REDIS_KEY=beats.buffer
+
+# enrichment variables
+AMQP_USERNAME=amqpadmin
+AMQP_HOST=amqpbroker
+AMQP_EXCHANGE=enrichment
+AMQP_TOPIC=data.timeframe
+BACKEND_API_HOST=django
+STATS_HOST=stats
+ENRICHMENT_LOGS_TO_ELASTICSEARCH=1
+
+# fake-beats variables
+FAKING_BEHAVIOUR=[{"timeseries":"none.heartbeat","interval":{"distribution":{"name":"constant","value":1},"factor":60000},"value":{"distribution":{"name":"constant","value":1}}}]
+NAMESPACE=global-namespace
+
+# postgis-exporter variables
+DATA_SOURCE_URI=postgis:5432/backend?sslmode=disable
+DATA_SOURCE_USER=backend
+
+# redis-exporter variables
+REDIS_ADDR=redis:6379
+
+# archivist variables
+BACKUPS_KEPT=14

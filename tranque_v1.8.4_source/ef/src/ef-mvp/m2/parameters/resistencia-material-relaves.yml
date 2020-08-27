@@ -1,0 +1,7 @@
+name: Resistencia del material de relaves de la cubeta del muro
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores

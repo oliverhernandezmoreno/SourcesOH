@@ -1,0 +1,21 @@
+name: Densidad del muro
+range_gte: 0
+type: raw
+
+unit:
+  id: percent
+  name: Porcentaje
+  abbreviation: "%"
+  si: false
+
+frequencies:
+  - minutes: 10080  # 7 días
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+
+thresholds:
+  - lower: ~  # Debe ser definido en configuracion sitio especifico

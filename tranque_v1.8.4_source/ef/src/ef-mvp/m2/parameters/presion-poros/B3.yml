@@ -1,0 +1,25 @@
+name: Presión de poros evento B3
+description: >-
+  Se mide un cambio de tendencia posterior a evento sísmico. Se
+  informa por sector, por instrumento.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/tendencia-desfavorable-post-sismo"
+
+script: common-scripts/copy-events.js

@@ -1,0 +1,24 @@
+name: Evento B1 de Resistencia del material de relaves de la cubeta del muro
+description: >-
+  Evento B1: (Se informa por sector)
+  Si se detecta que las propiedades resistentes de la cubeta no cumplen con las especificadas en diseño
+  (Se determina a partir del informe de la empresa a cargo del estudio).
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Drenes
+      canonical_name: drenes
+
+inputs:
+  - "@ef-mvp/m2/parameters/resistencia-material-relaves/propiedades-resistentes"

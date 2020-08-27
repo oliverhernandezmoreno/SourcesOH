@@ -1,0 +1,133 @@
+version:                 "3.4"
+
+services:
+  #databases
+  postgis:
+    image:               mdillon/postgis:10
+    env_file:            .env
+    volumes:
+      - postgis_data:/var/lib/postgresql/data
+
+  elasticsearch:
+    image:               registry.gitlab.com/inria-chile/tranque/config/elasticsearch:dev
+    env_file:            .env
+    volumes:
+      - elastic_data:/usr/share/elasticsearch/data
+
+  redis:
+    image:               redis:4-alpine
+    env_file:            .env
+
+  # file storage (S3 api)
+  storage:
+    image:               registry.gitlab.com/inria-chile/tranque/config/storage:dev
+    env_file:            .env
+    ports:
+      - 9000:9000 # minio ui
+    volumes:
+      - "storage_data:/data"
+
+  #amqp
+  rabbitmq:
+    image:               registry.gitlab.com/inria-chile/tranque/config/rabbitmq:dev
+    env_file:            .env
+    ports:
+      - 15671:15671 # rabbit admin site
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  # rest of elk stack
+  kibana:
+    image:               registry.gitlab.com/inria-chile/tranque/config/kibana:dev
+    env_file:            .env
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    image:               registry.gitlab.com/inria-chile/tranque/config/logstash:master
+    env_file:            .env
+    depends_on:
+      - elasticsearch
+      - rabbitmq
+      - redis
+
+  # frontend
+  frontend:
+    ## configuration to run app built for production
+    # image:             registry.gitlab.com/inria-chile/tranque/e700-frontend:dev
+    ### configuration to run with local files
+    build:
+      context:           ./
+      dockerfile:        ./Dockerfile.frontend
+    environment:
+      CI: "true"
+    volumes:
+      # mount code to run server from inside container
+      # changes to the code will trigger autoreload of development server
+      - ./frontend:/usr/src/app
+    # start react development server
+    command:             yarn start
+    ### end of local configuration
+
+  # backend
+  backend:
+    ## configuration to run app with production settings (gunicorn)
+    # image:             registry.gitlab.com/inria-chile/tranque/backend:dev
+    ### configuration to run with local files
+    build:
+      context:           ./
+      dockerfile:        ./Dockerfile.backend
+    volumes:
+      # mount code to run server from inside container
+      # changes to the code will trigger autoreload of development server
+      - ./backend:/usr/src/app
+      - ./run.backend.sh:/usr/src/app2/run.backend.sh
+    command: /usr/src/app2/run.backend.sh
+    ### end of local configuration
+    env_file:            .env
+    depends_on:
+      - postgis
+      - elasticsearch
+      - storage
+      - redis
+
+  backend-amqpconsumer:
+    image:               registry.gitlab.com/inria-chile/tranque/backend:dev
+    env_file:            .env
+    entrypoint:          ["/entrypoint.amqpconsumer.sh"]
+    command:             ["./manage.py", "runconsumer"]
+    depends_on:
+      - postgis
+      - elasticsearch
+      - rabbitmq
+
+  # reverse proxy for frontend and backend
+  nginx:
+    image:               nginx:1.12
+    ports:
+      - "80:80"
+    depends_on:
+      - frontend
+      - backend
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+
+  # computation module
+  enrichment:
+    image:               registry.gitlab.com/inria-chile/tranque/enrichment:dev
+    env_file:            .env
+    depends_on:
+      - elasticsearch
+      - rabbitmq
+      - postgis
+
+  stats:
+    image:               registry.gitlab.com/inria-chile/tranque/stats/r-base:dev
+    env_file:            .env
+
+
+volumes:
+  postgis_data:
+  elastic_data:
+  storage_data:
+  rabbitmq_data:

@@ -1,0 +1,7 @@
+name: B -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/b"
+  - "@emac-mvp/adt/arima/variables.b"
+
+script: ./../adt.js

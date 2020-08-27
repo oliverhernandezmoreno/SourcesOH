@@ -1,0 +1,12 @@
+name: Eventos gatilladores
+description: Eventos que pueden afectar la estabilidad física de un depósito
+
+
+frequencies:
+  - minutes: 1440  # 1 día
+  
+inputs:
+  - "@ef-mvp/m1/triggers/*"
+  - "@ef-mvp/m1/triggers/important/*"
+  - "@ef-mvp/m1/triggers/critical/*"
+  - "@ef-mvp/m1/triggers/forecasts/*"

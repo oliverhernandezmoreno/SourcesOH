@@ -1,0 +1,22 @@
+{
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": "2018",
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-unused-vars": ["error", {"argsIgnorePattern": "^(_)|(exports)|(require)|(module)$"}],
+    "no-debugger": "off",
+    "no-console": "off"
+  },
+  "globals": {
+    "ctx": false,
+    "refs": false,
+    "series": false,
+    "utils": false
+  }
+}

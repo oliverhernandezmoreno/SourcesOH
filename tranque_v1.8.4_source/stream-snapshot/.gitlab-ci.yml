@@ -1,0 +1,45 @@
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - build
+
+.docker_build_push_dind_setup: &docker_build_push_dind_setup
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+
+.docker_build_push_before_script: &docker_build_push_before_script
+  before_script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+
+.docker_build_push_gitlab: &docker_build_push_gitlab |
+  docker build -t "${CI_REGISTRY_IMAGE}/${CI_JOB_NAME}:${CI_COMMIT_REF_SLUG}" ${CI_JOB_NAME}
+  docker push "${CI_REGISTRY_IMAGE}/${CI_JOB_NAME}:${CI_COMMIT_REF_SLUG}"
+
+fake_stream:
+  stage: build
+  only:
+    refs:
+      - master
+    changes:
+      - fake_stream/*
+  <<: *docker_build_push_dind_setup
+  <<: *docker_build_push_before_script
+  script:
+    - *docker_build_push_gitlab
+
+stream_consumer:
+  stage: build
+  only:
+    refs:
+      - master
+      - tags
+    changes:
+      - stream_consumer/*
+  <<: *docker_build_push_dind_setup
+  <<: *docker_build_push_before_script
+  script:
+    - *docker_build_push_gitlab

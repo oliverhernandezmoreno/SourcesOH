@@ -1,0 +1,76 @@
+# Deployment for the API
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: api-svr
+  name: api-svr
+  namespace: tranque
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-svr
+  template:
+    metadata:
+      labels:
+        app: api-svr
+    spec:
+      containers:
+      - name: api-svr
+        image: tranqueacr.azurecr.io/tranque/backend:v1-8-2
+        resources:
+          limits:
+            cpu: 512m
+            memory: 512Mi
+          requests:
+            cpu: 256m
+            memory: 256Mi
+        env:
+        - name: DEFAULT_FILE_STORAGE
+          value: storages.backends.s3boto3.S3Boto3Storage
+        - name: SECRET_KEY
+          valueFrom: {secretKeyRef: {name: secrets, key: django-secret-key}}
+        - name: STATIC_URL
+          valueFrom: {configMapKeyRef: {name: configs, key: static-url}}
+        - name: DATABASE_HOST
+          valueFrom: {configMapKeyRef: {name: configs, key: postgres-host}}
+        - name: DATABASE_USER
+          valueFrom: {configMapKeyRef: {name: configs, key: postgres-user}}
+        - name: DATABASE_PASSWORD
+          valueFrom: {secretKeyRef: {name: secrets, key: postgres-password}}
+        - name: ELASTICSEARCH_PROTOCOL
+          valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-protocol}}
+        - name: ELASTICSEARCH_HOST
+          valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-host}}
+        - name: ELASTICSEARCH_PORT
+          valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-port}}
+        - name: ELASTICSEARCH_USER
+          valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-user}}
+        - name: ELASTICSEARCH_PASSWORD
+          valueFrom: {secretKeyRef: {name: secrets, key: elasticsearch-password}}
+        - name: AMQP_HOST
+          valueFrom: {configMapKeyRef: {name: configs, key: amqp-host}}
+        - name: AMQP_SSL
+          valueFrom: {configMapKeyRef: {name: configs, key: amqp-ssl}}
+        - name: AMQP_USERNAME
+          valueFrom: {configMapKeyRef: {name: configs, key: amqp-username}}
+        - name: AMQP_PASSWORD
+          valueFrom: {secretKeyRef: {name: secrets, key: amqp-password}}
+        - name: AMQP_PORT
+          valueFrom: {configMapKeyRef: {name: configs, key: amqp-port}}
+        - name: AMQP_VHOST
+          valueFrom: {configMapKeyRef: {name: configs, key: amqp-vhost}}
+        - name: AMQP_FEDERATED_QUEUE
+          valueFrom: {configMapKeyRef: {name: configs, key: amqp-federated-queue}}
+        - name: REDIS_HOST
+          valueFrom: {configMapKeyRef: {name: configs, key: redis-host}}
+        - name: S3_ACCESS_KEY_ID
+          valueFrom: {configMapKeyRef: {name: configs, key: s3-access-key-id}}
+        - name: S3_SECRET_ACCESS_KEY
+          valueFrom: {secretKeyRef: {name: secrets, key: s3-secret-access-key}}
+        - name: S3_BUCKET_NAME
+          valueFrom: {configMapKeyRef: {name: configs, key: s3-bucket-name}}
+        - name: S3_ENDPOINT_URL
+          valueFrom: {configMapKeyRef: {name: configs, key: s3-endpoint-url}}

@@ -1,0 +1,25 @@
+---
+- name:                        62-stack-deploy
+  hosts:                       role_docker-leader
+  vars:
+    server_user:               ec2-user
+  remote_user:                 "{{ server_user }}"
+  become:                      yes
+  become_user:                 root
+  tasks:
+  - name:                      undeploy tranque-prod stack
+    docker_stack:
+      state:                   absent
+      name:                    tranque-dev
+      absent_retries:          12
+      absent_retries_interval: 5
+      compose:
+      -   "/home/{{ server_user }}/docker-compose.yml"
+  - name:                      deploy tranque-dev stack
+    docker_stack:
+      state:                   present
+      name:                    tranque-dev
+      with_registry_auth:      true
+      resolve_image:           always
+      compose:
+      -   "/home/{{ server_user }}/docker-compose.yml"

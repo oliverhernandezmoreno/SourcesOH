@@ -1,0 +1,17 @@
+name: Tiempo transcurrido de lluvia
+
+unit:
+  id: second
+  name: Segundo
+  abbreviation: s
+  si: true
+
+inputs:
+  - "@ef-mvp/m2/parameters/lluvia/inicio"
+  - "@ef-mvp/m2/parameters/variables/estado-lluvia"
+
+meta:
+  startOfRain:
+    oneOf:
+      - type: string
+      - type: "null"

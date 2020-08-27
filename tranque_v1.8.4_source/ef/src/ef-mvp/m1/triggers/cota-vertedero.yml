@@ -1,0 +1,28 @@
+name: Modificación de la cota de operación del vertedero de emergencia
+description: >-
+  Los vertederos de emergencia asociados a depósito de relaves
+  comienzan a operar a una determinada cota de la laguna aguas claras,
+  esta cota está definida por la ubicación del vertedero, la etapa de
+  crecimiento del muro o la cantidad de losetas instalada en la
+  estructura entre otros factores. En caso que ocurra una modificación
+  de la cota de funcionamiento del vertedero por cualquier tipo de
+  motivo es necesario activar este evento gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q06
+

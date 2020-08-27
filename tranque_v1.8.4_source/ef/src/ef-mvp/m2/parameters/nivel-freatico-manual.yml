@@ -1,0 +1,18 @@
+name: Nivel freático de la cubeta del depósito con carga manual
+type: raw
+range_gt: 0
+
+scope: spread
+groups:
+  items:
+    - name: Instrumento de medición de nivel freático
+      canonical_name: instrumentos-nivel-freatico
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+frequencies:
+  - minutes: 10080  # 7 días

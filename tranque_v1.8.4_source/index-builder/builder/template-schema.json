@@ -1,0 +1,240 @@
+{
+  "type": "object",
+  "properties": {
+    "name": {"type": "string", "minLength": 1},
+    "description": {"type": "string"},
+    "type": {"enum": ["raw", "manual", "derived", null]},
+    "highlight": {"type": "boolean"},
+    "category": {"oneOf": [
+      {"type": "string", "minLength": 1},
+      {"type": "array", "items": {"type": "string", "minLength": 1}}
+    ]},
+    "space_coords": {"type": "string"},
+
+    "choices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "object",
+            "properties": {
+              "choiceValue": {"type": "number"},
+              "lt": {"type": "number"},
+              "lte": {"type": "number"},
+              "gt": {"type": "number"},
+              "gte": {"type": "number"}
+            },
+            "additionalProperties": false,
+            "required": ["choiceValue"]
+          },
+          "choice": {"type": "string"}
+        },
+        "additionalProperties": false,
+        "required": ["value", "choice"]
+      }
+    },
+
+    "unit": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "abbreviation": {"type": "string", "minLength": 1},
+        "si": {"type": "boolean"},
+        "si_conversion_scale": {"type": "number"},
+        "si_conversion_shift": {"type": "number"},
+        "si_unit": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "name": {"type": "string", "minLength": 1},
+            "abbreviation": {"type": "string", "minLength": 1},
+            "si": {"const": true}
+          },
+          "additionalProperties": false,
+          "required": ["id", "name", "si"]
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "name", "si"]
+    },
+
+    "x_unit": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "abbreviation": {"type": "string", "minLength": 1},
+        "si": {"type": "boolean"},
+        "si_conversion_scale": {"type": "number"},
+        "si_conversion_shift": {"type": "number"},
+        "si_unit": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "name": {"type": "string", "minLength": 1},
+            "abbreviation": {"type": "string", "minLength": 1},
+            "si": {"const": true}
+          },
+          "additionalProperties": false,
+          "required": ["id", "name", "si"]
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "name", "si"]
+    },
+
+    "y_unit": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "abbreviation": {"type": "string", "minLength": 1},
+        "si": {"type": "boolean"},
+        "si_conversion_scale": {"type": "number"},
+        "si_conversion_shift": {"type": "number"},
+        "si_unit": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "name": {"type": "string", "minLength": 1},
+            "abbreviation": {"type": "string", "minLength": 1},
+            "si": {"const": true}
+          },
+          "additionalProperties": false,
+          "required": ["id", "name", "si"]
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "name", "si"]
+    },
+
+    "z_unit": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "name": {"type": "string", "minLength": 1},
+        "abbreviation": {"type": "string", "minLength": 1},
+        "si": {"type": "boolean"},
+        "si_conversion_scale": {"type": "number"},
+        "si_conversion_shift": {"type": "number"},
+        "si_unit": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "minLength": 1},
+            "name": {"type": "string", "minLength": 1},
+            "abbreviation": {"type": "string", "minLength": 1},
+            "si": {"const": true}
+          },
+          "additionalProperties": false,
+          "required": ["id", "name", "si"]
+        }
+      },
+      "additionalProperties": false,
+      "required": ["id", "name", "si"]
+    },
+
+    "script": {"type": "string"},
+    "script_version": {"type": "string"},
+
+    "range_gte": {"type": "number"},
+    "range_lte": {"type": "number"},
+    "range_gt": {"type": "number"},
+    "range_lt": {"type": "number"},
+
+    "thresholds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": {"type": "string"},
+          "lower": {"oneOf": [{"type": "null"}, {"type": "number"}]},
+          "upper": {"oneOf": [{"type": "null"}, {"type": "number"}]}
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "scope": {"enum": ["spread", "group", null]},
+    "groups": {"oneOf": [
+      {
+        "type": "object",
+        "properties": {
+          "operator": {"enum": ["and", "or"]},
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "canonical_name": {"type": "string", "minLength": 1},
+                "name": {"type": "string", "minLength": 1}
+              },
+              "additionalProperties": false,
+              "required": ["canonical_name"]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": ["items"]
+      },
+      {
+        "type": "object",
+        "properties": {
+          "operator": {"enum": ["and", "or"]},
+          "parents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "canonical_name": {"type": "string", "minLength": 1},
+                "name": {"type": "string", "minLength": 1}
+              },
+              "additionalProperties": false,
+              "required": ["canonical_name"]
+            }
+          }
+        },
+        "additionalProperties": false,
+        "required": ["parents"]
+      }
+    ]},
+
+    "frequencies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "minutes": {"type": "number", "exclusiveMinimum": 0},
+          "protocol": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false,
+        "required": ["minutes"]
+      }
+    },
+
+    "inputs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+
+    "parameters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "canonical_name": {"type": "string", "minLength": 1},
+          "name": {"type": "string", "minLength": 1},
+          "schema": {"type": "object"},
+          "value": {}
+        },
+        "additionalProperties": false,
+        "required": ["canonical_name"]
+      }
+    },
+
+    "meta": {"type": "object"}
+  },
+  "required": ["name"],
+  "additionalProperties": false
+}

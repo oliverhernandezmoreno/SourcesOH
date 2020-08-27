@@ -1,0 +1,7 @@
+.no-header .inline-related.has_original.dynamic-profile h3:first-child {
+    display: none;
+}
+
+.no-upper h2 {
+    text-transform: unset;
+}

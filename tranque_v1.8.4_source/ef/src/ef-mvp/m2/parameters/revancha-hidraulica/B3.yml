@@ -1,0 +1,6 @@
+name: Evento B3 de revancha hidráulica
+description: >-
+  La revancha hidráulica supera el tercer umbral
+
+inputs:
+  - "@ef-mvp/m2/parameters/revancha-hidraulica"

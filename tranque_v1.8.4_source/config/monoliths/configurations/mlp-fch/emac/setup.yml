@@ -1,0 +1,157 @@
+# declaración de entidades agrupadoras
+groups:
+  - import_from: emac
+    canonical_name: monitoreo-aguas
+
+  - import_from: emac
+    canonical_name: subterraneo
+
+  - import_from: emac
+    canonical_name: superficial
+
+  - import_from: emac
+    canonical_name: aguas-abajo
+
+  - import_from: emac
+    canonical_name: aguas-arriba
+
+# inventario de instrumentos y puntos de medición
+sources:
+  - hardware_id: PB-11
+    name: PB-11
+    canonical_name: pb-11
+    coords:
+      srid: 32719
+      x: 310554
+      y: 6458839
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - subterraneo
+
+  - hardware_id: MC1
+    name: MC1
+    canonical_name: mc1
+    coords:
+      srid: 32719
+      x: 309964
+      y: 6457763
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - superficial
+
+  - hardware_id: SM7-1
+    name: SM7-1
+    canonical_name: sm7-1
+    coords:
+      srid: 32719
+      x: 310079
+      y: 6457458
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - subterraneo
+
+  - hardware_id: DGA1
+    name: DGA1
+    canonical_name: dga1
+    coords:
+      srid: 32719
+      x: 303896
+      y: 6463121
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - superficial
+
+  - hardware_id: DGA2
+    name: DGA2
+    canonical_name: dga2
+    coords:
+      srid: 32719
+      x: 305055
+      y: 6463365
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - superficial
+
+  - hardware_id: El-Romero-1
+    name: El Romero 1
+    canonical_name: el-romero-1
+    coords:
+      srid: 32719
+      x: 302911
+      y: 6462191
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - subterraneo
+
+  - hardware_id: El-Tipay
+    name: El Tipay
+    canonical_name: el-tipay
+    coords:
+      srid: 32719
+      x: 299310
+      y: 6462933
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - subterraneo
+
+# parámetros de cálculo
+parameters:
+  - canonical_name: ir-reference
+    name: SM7-3 (Punto de referencia para Índice de Riesgo)
+    value:
+      srid: 32719
+      x: 305555
+      y: 6463424
+
+  - canonical_name: "box-cox-lambda-variable-{variable}"
+    name: "Lambda parameter for Box-Cox for {variable}"
+    value: 0
+    with_variable:
+      - al
+      - as
+      - b
+      - be
+      - cd
+      - ce
+      - chloride
+      - co
+      - cr
+      - cu
+      - cyanide
+      - fe
+      - fluoride
+      - hg
+      - mn
+      - mo
+      - ni
+      - pb
+      - ph
+      - sb
+      - se
+      - sulfates
+      - zn
+
+  - canonical_name: "box-cox-lambda-sgt-{variable}"
+    name: "Lambda parameter for Box-Cox for SGT {variable}"
+    value: 0
+    with_variable:
+      - ce
+      - nf
+      - orp
+      - ph
+      - t
+
+# configuración específica por variable
+timeseries:
+  - canonical_name: "{target}.s-{point}.emac-mvp.sgt.{variable}"
+    frequencies:
+      - minutes: 60
+    with_point: ["MC1", "DGA1", "DGA2"]
+    with_variable: ["ce", "t", "orp", "nf", "ph"]

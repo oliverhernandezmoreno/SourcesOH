@@ -1,0 +1,6 @@
+name: Evento C por remoción en masa de terreno natural hacia el muro o hacia sectores críticos
+
+inputs:
+  - "@ef-mvp/m1/triggers/critical/deslizamiento-critico"
+
+script: "../../trigger-C.js"

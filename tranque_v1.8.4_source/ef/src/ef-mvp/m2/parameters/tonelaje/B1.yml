@@ -1,0 +1,15 @@
+name: Evento B1 de Tonelaje de relaves o lamas depositados en la cubeta y muro
+description: Se activan cuando tonelaje es mayor al valor umbral
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+inputs:
+  - "@ef-mvp/m2/parameters/tonelaje"

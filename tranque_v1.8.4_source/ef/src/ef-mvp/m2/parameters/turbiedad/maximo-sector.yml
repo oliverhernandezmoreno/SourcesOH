@@ -1,0 +1,19 @@
+name: Turbiedad del agua máxima por sector que contiene al instrumento
+range_gte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+unit:
+  id: ntu
+  name: Unidad nefelométrica de turbidez
+  abbreviation: NTU
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/turbiedad"
+
+script: common-scripts/maximo.js

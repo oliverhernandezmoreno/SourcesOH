@@ -1,0 +1,6 @@
+remotes:
+  - namespace: dpais-qa-sml-disconnected
+    exchange: federated.dpais-qa-sml-disconnected
+    bucket: sml-disconnected
+    targets:
+      - dep11

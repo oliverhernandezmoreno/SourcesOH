@@ -1,0 +1,32 @@
+# Regular application variables are stored here
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configs
+  namespace: tranque
+data:
+  
+  api-base: https://w2.inriadev.cl/api
+  static-url: https://static.inriadev.cl/static/
+  
+  s3-access-key-id: sysadmin
+  s3-bucket-name: smc
+  s3-endpoint-url: http://172.30.3.4/
+
+  redis-host: redis-svc
+  
+  elasticsearch-protocol: http
+  elasticsearch-host: 172.30.4.36
+  elasticsearch-port: "9200"
+  elasticsearch-user: sysadmin
+  
+  amqp-host: 172.30.4.35
+  amqp-username: admin
+  amqp-ssl: "0"
+  amqp-port: "5672"
+  amqp-vhost: /
+  amqp-federated-queue: central-queue
+
+  postgres-host: 172.30.4.4 # tranque-1.postgres.database.azure.com
+  postgres-user: sysadmin@tranque-1

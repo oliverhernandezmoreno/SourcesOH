@@ -1,0 +1,6 @@
+remotes:
+  - namespace: __REPLACED_NAMESPACE__
+    exchange: federated.__REPLACED_NAMESPACE__
+    bucket: __REPLACED_BUCKET__
+    targets:
+      - __REPLACED_TARGET__

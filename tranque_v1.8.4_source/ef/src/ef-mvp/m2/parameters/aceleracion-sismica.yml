@@ -1,0 +1,20 @@
+name: Aceleración sísmica del muro
+type: raw
+
+unit:
+  id: seismic-acceleration
+  name: Aceleración sísmica
+  abbreviation: m/s²
+  si: false
+
+thresholds:
+  - upper: ~  # m/s² seismic-acceleration
+
+# frequencies:
+#   - minutes: 0.000083333  # 1/200 segundos
+
+scope: spread
+groups:
+  items:
+    - name: Acelerógrafos
+      canonical_name: acelerografos

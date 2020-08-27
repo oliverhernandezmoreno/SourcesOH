@@ -1,0 +1,27 @@
+name: Ubicación y tamaño de la laguna
+description: >-
+  El operador debe verificar que se cumple con ubicación y el tamaño
+  de la laguna aguas claras establecido por el plan de depositación,
+  para esto debe verificar que la laguna no se esté desplazando por
+  sectores irregulares y que no se estén formando lagunas secundarias
+  en sectores distintos a la laguna principal. En caso de detectar
+  visualmente un problema de este tipo es necesario activar este
+  evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q05

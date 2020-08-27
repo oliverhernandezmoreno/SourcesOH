@@ -1,0 +1,11 @@
+FROM nginx:1.15.3-alpine
+
+# disable nginx access log
+COPY docker/nginx.conf /etc/nginx
+
+# copy static content from django image
+COPY --from=registry.gitlab.com/inria-chile/tranque/backend:dev /usr/src/app/static-root /usr/share/nginx/html/static
+
+# healthcheck
+HEALTHCHECK --interval=1s --timeout=5s --retries=120 \
+  CMD nc -z localhost 80 || exit 1

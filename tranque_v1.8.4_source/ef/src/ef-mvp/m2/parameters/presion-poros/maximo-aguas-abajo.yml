@@ -1,0 +1,13 @@
+name: Presión de poros máxima aguas abajo
+range_gte: 0
+
+scope: group
+groups:
+  items:
+    - name: Sección aguas abajo del muro
+      canonical_name: ubicacion-aguas-abajo
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros"
+
+script: common-scripts/maximo.js

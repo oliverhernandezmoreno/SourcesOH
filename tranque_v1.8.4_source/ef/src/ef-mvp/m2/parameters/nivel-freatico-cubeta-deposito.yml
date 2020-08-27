@@ -1,0 +1,28 @@
+name: Nivel freático de la cubeta del depósito
+type: raw
+range_gt: 0
+
+scope: spread
+groups:
+  items:
+    - name: Instrumento de medición de nivel freático
+      canonical_name: instrumentos-nivel-freatico
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+frequencies:
+  - minutes: 60  # 1 hr
+
+thresholds:
+  - upper: ~  # debe ser definido
+  - upper: ~
+    kind: cota-instalacion
+
+inputs:
+  - "@ef-mvp/m2/parameters/nivel-freatico-manual"
+
+script: common-scripts/copy-events.js

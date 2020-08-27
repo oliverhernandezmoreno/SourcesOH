@@ -1,0 +1,15 @@
+name: Concentración representativa
+
+scope: group
+groups:
+  operator: and
+  items:
+    - name: Muestreo subterráneo
+      canonical_name: subterraneo
+    - name: Aguas abajo
+      canonical_name: aguas-abajo
+
+inputs:
+  - "@emac-mvp/ii/area-poligono"
+
+script: ./cr.js

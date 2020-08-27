@@ -1,0 +1,60 @@
+name: Evento D1 de Condiciones asociadas a los escenarios de falla (Módulo 2) IT-02 Inestabilidad por aumento de presión de poros con evidencia de deformación
+description: >-
+  Eventos Grupo D:
+    a) Evento D1:
+      Se deben cumplir todos los eventos en un sector para activar el escenario de falla:
+        Eventos Módulo 2:
+          • Presiones de poros: (Evento B5 o superior)
+      Adicionalmente se cumple al menos uno de los siguientes:
+        Eventos Módulo 2:
+          • Desplazamiento o deformación del muro: (Evento C1, C2, C3, C4 o C5)
+          • Deformación del coronamiento: (Evento C1, C2 o C3)
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  # Condicion1.General
+  - "@ef-mvp/m1/triggers/important/terremoto-4-6"
+  - "@ef-mvp/m1/triggers/critical/terremoto-7"
+  # Condicion2/SectoC
+  - "@ef-mvp/m2/parameters/presion-poros/B5-1"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-2"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-3"
+  - "@ef-mvp/m2/parameters/presion-poros/B5-4"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-1"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-2"
+  - "@ef-mvp/m2/parameters/presion-poros/B6-3"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-1"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-2"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-3"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-4"
+  - "@ef-mvp/m2/parameters/presion-poros/C1-5"
+  - "@ef-mvp/m2/parameters/presion-poros/C2-1"
+  - "@ef-mvp/m2/parameters/presion-poros/C2-2"
+  - "@ef-mvp/m2/parameters/presion-poros/D1"
+  - "@ef-mvp/m2/parameters/presion-poros/D2"
+  # Desplazamiento o deformación del muro
+  - "@ef-mvp/m2/parameters/deformacion/monolito/muro/eje-x/C1"
+  - "@ef-mvp/m2/parameters/deformacion/monolito/muro/eje-y/C2"
+  - "@ef-mvp/m2/parameters/deformacion/monolito/muro/eje-z/C3"
+  - "@ef-mvp/m2/parameters/deformacion/inclinometro/muro/eje-x/C4"
+  - "@ef-mvp/m2/parameters/deformacion/inclinometro/muro/eje-y/C5"
+  - "@ef-mvp/m2/parameters/deformacion/inclinometro/muro/eje-z/C6"
+  # Deformación del coronamiento
+  - "@ef-mvp/m2/parameters/deformacion/monolito/coronamiento/eje-x/C1"
+  - "@ef-mvp/m2/parameters/deformacion/monolito/coronamiento/eje-y/C2"
+  - "@ef-mvp/m2/parameters/deformacion/monolito/coronamiento/eje-z/C3"

@@ -1,0 +1,12 @@
+name: Lluvia precipitada acumulada
+description: Lluvia acumulada en un periodo continuo de lluvia
+
+unit:
+  id: millimeters
+  name: Milímetros
+  abbreviation: mm
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/lluvia"
+  - "@ef-mvp/m2/parameters/variables/tiempo-lloviendo"

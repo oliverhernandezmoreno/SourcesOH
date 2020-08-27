@@ -1,0 +1,9 @@
+# editor artifacts
+*~
+.terraform/
+.terraform.*
+terraform.*
+*.retry
+*.token
+.DS_Store
+*.tfstate

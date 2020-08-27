@@ -1,0 +1,162 @@
+[
+  {
+    "timeseries": "el-mauro.s-perfil-A1.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [8, 3, 6]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-A2.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [8, 3, 6]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-B1.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [8, 4, 6]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-B2.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [8, 4, 6]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-C1.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [8, 4, 5]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-C2.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [8, 4, 5]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-H1.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [9, 4.5]
+    }
+  },
+  {
+    "timeseries": "el-mauro.s-perfil-H2.ef-mvp.m2.parameters.revancha-operacional",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 604800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0,
+        "std": 0.15
+      },
+      "staticCurve": [9, 4.5]
+    }
+  }
+]

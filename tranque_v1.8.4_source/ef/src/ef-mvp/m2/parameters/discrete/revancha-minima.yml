@@ -1,0 +1,19 @@
+name: Revancha mínima
+type: raw
+
+frequencies:
+  - minutes: 2628000  # 5 años
+
+choices:
+  - choice: Hay un estudio reciente
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: No se tiene un estudio actualizado
+    value:
+      choiceValue: 1
+      lt: 2
+  - choice: No existe un estudio de revancha mínima
+    value:
+      choiceValue: 2
+      gte: 2

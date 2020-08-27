@@ -1,0 +1,867 @@
+services:
+  amqpbroker:
+    image: registry.gitlab.com/inria-chile/tranque/config/rabbitmq:{config_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  amqpconsumer:
+    command:
+    - ./manage.py
+    - runconsumer
+    depends_on:
+    - amqpbroker
+    - postgis
+    entrypoint:
+    - /entrypoint.amqpconsumer.sh
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/backend:{backend_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  amqpconsumer-smc:
+    command:
+    - ./manage.py
+    - runconsumer
+    - --smc
+    depends_on:
+    - postgis
+    entrypoint:
+    - /entrypoint.amqpconsumer.sh
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/backend:{backend_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  archivist:
+    depends_on:
+    - elasticsearch
+    - postgis
+    - storage
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      BACKUPS_KEPT: '14'
+      BACKUP_ACCESS_KEY_ID: AKIA2PELTG5Z4SWOCV6I
+      BACKUP_BUCKET_NAME: tranque-dev-backups
+      BACKUP_SECRET_ACCESS_KEY: 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
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/archivist:${archivist_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  backend:
+    depends_on:
+    - postgis
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    healthcheck:
+      interval: 1s
+      retries: 120
+      test: nc -z localhost 8000 || exit 1
+      timeout: 5s
+    image: registry.gitlab.com/inria-chile/tranque/backend:{backend_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+    volumes:
+    - backend_configuration_state:/configuration-state:rw
+    - /opt/tranque-platform/tranque/config/setup-package:/initial-setup:rw
+  beats-consumer:
+    depends_on:
+    - redis
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/beats-consumer:{beats_consumer_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  cron:
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/config/cron:{config_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  django-static:
+    image: registry.gitlab.com/inria-chile/tranque/backend/static-nginx:{backend_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  elasticsearch:
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/config/elasticsearch:{config_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+    volumes:
+    - elasticsearch:/usr/share/elasticsearch/data:rw
+  enrichment:
+    depends_on:
+    - amqpbroker
+    - postgis
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/enrichment:{enrichment_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  frontend:
+    image: registry.gitlab.com/inria-chile/tranque/e700-frontend/sml:{frontend_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  kibana:
+    depends_on:
+    - elasticsearch
+    image: registry.gitlab.com/inria-chile/tranque/config/kibana:{config_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  logstash:
+    depends_on:
+    - amqpbroker
+    - elasticsearch
+    - redis
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/config/logstash:{config_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  postgis:
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: mdillon/postgis:10
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+    volumes:
+    - database:/var/lib/postgresql/data:rw
+  proxy:
+    command:
+    - nginx
+    - -g
+    - daemon off;
+    depends_on:
+    - backend
+    - beats-consumer
+    - django-static
+    - frontend
+    entrypoint:
+    - /entrypoint/subst.sh
+    image: registry.gitlab.com/inria-chile/tranque/config/secure-proxy:{config_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    ports:
+    - published: 80
+      target: 80
+    - published: 443
+      target: 443
+    restart: on-failure
+    volumes:
+    - /opt/tranque-platform/tranque/base/proxy:/entrypoint:rw
+  redis:
+    image: redis:4-alpine
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+    volumes:
+    - redis:/data:rw
+  stats:
+    image: registry.gitlab.com/inria-chile/tranque/stats/r-base:{stats_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+  storage:
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/config/storage:{config_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+    volumes:
+    - storage:/data:rw
+  stream-consumer:
+    environment:
+      ACCESS_PASSWORDS: dPG3GbMck4zsxn5gYBWovmRsq9SaV08FbzVerTmT,7XQiDpQ8sybcBWshHb4pn+h9Spwn3UF6_4011XgZ,9gFBf2rpMYdc75D4C34ibIh4ei2pp4PSFKSZRUkE
+      AMQP_FEDERATED_QUEUE: consumer-queue
+      AMQP_HOST: amqpbroker
+      AMQP_PORT: '5672'
+      AMQP_TOPIC: data.timeframe
+      BACKEND_API_VERSION: v1
+      BACKEND_HOST: backend
+      BACKEND_PORT: '8000'
+      BACKEND_TOKEN: qhjABasBeqGTLiOmVR7jDaSXHipO
+      DATABASE_HOST: postgis
+      DATABASE_NAME: backend
+      DATABASE_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      DATABASE_PORT: '5432'
+      DATABASE_USER: backend
+      DEBUG: '0'
+      DEFAULT_FILE_STORAGE: storages.backends.s3boto3.S3Boto3Storage
+      ELASTICSEARCH_HOST: elasticsearch
+      ELASTICSEARCH_PORT: '9200'
+      ES_JAVA_OPTS: -Xmx2g -Xms2g
+      INTERNAL_CREDENTIALS: cron:qhjABasBeqGTLiOmVR7jDaSXHipO
+      KIBANA_HOST: kibana
+      KIBANA_PORT: '5601'
+      MINIO_ACCESS_KEY: storage
+      MINIO_SECRET_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      NAMESPACE: alfa-sml-amtc
+      NODE_ENV: production
+      POSTGRES_DB: backend
+      POSTGRES_PASSWORD: NYlTdhmiIWhr90HWZeWj7M-fIF_N
+      POSTGRES_USER: backend
+      REDIS_HOST: redis
+      REDIS_PORT: '6379'
+      S3_ACCESS_KEY_ID: storage
+      S3_BUCKET_NAME: local-bucket
+      S3_ENDPOINT_URL: http://storage:9000
+      S3_SECRET_ACCESS_KEY: qzbwDkbJRQg16BjyvId4qIg3EYr0cndI0tyK96Zg
+      SECRET_KEY: FPq1eqaLnbH-f6MoRAlpJMHeP5oS1Fg3dqGjVKXe
+      SMC_AMQP_HOST: 52.154.241.191
+      SMC_AMQP_PASSWORD: Dn9S8j7IlhqQpQdZ
+      SMC_AMQP_PORT: '5672'
+      SMC_AMQP_QUEUE: consumer-queue
+      SMC_AMQP_SSL: '0'
+      SMC_AMQP_USERNAME: user-amtc
+      SMC_S3_ACCESS_KEY_ID: user-amtc
+      SMC_S3_BUCKET_NAME: amtc
+      SMC_S3_ENDPOINT_URL: https://minio.inriadev.cl
+      SMC_S3_SECRET_ACCESS_KEY: Dn9S8j7IlhqQpQdZ
+      STATS_HOST: stats
+      STATS_PORT: '5000'
+      SUPERUSER_PASSWORD: tranque-admin
+      SUPERUSER_USERNAME: admin
+      http.host: 0.0.0.0
+      transport.host: 127.0.0.1
+    image: registry.gitlab.com/inria-chile/tranque/stream-snapshot/stream_consumer:{stream_snapshot_version}
+    logging:
+      driver: json-file
+      options:
+        max-file: '3'
+        max-size: 10m
+    restart: on-failure
+version: '3.4'
+volumes:
+  backend_configuration_state: {}
+  database: {}
+  elasticsearch: {}
+  redis: {}
+  storage: {}

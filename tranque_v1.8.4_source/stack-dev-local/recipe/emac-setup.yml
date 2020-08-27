@@ -1,0 +1,147 @@
+groups:
+  - import_from: emac
+    canonical_name: monitoreo-aguas
+  - import_from: emac
+    canonical_name: aguas-arriba
+  - import_from: emac
+    canonical_name: aguas-abajo
+  - import_from: emac
+    canonical_name: superficial
+  - import_from: emac
+    canonical_name: subterraneo
+
+
+sources:
+  - hardware_id: SM7-1
+    name: SM7-1
+    canonical_name: sm7-1
+    coords:
+      srid: 32719
+      x: 310079
+      y: 6457458
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - subterraneo
+
+  - hardware_id: PB-11
+    name: PB-11
+    canonical_name: pb-11
+    coords:
+      srid: 32719
+      x: 310554
+      y: 6458839
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - subterraneo
+
+  - hardware_id: PB-16
+    name: PB-16
+    canonical_name: pb-16
+    coords:
+      srid: 32719
+      x: 311653
+      y: 6462350
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - subterraneo
+
+  - hardware_id: PM-1
+    name: PM-1
+    canonical_name: pm-1
+    coords:
+      srid: 32719
+      x: 303690
+      y: 6463063
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - subterraneo
+
+  - hardware_id: MC1
+    name: MC1
+    canonical_name: mc1
+    coords:
+      srid: 32719
+      x: 309964
+      y: 6457763
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-arriba
+      - superficial
+
+  - hardware_id: DGA1
+    name: DGA1
+    canonical_name: dga1
+    coords:
+      srid: 32719
+      x: 303896
+      y: 6463121
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - superficial
+
+  - hardware_id: DGA2
+    name: DGA2
+    canonical_name: dga2
+    coords:
+      srid: 32719
+      x: 305055
+      y: 6463365
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - superficial
+
+  - hardware_id: El-Romero-1
+    name: El Romero 1
+    canonical_name: el-romero-1
+    coords:
+      srid: 32719
+      x: 302911
+      y: 6462191
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - subterraneo
+
+  - hardware_id: El-Tipay
+    name: El Tipay
+    canonical_name: el-tipay
+    coords:
+      srid: 32719
+      x: 299310
+      y: 6462933
+    type: offline
+    groups:
+      - monitoreo-aguas
+      - aguas-abajo
+      - subterraneo
+
+
+parameters:
+  - canonical_name: ir-reference
+    name: SM7-3 (Punto de referencia para Índice de Riesgo)
+    value:
+      srid: 32719
+      x: 305555
+      y: 6463424
+
+
+timeseries:
+  - canonical_name: "{target}.s-{point}.emac-mvp.sgt.{variable}"
+    frequencies:
+      - minutes: 60
+    with_point: ["MC1", "DGA1", "DGA2"]
+    with_variable: ["ce", "t", "orp", "nf", "ph"]

@@ -1,0 +1,64 @@
+---
+- name:          41-copy-files-sml-connected
+  hosts:         role_tranque-dpais-qa-sml
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+
+  - name:        create root folder
+    file:
+      path:      "/home/{{ server_user }}/stack"
+      state:     directory
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rwx,g+rx-w,o+rx-w
+
+  - name:        create nginx conf directory
+    file:
+      path:      "/home/{{ server_user }}/stack/nginx"
+      state:     directory
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rwx,g+rx-w,o+rx-w
+
+  - name:        copy nginx default.conf
+    copy:
+      src:       ../assets/sml-connected/nginx/default.conf
+      dest:      "/home/{{ server_user }}/stack/nginx/default.conf"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+
+  - name:        copy SSL certificate and key
+    copy:
+      src:       "../assets/{{ item }}"
+      dest:      "/home/{{ server_user }}/stack/nginx/{{ item }}"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+    with_items:
+      - fullchain.pem
+      - privkey.pem
+
+  - name:        copy stack definition files
+    copy:
+      src:       "../assets/sml-connected/{{ item }}"
+      dest:      "/home/{{ server_user }}/stack/{{ item }}"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rw-x,g+r-wx,o+r-wx
+    with_items:
+      - docker-compose.yml
+      - .env
+      - .secrets
+
+  - name:        copy setup package
+    copy:
+      src:       ../assets/sml-connected/setup-package
+      dest:      "/home/{{ server_user }}/stack"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      preserve

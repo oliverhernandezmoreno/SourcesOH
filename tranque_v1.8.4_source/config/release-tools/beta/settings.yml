@@ -1,0 +1,99 @@
+# Speciy the source and destination docker-registries
+registries:
+  source:
+    name: Inria Tranque
+    url: registry.gitlab.com/inria-chile/tranque/
+
+  destination:
+    name: FCH Tranque
+    url: fundacionchile.azurecr.io/tranque/
+
+
+# Specify each of the posible images and their source and destination names.
+#
+# Most images path conversions are straightforward:
+# source_name:<version> => destination_name:<version>
+#
+# Frontend images use a somewhat different convention:
+# source: e700-frontend/smc:<version> => destination: frontend:<version>-smc
+
+images:
+  backend:
+    source: backend
+    destination: backend
+
+  django_static:
+    source: backend/static-nginx
+    destination: django-static
+
+  frontend_sml:
+    source: e700-frontend/sml
+    destination:
+      name: frontend
+      tag_suffix: -sml
+
+  frontend_smc:
+    source: e700-frontend/smc
+    destination:
+      name: frontend
+      tag_suffix: -smc
+
+  enrichment:
+    source: enrichment
+    destination: enrichment
+
+  rabbitmq:
+    source: config/rabbitmq
+    destination: rabbitmq
+
+  cron:
+    source: config/cron
+    destination: cron
+
+  logstash:
+    source: config/logstash
+    destination: logstash
+
+  elasticsearch:
+    source: config/elasticsearch
+    destination: elasticsearch
+
+  storage:
+    source: config/storage
+    destination: storage
+
+  kibana:
+    source: config/kibana
+    destination: kibana
+
+  proxy:
+    source: config/proxy
+    destination: proxy
+
+  stats:
+    source: stats/r-base
+    destination: stats
+
+  archivist:
+    source: archivist
+    destination: archivist
+
+  beats_consumer:
+    source: beats-consumer
+    destination: beats-consumer
+
+  fake_beats:
+    source: fake-beats
+    destination: fake-beats
+
+  http_producer:
+    source: http-poller-producer
+    destination: http-poller-producer
+
+  sql_producer:
+    source: sql-beats-producer
+    destination: sql-beats-producer
+
+  stream_consumer:
+    source: stream-snapshot/stream_consumer
+    destination: stream_consumer

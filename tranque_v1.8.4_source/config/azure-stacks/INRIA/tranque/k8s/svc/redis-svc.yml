@@ -1,0 +1,19 @@
+# Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: redis-svc
+  name: redis-svc
+  namespace: tranque
+spec:
+  ports:
+  - name: 6379-6379
+    port: 6379
+    protocol: TCP
+    targetPort: 6379
+  selector:
+    app: redis-svr
+  clusterIP: None
+  type: ClusterIP

@@ -1,0 +1,17 @@
+---
+- import_playbook: 00-install-docker.yml
+- import_playbook: 10-docker-labels-manager.yml
+- import_playbook: 11-docker-labels-backend.yml
+- import_playbook: 12-docker-labels-broker.yml
+- import_playbook: 13-docker-labels-elasticsearch.yml
+- import_playbook: 14-docker-labels-kibana.yml
+- import_playbook: 15-docker-labels-monitor.yml
+- import_playbook: 16-docker-labels-postgres.yml
+- import_playbook: 20-swarm-init.yml
+- import_playbook: 30-setup-elasticsearch-worker.yml
+- import_playbook: 40-docker-registry.yml
+- import_playbook: 50-mount-nfs-nginx.yml
+- import_playbook: 51-mount-ebs-elasticsearch.yml
+- import_playbook: 52-mount-nfs-postgres.yml
+- import_playbook: 53-mount-nfs-www.yml
+- import_playbook: 54-mount-nfs-prometheus.yml

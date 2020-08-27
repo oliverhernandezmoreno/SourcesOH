@@ -1,0 +1,81 @@
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - test
+  - build
+  - update downstream
+
+test-build:
+  stage: test
+  image: registry.gitlab.com/inria-chile/tranque/index-builder:latest
+  script:
+    - tar czf - src | build > build.tgz
+    - test -s build.tgz
+
+docker-push:
+  stage: build
+  only:
+    - master
+  tags:
+    - docker
+  image: docker:19
+  services:
+    - docker:19-dind
+  script:
+    - docker login -u gitlab-ci-token -p "${CI_JOB_TOKEN}" "${CI_REGISTRY}"
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}" --build-arg CI_COMMIT_SHA=${CI_COMMIT_SHA} --build-arg CI_PROJECT_NAME=${CI_PROJECT_NAME} .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_SHA}"
+
+deploy-backend-dev:
+  stage: update downstream
+  only:
+    - master
+  image: alpine:3.8
+  when: manual
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8060041/trigger/pipeline
+    REF: dev
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${REF} ${TRIGGER_URL}
+
+deploy-enrichment-dev:
+  stage: update downstream
+  only:
+    - master
+  image: alpine:3.8
+  when: manual
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8017320/trigger/pipeline
+    REF: dev
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${REF} ${TRIGGER_URL}
+
+deploy-backend-master:
+  stage: update downstream
+  only:
+    - master
+  image: alpine:3.8
+  when: manual
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8060041/trigger/pipeline
+    REF: master
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${REF} ${TRIGGER_URL}
+
+deploy-enrichment-master:
+  stage: update downstream
+  only:
+    - master
+  image: alpine:3.8
+  when: manual
+  variables:
+    TRIGGER_URL: https://gitlab.com/api/v4/projects/8017320/trigger/pipeline
+    REF: master
+  script:
+    - apk add --update --no-cache curl
+    - curl -v --fail -X POST -F token=${CI_JOB_TOKEN} -F ref=${REF} ${TRIGGER_URL}

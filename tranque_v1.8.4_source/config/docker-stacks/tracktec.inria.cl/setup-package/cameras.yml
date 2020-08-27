@@ -1,0 +1,19 @@
+cameras:
+  - name: fake_camera1
+    target: dep01
+    label: Fake camera 1
+  - name: fake_camera2
+    target: dep01
+    label: Fake camera 2
+  - name: fake_camera1
+    target: dep02
+    label: Fake camera 1
+  - name: fake_camera2
+    target: dep02
+    label: Fake camera 2
+  - name: fake_camera1
+    target: dep03
+    label: Fake camera 1
+  - name: fake_camera2
+    target: dep03
+    label: Fake camera 2

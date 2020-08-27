@@ -1,0 +1,23 @@
+name: Evento B3 en grupo de redundancia
+description: >-
+  Agrupa eventos B3 de integridad de sistema de drenaje en grupos de
+  redundancia de piezómetros.
+
+scope: group
+groups:
+  parents:
+    - name: Grupos de validación de piezometros
+      canonical_name: validacion-piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/integridad-sistema-drenaje/B3"
+
+meta:
+  vars:
+    type: array
+    items: {type: object}
+  heads:
+    type: array
+    items: {type: object}
+
+script: common-scripts/concentrate.js

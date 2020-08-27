@@ -1,0 +1,26 @@
+name: Falla o bloqueo del vertedero de emergencia
+description: >-
+  Corresponde a cualquier problema en el vertedero de emergencia que
+  tenga como consecuencia que este no se encuentre completamente
+  operativo, en caso de ser necesario su uso. En caso de detectar
+  mediante un reporte o comunicación con otros operadores un problema
+  en el vertedero que podría afectar su funcionamiento, se debe
+  activar el evento gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q05

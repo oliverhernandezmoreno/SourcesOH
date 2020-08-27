@@ -1,0 +1,20 @@
+name: NF
+description: Nivel freático (sensor)
+type: raw
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+frequencies:
+  - minutes: 480
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-sgt

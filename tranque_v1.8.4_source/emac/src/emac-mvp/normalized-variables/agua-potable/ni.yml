@@ -1,0 +1,13 @@
+name: Ni -- Agua Potable -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/ni"
+  - "@emac-mvp/valid-variables/ni"
+
+script: ./../normalization-agua-potable.js

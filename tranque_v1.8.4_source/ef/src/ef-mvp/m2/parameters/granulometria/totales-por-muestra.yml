@@ -1,0 +1,18 @@
+name: Totales de granulométrica
+range_gte: 0
+
+unit:
+  id: gram
+  name: Gramo
+  abbreviation: g
+  si: false
+  si_conversion_scale: 0.001
+  si_unit:
+    id: kilogram
+    name: Kilogramo
+    abbreviation: kg
+    si: true
+
+
+inputs:
+  - '@ef-mvp/m2/parameters/granulometria'

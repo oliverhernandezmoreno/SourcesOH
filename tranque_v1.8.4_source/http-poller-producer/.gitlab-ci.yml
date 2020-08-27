@@ -1,0 +1,61 @@
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+
+stages:
+  - code quality
+  - test
+  - sonar
+  - push
+
+lint:
+  stage: code quality
+  image: python:3.6-alpine
+  script:
+    - pip install "flake8==3.7.7"
+    - flake8
+
+test:
+  stage: test
+  image: python:3.6-alpine
+  script:
+    - pip install -r requirements.txt
+    - pytest --cov-report=xml
+    - mkdir coverage-reports
+    - mv coverage.xml coverage-reports/coverage-report.xml
+  artifacts:
+    paths:
+      - coverage-reports
+
+sonar:
+  stage: sonar
+  only:
+    - dev
+    - master
+  image:
+    name: newtmitch/sonar-scanner:3.2.0
+    entrypoint: ['']
+  script:
+    # install vault
+    - wget -q https://releases.hashicorp.com/vault/0.11.1/vault_0.11.1_linux_amd64.zip
+    - unzip -q vault_0.11.1_linux_amd64.zip
+    - rm -f vault_0.11.1_linux_amd64.zip
+    # get sonar login token from vault
+    - SONAR_TOKEN=$(./vault read -field=key secret/tranque/dev/sonarqube/login)
+    # - run sonar scanner
+    - sonar-scanner -Dsonar.projectBaseDir=$CI_PROJECT_DIR -Dsonar.host.url=https://sonar.dev.inria.cl -Dsonar.login=$SONAR_TOKEN -Dsonar.projectName="Tranque HTTP Poller Producer" -Dsonar.projectKey=tranque-http-poller-producer -Dsonar.projectVersion=$CI_COMMIT_SHA -Dsonar.exclusions=aux/*.*
+
+push:
+  stage: push
+  only:
+    - dev
+    - master
+    - tags
+  tags:
+    - docker
+  image: docker:19.03.0
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${CI_REGISTRY}
+    - docker build -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" --build-arg CI_COMMIT_SHA=${CI_COMMIT_SHA} .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"

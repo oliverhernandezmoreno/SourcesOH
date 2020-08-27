@@ -1,0 +1,6 @@
+name: Evento B4 de potencial de rebalse
+description: >-
+  El potencial de rebalse es mayor que 1
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse"

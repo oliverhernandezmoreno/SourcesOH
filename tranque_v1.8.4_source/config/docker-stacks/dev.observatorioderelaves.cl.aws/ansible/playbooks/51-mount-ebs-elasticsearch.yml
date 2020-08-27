@@ -1,0 +1,34 @@
+---
+- name:          51-mount-ebs-elasticsearch
+  hosts:         role_docker-worker-elasticsearch
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+  - name:        make EBS filesystem
+    filesystem:
+      fstype:    xfs
+      dev:       /dev/sdf
+  - name:        create EBS directory
+    file:
+      path:      /home/{{ server_user }}/elasticsearch-db
+      state:     directory
+      mode:      0755
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+  - name:        mount EBS directory
+    mount:
+      name:      /home/{{ server_user }}/elasticsearch-db
+      src:       /dev/sdf
+      fstype:    xfs
+      state:     mounted
+      opts:      defaults
+  - name:        set mounted folder permissions
+    file:
+      path:      /home/{{ server_user }}/elasticsearch-db
+      state:     directory
+      mode:      0755
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"

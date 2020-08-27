@@ -1,0 +1,28 @@
+name: Ancho de coronamiento
+description: >-
+  El operador debe verificar que se cumple con el ancho de
+  coronamiento mínimo establecido por diseño, para esto el operador
+  deberá verificar que a lo largo del muro no existan sectores
+  puntuales donde el ancho de coronamiento pueda ser menor y presentar
+  valores cercanos al mínimo establecido. Deslizamiento de talud que
+  reduzca el ancho de coronamiento también deben ser considerados en
+  esta inspección. En caso de detectar visualmente un problema de este
+  tipo es necesario activar este evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q03

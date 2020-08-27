@@ -1,0 +1,8 @@
+- username: demo
+  password: tranque-demo
+  group: mine
+  targets:
+    - primero
+    - segundo
+    - tercero
+    - cuarto

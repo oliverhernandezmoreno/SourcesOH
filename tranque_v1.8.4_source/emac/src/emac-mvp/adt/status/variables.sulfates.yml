@@ -1,0 +1,7 @@
+name: SO4 -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/sulfates"
+  - "@emac-mvp/adt/arima/variables.sulfates"
+
+script: ./../adt.js

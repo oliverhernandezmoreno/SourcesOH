@@ -1,0 +1,6 @@
+name: Evento C por deslizamiento inminente hacia el interior de la laguna
+
+inputs:
+  - "@ef-mvp/m1/triggers/deslizamiento-inminente"
+
+script: "../trigger-C.js"

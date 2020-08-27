@@ -1,0 +1,39 @@
+name: Presión de poros en el muro
+description: Presión de poros en el muro
+range_gt: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+unit:
+  id: piezometric-altitude
+  name: Metros sobre el nivel del mar (altura piezométrica)
+  abbreviation: m.s.n.m.
+  si: false
+
+frequencies:
+  - minutes: 60  # 1 hora
+  - protocol: protocolo-a
+    minutes: 0.02  # ~1 segundos
+  - protocol: protocolo-b
+    minutes: 0.02  # ~1 segundos
+
+thresholds:
+  - upper: ~
+  - upper: ~
+  - upper: ~
+    kind: dren
+  - lower: ~
+    kind: cota-instalacion
+  - lower: ~  # en horas
+    kind: tiempo-critico-primer-umbral
+  - lower: ~  # en horas
+    kind: tiempo-critico-segundo-umbral
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros-manual"
+
+script: common-scripts/copy-events.js

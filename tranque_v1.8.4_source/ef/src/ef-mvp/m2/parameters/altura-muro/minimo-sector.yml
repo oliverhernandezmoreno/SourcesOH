@@ -1,0 +1,19 @@
+name: Altura del coronamiento del muro mínima por sector
+range_gte: 0
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/altura-muro"
+
+script: common-scripts/minimo.js

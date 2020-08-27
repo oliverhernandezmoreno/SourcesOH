@@ -1,0 +1,29 @@
+---
+- name:           00-install-docker
+  hosts:          role_docker-leader:role_docker-worker-*
+  vars:
+    server_user:  ec2-user
+  remote_user:    "{{ server_user }}"
+  become:         yes
+  become_user:    root
+  tasks:
+  - name:         install docker
+    package:
+      name:       docker
+      state:      latest
+  - name:         enable and start docker
+    service:
+      name:       docker
+      state:      started
+      enabled:    yes
+  - name:         add user to docker group
+    user:         name={{ server_user }}
+                  groups=docker
+                  append=yes
+  - name:         install pip
+    include_role:
+      name:       geerlingguy.pip
+    vars:
+      - pip_install_packages:
+        - docker
+        - jsondiff

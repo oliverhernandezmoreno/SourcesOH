@@ -1,0 +1,18 @@
+name: Activación manual - tendencia desfavorable de presión de poros
+type: manual
+
+choices:
+  - choice: No hay evidencia
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay evidencia de tendencia desfavorable de presión de poros
+    value:
+      choiceValue: 1
+      gte: 1
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros

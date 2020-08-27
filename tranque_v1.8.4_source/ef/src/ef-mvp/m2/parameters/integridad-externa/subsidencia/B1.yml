@@ -1,0 +1,17 @@
+name: Evento B1
+description: Se activa el evento gatillador fenómeno de subsidencia o socavón en el muro del depósito
+
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+
+inputs:
+  - "@ef-mvp/m1/triggers/subsidencia-muro"

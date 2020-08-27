@@ -1,0 +1,14 @@
+name: Evento A1 de altura del coronamiento del muro
+description: >-
+  La altura excede el plan de crecimiento, incluyendo el error máximo
+  permitido.
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/altura-muro"
+  - "@ef-mvp/m2/parameters/altura-muro/proyectada"

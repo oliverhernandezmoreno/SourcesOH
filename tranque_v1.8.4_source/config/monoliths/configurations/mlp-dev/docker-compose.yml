@@ -1,0 +1,71 @@
+version: "3.4"
+
+services:
+  archivist:
+    image: registry.gitlab.com/inria-chile/tranque/archivist:dev
+    env_file:
+      - ../base/.env.defaults
+      - ../config/.env.secrets
+      - ../base/.env.fixed
+      - ../config/.env.archivist.secrets
+    environment:
+      BACKUPS_KEPT: "14"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: on-failure
+    depends_on:
+      - postgis
+      - elasticsearch
+      - storage
+
+  pi-producer:
+    image: registry.gitlab.com/inria-chile/tranque/sql-beats-producer:dev
+    extra_hosts:
+      - "MLPCHAAPP26:10.30.0.146"
+      - "MLPFAEPI01:10.30.5.21"
+    env_file:
+      - ../config/.env.producers.secrets
+      - ../config/.env.pi-producer.secrets
+    volumes:
+      - ../config/pi-producer:/deployment
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+
+  sgs-producer:
+    image: registry.gitlab.com/inria-chile/tranque/http-poller-producer:dev
+    env_file:
+      - ../config/.env.producers.secrets
+    environment:
+      SCRIPT_FILE: "/deployment/sgs_script.py"
+      HEARTBEAT_NAME: "el-mauro.h-SGS.heartbeat"
+    volumes:
+      - ../config/sgs-producer:/deployment
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always
+
+  dga-producer:
+    image: registry.gitlab.com/inria-chile/tranque/http-poller-producer:dev
+    env_file:
+      - ../config/.env.producers.secrets
+    environment:
+      SCRIPT_FILE: "/deployment/dga_script.py"
+      HEARTBEAT_NAME: "el-mauro.h-DGA.heartbeat"
+    volumes:
+      - ../config/dga-producer:/deployment
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: always

@@ -1,0 +1,24 @@
+name: Deslizamiento superficial de un sector del talud del muro
+description: >-
+  Corresponde a un deslizamiento de la capa superficial del material
+  del muro en el sector aguas arriba o aguas abajo, se considera que
+  si aproximadamente un área de 100[m²] se ve afectada es necesario
+  activar este evento gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q03

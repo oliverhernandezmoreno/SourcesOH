@@ -1,0 +1,27 @@
+---
+- name: 20-install-gitlab-runner
+  hosts: role_gitlab-runner
+  vars:
+    server_user: ec2-user
+  remote_user: "{{ server_user }}"
+  become: yes
+  become_user: root
+  tasks:
+    - name: download gitlab-runner installer
+      get_url:
+        url: https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh
+        dest: /tmp/gitlab-runner.sh
+        mode: ug+rwx,o+rx-w
+    - name: install gitlab-runner installer
+      shell: /tmp/gitlab-runner.sh
+    - name: install gitlab-runner package
+      yum:
+        name: gitlab-runner
+        state: installed
+    - name: copy gitlab-runner configuration file
+      copy:
+        src: ../assets/config.toml.secrets
+        dest: /etc/gitlab-runner/config.toml
+        owner: root
+        group: root
+        mode: u+rw-x,go-rwx

@@ -1,0 +1,29 @@
+name: Pendiente local de muro aguas arriba
+space_coords: x
+
+unit:
+  id: h-v-ratio
+  name: "Razón H:V"
+  abbreviation: "H:V"
+  si: false
+
+x_unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+frequencies:
+  - minutes: 43200  # 30 días
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/elevacion"
+
+thresholds:
+  - lower: ~  # debe ser definido

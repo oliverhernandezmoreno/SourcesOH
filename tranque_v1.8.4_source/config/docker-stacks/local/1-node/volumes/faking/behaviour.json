@@ -1,0 +1,84 @@
+[
+  {
+    "timeseries": "fake-bursty-measurement",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 15,
+        "std": 3
+      },
+      "factor": 60000
+    },
+    "burst": {
+      "quantity": {
+        "distribution": {
+          "name": "normal",
+          "mean": 6,
+          "std": 1
+        }
+      },
+      "interval": {
+        "distribution": {
+          "name": "normal",
+          "mean": 500,
+          "std": 500
+        }
+      }
+    },
+    "value": {
+      "distribution": {
+        "name": "uniform",
+        "a": -0.1,
+        "b": 1.1
+      }
+    },
+    "metadata": [
+      {
+        "key": "source",
+        "value": "sensor-1"
+      }
+    ]
+  },
+  {
+    "timeseries": "fake-regular-measurement",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 5000,
+        "std": 1000
+      }
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0.5,
+        "std": 0.25
+      },
+      "fitMin": 0
+    },
+    "metadata": [
+      {
+        "key": "source",
+        "value": "sensor-2"
+      }
+    ]
+  },
+  {
+    "timeseries": "fake-yes-no-answer",
+    "interval": {
+      "distribution": {
+        "name": "constant",
+        "value": 1
+      },
+      "factor": 5000
+    },
+    "value": {
+      "distribution": {
+        "name": "binary",
+        "a": 1,
+        "b": 0,
+        "pa": 0.01
+      }
+    }
+  }
+]

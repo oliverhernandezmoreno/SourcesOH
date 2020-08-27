@@ -1,0 +1,7 @@
+name: CN -- Status ADT
+
+inputs:
+  - "@emac-mvp/variables/cyanide"
+  - "@emac-mvp/adt/arima/variables.cyanide"
+
+script: ./../adt.js

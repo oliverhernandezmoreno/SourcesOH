@@ -1,0 +1,26 @@
+name: Altura del coronamiento
+description: >-
+  El operador debe verificar que se cumple con la altura de
+  coronamiento correspondiente al plan de crecimiento del muro,
+  verificando que no existan sectores con alturas irregulares producto
+  de un crecimiento excesivo o que al contrario están por debajo de la
+  altura general del muro. En caso de detectar visualmente un problema
+  de este tipo es necesario activar este evento.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-design
+  - q01

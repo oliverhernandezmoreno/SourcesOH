@@ -1,0 +1,10 @@
+name: Cálculo de tendencia de presión de poros
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros"

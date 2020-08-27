@@ -1,0 +1,8 @@
+name: Evento A1 de revancha hidráulica
+description: >-
+  Se detecta una revancha hidráulica decreciente con respecto a la
+  última medición cuando hay lluvia en curso
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/estado-lluvia"
+  - "@ef-mvp/m2/parameters/revancha-hidraulica"

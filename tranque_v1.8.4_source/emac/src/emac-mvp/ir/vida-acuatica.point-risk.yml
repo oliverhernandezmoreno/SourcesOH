@@ -1,0 +1,13 @@
+name: Indicador de riesgo -- Vida Acuática
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/ir/vida-acuatica.exclusions"
+  - "@emac-mvp/normalized-variables/vida-acuatica/*"
+
+script: ./point-risk.js

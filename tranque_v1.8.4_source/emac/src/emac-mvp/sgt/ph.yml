@@ -1,0 +1,16 @@
+name: pH
+description: pH (sensor)
+range_gte: 1
+range_lte: 14
+type: raw
+
+frequencies:
+  - minutes: 480
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-sgt

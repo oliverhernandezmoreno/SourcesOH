@@ -1,0 +1,4 @@
+backup-storage/**/*
+!backup-storage/backups_bucket/dev.local/README.md
+backend/
+frontend/

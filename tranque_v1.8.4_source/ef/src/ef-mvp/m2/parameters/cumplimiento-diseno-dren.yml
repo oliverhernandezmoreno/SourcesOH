@@ -1,0 +1,7 @@
+name: Cumplimiento de las características de diseño del sistema de drenaje
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores

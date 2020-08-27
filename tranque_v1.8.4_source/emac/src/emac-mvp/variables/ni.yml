@@ -1,0 +1,39 @@
+name: Ni
+description: Níquel
+range_gt: 0
+type: raw
+
+unit:
+  id: milligram-liter
+  name: Miligramos por litro
+  abbreviation: mg/L
+  si: false
+  si_conversion_scale: 0.001
+  si_unit:
+    id: kilogram-cubic-meter
+    name: Kilogramos por metro cúbico
+    abbreviation: "kg/m\xB3"
+    si: true
+
+frequencies:
+  - minutes: 43200
+
+thresholds:
+  - upper: 0.02
+    kind: recreacion
+  - upper: 0.052
+    kind: vida-acuatica
+  - upper: 0.07
+    kind: agua-potable
+  - upper: 0.07
+    kind: ii
+  - upper: 0.2
+    kind: riego
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-variable

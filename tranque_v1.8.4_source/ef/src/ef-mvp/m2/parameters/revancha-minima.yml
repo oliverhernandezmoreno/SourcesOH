@@ -1,0 +1,7 @@
+name: Revancha mínima
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores

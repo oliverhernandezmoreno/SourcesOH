@@ -1,0 +1,11 @@
+.secrets filter=git-crypt diff=git-crypt
+.secret filter=git-crypt diff=git-crypt
+**/*.secrets filter=git-crypt diff=git-crypt
+**/*.secret filter=git-crypt diff=git-crypt
+**/*.secrets/** filter=git-crypt diff=git-crypt
+**/*.secret/** filter=git-crypt diff=git-crypt
+**/*.secret.yml filter=git-crypt diff=git-crypt
+*.tfvars filter=git-crypt diff=git-crypt
+alertmanager.yml filter=git-crypt diff=git-crypt
+**/*.pem filter=git-crypt diff=git-crypt
+**/*.pfx filter=git-crypt diff=git-crypt

@@ -1,0 +1,31 @@
+cameras:
+  - name: fake_camera1
+    target: dep01
+    host: fake_stream1
+    port: 8554
+    protocol: rtsp
+  - name: fake_camera2
+    target: dep01
+    host: fake_stream2
+    port: 8554
+    protocol: rtsp
+  - name: fake_camera1
+    target: dep02
+    host: fake_stream1
+    port: 8554
+    protocol: rtsp
+  - name: fake_camera2
+    target: dep02
+    host: fake_stream2
+    port: 8554
+    protocol: rtsp
+  - name: fake_camera1
+    target: dep03
+    host: fake_stream1
+    port: 8554
+    protocol: rtsp
+  - name: fake_camera2
+    target: dep03
+    host: fake_stream2
+    port: 8554
+    protocol: rtsp

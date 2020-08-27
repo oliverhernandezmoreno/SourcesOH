@@ -1,0 +1,19 @@
+name: Pendiente de playa mínima por sector
+range_gte: 0
+
+unit:
+  id: percent
+  name: Porcentaje
+  abbreviation: "%"
+  si: false
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-playa"
+
+script: common-scripts/minimo.js

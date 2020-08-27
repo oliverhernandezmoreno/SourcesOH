@@ -1,0 +1,33 @@
+name: Deslizamiento inminente hacia el interior de la laguna
+description: >-
+  Corresponde a la detección de un sector perteneciente a terreno
+  natural que rodea la cubeta del depósito que por algún motivo se
+  encuentra en una situación de inestabilidad que puede provocar un
+  inminente colapso y que, en caso de ocurrir este colapso, puede
+  desplazar parte o la totalidad de la laguna aguas claras. En caso de
+  detectar mediante un reporte, comunicación con otros operadores o
+  visualmente este tipo de situaciones es necesario activar el evento
+  gatillador.
+type: raw
+
+frequencies:
+  - minutes: 1440  # 1 día
+
+choices:
+  - choice: "Sí, gatillará una alerta roja"
+    value:
+      choiceValue: 2
+      gt: 1
+  - choice: "Sí, gatillará una alerta amarilla"
+    value:
+      choiceValue: 1
+      gt: 0
+      lte: 1
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+category:
+  - m1-triggers
+  - q16

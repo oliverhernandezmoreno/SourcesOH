@@ -1,0 +1,19 @@
+name: Evento A2 de Estado operativo del vertedero de emergencia
+description: >-
+  Evento A2:
+  Se activa el evento gatillador asociado a que se ha modificado la cota de funcionamiento del vertedero
+  de emergencia (Para gestionar este evento se debe actualizar la cota de funcionamiento del vertedero
+  de emergencia (dato de configuración del “Potencial de rebalse”))
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+inputs:
+  - "@ef-mvp/m2/parameters/vertedero/cota-vertedero"

@@ -1,0 +1,20 @@
+name: Superación redundante del segundo umbral de un piezómetro
+
+scope: group
+groups:
+  parents:
+    - name: Grupos de validación de piezometros
+      canonical_name: validacion-piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/t2"
+
+meta:
+  vars:
+    type: array
+    items: {type: object}
+  heads:
+    type: array
+    items: {type: object}
+
+script: common-scripts/concentrate.js

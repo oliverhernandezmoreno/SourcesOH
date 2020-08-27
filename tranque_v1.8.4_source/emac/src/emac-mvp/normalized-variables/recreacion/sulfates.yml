@@ -1,0 +1,13 @@
+name: SO4 -- Recreación -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/sulfates"
+  - "@emac-mvp/valid-variables/sulfates"
+
+script: ./../normalization-recreacion.js

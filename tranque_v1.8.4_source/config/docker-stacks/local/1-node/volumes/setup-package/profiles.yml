@@ -1,0 +1,5 @@
+- username: omniuser
+  password: omniuser
+  group: mine
+  targets:
+    - el-mauro

@@ -1,0 +1,47 @@
+name: Altura del coronamiento del muro
+description: >-
+  Corresponde a la cota de coronamiento del muro del depósito.
+  Se define en la etapa de diseño del depósito de relaves y
+  está asociada a la etapa de construcción.
+range_gte: 0
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+frequencies:
+  - minutes: 10080  # 7 días
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/elevacion"
+
+
+parameters:
+  - canonical_name: plan-crecimiento-altura-coronamiento
+    name: "Altura proyectada de coronamiento de muro"
+    schema:
+      type: object
+      properties:
+        curve:
+          type: array
+          items:
+            type: object
+            properties:
+              group: {type: string}
+              date: {type: string}
+              value: {type: number}
+            required: ["date", "value"]
+
+  - canonical_name: error-permitido-altura-coronamiento
+    name: "Error permitido en metros de altura vs. altura proyectada"
+    schema:
+      type: number
+      exclusiveMinimum: 0

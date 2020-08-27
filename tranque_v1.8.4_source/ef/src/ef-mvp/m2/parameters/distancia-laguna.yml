@@ -1,0 +1,24 @@
+name: Distancia mínima al muro de la laguna aguas claras
+description: Medición puntual en la zona más cercana de la laguna al muro
+range_gte: 0
+type: raw
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+thresholds:
+  - lower: ~
+  - lower: ~
+  - lower: 0  # pre-definido como "en contacto con el muro"
+
+frequencies:
+  - minutes: 10080  # 7 días
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores

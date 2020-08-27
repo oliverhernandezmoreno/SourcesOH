@@ -1,0 +1,28 @@
+version:           "3.4"
+
+services:
+
+  backup-storage:
+    image:         registry.gitlab.com/inria-chile/tranque/config/storage:dev
+    environment:
+      - S3_BUCKET_NAME=backups_bucket
+      - MINIO_ACCESS_KEY=admin123
+      - MINIO_SECRET_KEY=admin123
+    volumes:
+      - "./backup-storage:/data"
+
+  # backup & restore service
+  archivist:
+    image:         registry.gitlab.com/inria-chile/tranque/archivist:dev
+    env_file:      .env
+    environment:
+      - BACKUPS_KEPT=999
+      - BACKUP_ACCESS_KEY_ID=admin123
+      - BACKUP_SECRET_ACCESS_KEY=admin123
+      - BACKUP_BUCKET_NAME=backups_bucket
+      - BACKUP_ENDPOINT_URL=http://backup-storage:9000
+    depends_on:
+      - postgis
+      - elasticsearch
+      - storage
+      - backup-storage

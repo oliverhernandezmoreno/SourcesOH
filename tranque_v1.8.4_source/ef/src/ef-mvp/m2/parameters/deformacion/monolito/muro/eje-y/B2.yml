@@ -1,0 +1,27 @@
+name: Evento B2
+description: >-
+  Se detecta tendencia desfavorable de deformación de monolito en el eje Y
+  en muro
+
+choices:
+  - choice: Sí
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: 'No'
+    value:
+      choiceValue: 0
+      lte: 0
+
+
+scope: spread
+groups:
+  items:
+    - name: Prismas y Monolitos
+      canonical_name: prismas-monolitos
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/monolito/muro/eje-y/tendencia"
+
+script: ef-mvp/m2/parameters/deformacion/monolito/evento-tendencia.js

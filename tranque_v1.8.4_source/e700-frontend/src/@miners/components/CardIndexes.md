@@ -1,0 +1,5 @@
+CardIndexes example:
+
+```js
+<CardIndexes/>
+```

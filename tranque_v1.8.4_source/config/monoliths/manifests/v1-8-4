@@ -1,0 +1,14 @@
+s=${BACKEND_IMAGE}=registry.gitlab.com/inria-chile/tranque/backend:v1-8-3=
+s=${ENRICHMENT_IMAGE}=registry.gitlab.com/inria-chile/tranque/enrichment:v1-6-5=
+s=${STATS_IMAGE}=registry.gitlab.com/inria-chile/tranque/stats/r-base:v1-6-1=
+s=${CRON_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/cron:v1-6-5=
+s=${LOGSTASH_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/logstash:v1-6-5=
+s=${BEATS_CONSUMER_IMAGE}=registry.gitlab.com/inria-chile/tranque/beats-consumer:v1-6-1=
+s=${ELASTICSEARCH_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/elasticsearch:v1-6-5=
+s=${RABBITMQ_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/rabbitmq:v1-6-5=
+s=${STORAGE_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/storage:v1-6-5=
+s=${FRONTEND_IMAGE}=registry.gitlab.com/inria-chile/tranque/e700-frontend:v1-8-4=
+s=${DJANGO_STATIC_IMAGE}=registry.gitlab.com/inria-chile/tranque/backend/static-nginx:v1-8-3=
+s=${KIBANA_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/kibana:v1-6-5=
+s=${PROXY_IMAGE}=registry.gitlab.com/inria-chile/tranque/config/secure-proxy:v1-6-5=
+s=${STREAM_CONSUMER_IMAGE}=registry.gitlab.com/inria-chile/tranque/stream-snapshot/stream_consumer:v1-8-0=

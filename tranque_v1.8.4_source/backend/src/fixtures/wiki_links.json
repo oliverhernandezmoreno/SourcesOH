@@ -1,0 +1,237 @@
+[
+	{
+		"model": "infos.siteparameter",
+		"pk": "GLOSSARY_LINK",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.revancha-operacional",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/revancha-operacional"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.revancha-hidraulica",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/revancha-hidraulica"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.distancia-minima-laguna-muro",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/distancia-minima-laguna-muro"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.pendiente-de-talud",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/pendiente-de-talud"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.pendiente-de-playa",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/pendiente-de-playa"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.altura-de-coronamiento",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/altura-de-coronamiento"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.ancho-de-coronamiento",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/ancho-de-coronamiento"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.perfiles-topograficos",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/perfiles-topograficos"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.cotas-piezometricas-en-el-tiempo",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/cotas-piezometricas-en-el-tiempo"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.perfil-topografico-y-cotas-piezometricas",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/perfil-topografico-y-cotas-piezometricas"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.nivel-freatico-de-cubeta",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/nivel-freatico-de-cubeta"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.detalle-de-piezometro",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/detalle-de-piezometro"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.porcentaje-de-finos",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/porcentaje-de-finos"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.curva-granulometrica",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/curva-granulometrica"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.densidad-del-muro",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/densidad-del-muro"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.tonelaje",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/tonelaje"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.deformacion-puntual-en-superficie",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/deformacion-puntual-en-superficie"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.deformacion-puntual-en-profundidad",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/deformacion-puntual-en-profundidad"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.deformacion-de-perfil-en-profundidad",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/deformacion-de-perfil-en-profundidad"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.caudal",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/caudal"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.turbiedad",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/turbiedad"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.detalle-de-caudalimetro",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/detalle-de-caudalimetro"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.detalle-de-turbidimetro",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/detalle-de-turbidimetro"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.intensidad-de-lluvia",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/intensidad-de-lluvia"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.potencial-de-rebalse",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/potencial-de-rebalse"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.vertedero-de-emergencia",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/vertedero-de-emergencia"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.acelerografos",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/acelerografos"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.grietas-en-el-muro",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/grietas-en-el-muro"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.humedad-o-filtraciones-en-talud",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/humedad-o-filtraciones-en-talud"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.subsidencia-o-socavacion-cerca-del-muro",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/subsidencia-o-socavacion-cerca-del-muro"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.integridad-de-los-estribos",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/integridad-de-los-estribos"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.modulos-de-deformacion-y-resistencia",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/modulos-de-deformacion-y-resistencia"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.resistencia-del-material-de-relaves",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/resistencia-del-material-de-relaves"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.diseno-del-sistema-de-drenaje",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/diseno-del-sistema-de-drenaje"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.caracterizacion-geotecnica-del-suelo-de-fundacion",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/caracterizacion-geotecnica-del-suelo-de-fundacion"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.ef-views.estudio-de-revancha-minima",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/estudio-de-revancha-minima"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/glosario/eventos_alertas"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.evento",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/evento"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.alerta",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/alerta"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.anomalia",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/anomalia"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.incidente",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/incidente"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.incidente-importante",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/incidente-importante"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.incidente-grave",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/incidente-grave"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.alerta-amarilla",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/alerta-amarilla"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.alerta-roja",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/alerta-roja"}
+	},
+	{
+		"model": "infos.siteparameter",
+		"pk": "glossary.tickets.semaforo",
+		"fields": {"value": "https://tranque-wiki.azurewebsites.net/es/glosario/terminos/semaforo"}
+	}
+]

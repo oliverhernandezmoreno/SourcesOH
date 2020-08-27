@@ -1,0 +1,14 @@
+name: Evento B1 de ancho de coronamiento
+description: >-
+  El ancho medido es menor que el valor umbral.
+
+scope: group
+groups:
+  parents:
+    - name: Sectores de muro
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/ancho-coronamiento/B1"
+
+script: common-scripts/al-menos-un-evento.js

@@ -1,0 +1,71 @@
+---
+- name:          42-replacements-sml-1
+  hosts:         role_tranque-qa-sml-1
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+
+  - name:        copy replacement script and secrets over
+    copy:
+      src:       "../assets/{{ item }}"
+      dest:      "/home/{{ server_user }}/{{ item }}"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rwx,g+rx-w,o+rx-w
+    with_items:
+      - sml-1.sh
+      - sml-1.secrets
+
+  - name:        execute replacements
+    command:     "/home/{{ server_user }}/sml-1.sh"
+
+
+- name:          42-replacements-sml-2
+  hosts:         role_tranque-qa-sml-2
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+
+  - name:        copy replacement script and secrets over
+    copy:
+      src:       "../assets/{{ item }}"
+      dest:      "/home/{{ server_user }}/{{ item }}"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rwx,g+rx-w,o+rx-w
+    with_items:
+      - sml-2.sh
+      - sml-2.secrets
+
+  - name:        execute replacements
+    command:     "/home/{{ server_user }}/sml-2.sh"
+
+
+- name:          42-replacements-sml-3
+  hosts:         role_tranque-qa-sml-3
+  vars:
+    server_user: ec2-user
+  remote_user:   "{{ server_user }}"
+  become:        yes
+  become_user:   root
+  tasks:
+
+  - name:        copy replacement script and secrets over
+    copy:
+      src:       "../assets/{{ item }}"
+      dest:      "/home/{{ server_user }}/{{ item }}"
+      owner:     "{{ server_user }}"
+      group:     "{{ server_user }}"
+      mode:      u+rwx,g+rx-w,o+rx-w
+    with_items:
+      - sml-3.sh
+      - sml-3.secrets
+
+  - name:        execute replacements
+    command:     "/home/{{ server_user }}/sml-3.sh"

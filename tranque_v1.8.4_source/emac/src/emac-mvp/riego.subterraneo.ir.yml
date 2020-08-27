@@ -1,0 +1,36 @@
+name: Índice de riesgo -- Riego
+highlight: true
+
+scope: group
+groups:
+  operator: and
+  items:
+    - name: Muestreo subterráneo
+      canonical_name: subterraneo
+    - name: Aguas abajo
+      canonical_name: aguas-abajo
+
+thresholds:
+  - upper: 0.0
+
+inputs:
+  - "@emac-mvp/normalized-variables/riego/*"
+  - "@emac-mvp/ir/riego.point-risk"
+
+script: ./ir.js
+
+category:
+  - emac-index
+  - risk-index
+
+parameters:
+  - canonical_name: ir-reference
+    name: "Punto de referencia de índice de riesgo"
+    schema:
+      type: object
+      properties:
+        srid: {type: number}
+        x: {type: number}
+        y: {type: number}
+      additionalProperties: false
+      required: ["x", "y"]

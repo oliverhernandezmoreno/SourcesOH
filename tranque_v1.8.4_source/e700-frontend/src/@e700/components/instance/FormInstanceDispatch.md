@@ -1,0 +1,5 @@
+FormInstanceDispatch example:
+
+```jsx
+<FormInstanceDispatch/>
+```

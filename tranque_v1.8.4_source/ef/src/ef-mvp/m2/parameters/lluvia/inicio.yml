@@ -1,0 +1,9 @@
+name: Ajuste de inicio de lluvia
+description: >-
+  Corresponde a un reporte manual del instante de inicio de lluvia
+type: raw
+
+choices:
+  - choice: "Inicio"
+    value:
+      choiceValue: 1

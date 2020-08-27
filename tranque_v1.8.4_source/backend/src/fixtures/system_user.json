@@ -1,0 +1,19 @@
+[
+{
+  "model": "auth.user",
+  "fields": {
+    "password": "!bygNCfL170G1Sxk3yjU8WZA9UPzm1W9Wkg2LiWQ7",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "system",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2020-04-14T14:54:16.048Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

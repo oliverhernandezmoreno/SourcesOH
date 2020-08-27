@@ -1,0 +1,26 @@
+name: Temperatura
+description: Temperatura (sensor)
+type: raw
+
+unit:
+  id: deg-c
+  name: Grados centígrados
+  abbreviation: °C
+  si: false
+  si_conversion_shift: 273
+  si_unit:
+    id: deg-k
+    name: Kelvin
+    abbreviation: K
+    si: true
+
+frequencies:
+  - minutes: 480
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-sgt

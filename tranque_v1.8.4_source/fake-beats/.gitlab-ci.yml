@@ -1,0 +1,59 @@
+stages:
+  - code quality
+  - test
+  - push
+
+lint:
+  stage: code quality
+  image: node:10.9.0-jessie
+  script:
+    - yarn install --non-interactive
+    - yarn lint
+
+sonar:
+  stage: code quality
+  only:
+    - dev
+    - master
+  image:
+    name: newtmitch/sonar-scanner:3.2.0
+    entrypoint: ['']
+  script:
+    # install typescript
+    - npm i typescript
+    # install vault
+    - wget -q https://releases.hashicorp.com/vault/0.11.1/vault_0.11.1_linux_amd64.zip
+    - unzip -q vault_0.11.1_linux_amd64.zip
+    - rm -f vault_0.11.1_linux_amd64.zip
+    # get sonar login token from vault
+    - SONAR_TOKEN=$(./vault read -field=key secret/tranque/dev/sonarqube/login)
+    # run sonar scanner
+    - sonar-scanner -Dsonar.projectBaseDir=$CI_PROJECT_DIR -Dsonar.host.url=https://sonar.dev.inria.cl -Dsonar.login=$SONAR_TOKEN -Dsonar.projectName="Tranque Fake Beats" -Dsonar.projectKey=tranque-fake-beats -Dsonar.projectVersion=$CI_COMMIT_SHA
+
+jest:
+  stage: test
+  image: node:10.9.0-jessie
+  script:
+    - yarn install --non-interactive
+    - yarn build
+    - yarn test
+
+docker-push:
+  stage: push
+  only:
+    - dev
+    - master
+    - tags
+  tags:
+    - docker
+  image: docker:19.03.0
+  variables:
+    DOCKER_REGISTRY: registry.gitlab.com/inria-chile
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: "/certs"
+  services:
+    - docker:19.03.0-dind
+  script:
+    - docker login -u gitlab-ci-token -p ${CI_JOB_TOKEN} ${DOCKER_REGISTRY}
+    - docker build -t "${DOCKER_REGISTRY}/tranque/fake-beats:${CI_COMMIT_REF_SLUG}" .
+    - docker push "${DOCKER_REGISTRY}/tranque/fake-beats:${CI_COMMIT_REF_SLUG}"

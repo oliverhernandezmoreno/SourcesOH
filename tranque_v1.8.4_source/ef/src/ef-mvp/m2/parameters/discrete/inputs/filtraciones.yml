@@ -1,0 +1,21 @@
+name: Evidencia de humedad y/o filtraciones en el muro
+type: manual
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+
+choices:
+  - choice: No hay evidencia
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay evidencia de humedad
+    value:
+      choiceValue: 1
+      gte: 1
+
+frequencies:
+  - minutes: 1440  # 1 día

@@ -1,0 +1,24 @@
+name: Evento CD1 de Módulos de deformación y resistencia al corte del material de relleno del muro del depósito
+description: >-
+  Evento D1: (Se informa por sector)
+  Se determina que el sector que no cumple con los parámetros de densidad (Evento C2) se encuentra
+  bajo el nivel freático o con un nivel alto de saturación.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/modulos-deformacion-resistencia-muro/detecta-D1"

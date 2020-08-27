@@ -1,0 +1,20 @@
+name: Indicación de ocurrencia de un sismo en sector con filtación
+type: manual
+
+
+choices:
+  - choice: No hay ocurrencia de sismo
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay ocurrencia de sismo
+    value:
+      choiceValue: 1
+      gte: 1
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+      

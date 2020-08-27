@@ -1,0 +1,76 @@
+version:         "3.4"
+
+x-logging:       &logging
+  driver:        "json-file"
+  options:
+    max-size:    "10m"
+    max-file:    "3"
+
+x-env-files:     &env-files
+  env_file:
+    - .env
+    - .secrets
+
+services:
+  prometheus:
+    image:       prom/prometheus:v2.7.1
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=8w'
+    restart:     always
+    volumes:
+      - ./configs/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./configs/prometheus/alerting_rules.yml:/etc/prometheus/alerting_rules.yml
+      - /home/ec2-user/prometheus-data:/prometheus
+    restart:     always
+
+  alertmanager:
+    image:       prom/alertmanager:v0.15.3
+    restart:     always
+    depends_on:
+      - prometheus
+    volumes:
+      - ./configs/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+
+  unsee:
+    image:       cloudflare/unsee:latest
+    restart:     always
+    <<:          *env-files
+    depends_on:
+      - alertmanager
+
+  grafana:
+    image:       grafana/grafana:5.3.0
+    <<:          *env-files
+    depends_on:
+      - prometheus
+    volumes:
+      - /home/ec2-user/grafana-data:/var/lib/grafana
+      - ./configs/grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./configs/grafana/prometheus-datasource.yml:/etc/grafana/provisioning/datasources/prometheus-datasource.yml
+      - ./configs/grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
+      - ./configs/grafana/tranque-dev-horizontal-dashboard.json:/var/lib/grafana/dashboards/tranque-dev-horizontal-dashboard.json
+      - ./configs/grafana/tranque-dev-vertical-dashboard.json:/var/lib/grafana/dashboards/tranque-dev-vertical-dashboard.json
+      - ./configs/grafana/tranque-prod-horizontal-dashboard.json:/var/lib/grafana/dashboards/tranque-prod-horizontal-dashboard.json
+      - ./configs/grafana/tranque-prod-vertical-dashboard.json:/var/lib/grafana/dashboards/tranque-prod-vertical-dashboard.json
+    restart:     always
+
+  lets-nginx:
+    image:       smashwilson/lets-nginx
+    restart:     always
+    depends_on:
+      - grafana
+      - unsee
+      - prometheus
+    volumes:
+      - /home/ec2-user/grafana-data/letsencrypt/cache:/cache
+      - /home/ec2-user/grafana-data/letsencrypt/letsencrypt:/etc/letsencrypt
+    environment:
+      EMAIL:     "sistemas@inria.cl"
+      DOMAIN:    "monitor.observatorioderelaves.cl;alert.observatorioderelaves.cl;prometheus.observatorioderelaves.cl"
+      UPSTREAM:  "grafana:3000;unsee:8080;prometheus:9090"
+      STAGING:   0
+    ports:
+      - 80:80
+      - 443:443

@@ -1,0 +1,13 @@
+name: Pendiente global del muro aguas abajo mínima del depósito
+range_gte: 0
+
+unit:
+  id: h-v-ratio
+  name: "Razón H:V"
+  abbreviation: "H:V"
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/pendiente-muro/global-aguas-abajo/minimo-sector"
+
+script: common-scripts/minimo.js

@@ -1,0 +1,133 @@
+version:                   "3.4"
+
+x-logging:                 &logging
+  driver:                  "json-file"
+  options:
+    max-size:              "10m"
+    max-file:              "3"
+
+x-service:                 &service
+  restart:                 on-failure
+  logging:                 *logging
+
+x-service-with-env:        &service-with-env
+  <<:                      *service
+  env_file:
+    - .env
+    - .secrets
+
+services:
+  storage:
+    <<:                    *service-with-env
+    image:                 minio/minio:RELEASE.2019-04-23T23-50-36Z
+    command:               ["server", "/data"]
+    volumes:
+      - minio:/data
+    ports:
+      - 9000:9000
+
+  postgis:
+    <<:                    *service-with-env
+    image:                 mdillon/postgis:10
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  django:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/backend:v1-1-1
+    healthcheck:
+      test: nc -z localhost 8000 || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 120
+    volumes:
+      - /home/ec2-user/stack/setup-package:/initial-setup
+    depends_on:
+      - postgis
+      - elasticsearch
+
+  django-amqpconsumer:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/backend:v1-1-1
+    entrypoint:            ["/entrypoint.amqpconsumer.sh"]
+    command:               ["./manage.py", "runconsumer"]
+    depends_on:
+      - postgis
+      - elasticsearch
+      - amqpbroker
+
+  django-static:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/backend/static-nginx:v1-1-1
+
+  cron:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/config/cron:v1-1-0
+    depends_on:
+      - django
+
+  frontend:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/frontend:v1-1-0
+
+  e700-frontend:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/e700-frontend:v1-1-0
+
+  proxy:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/config/secure-proxy:v1-1-0
+    volumes:
+      - /home/ec2-user/stack/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /home/ec2-user/stack/nginx/fullchain.pem:/etc/ssl/fullchain.pem
+      - /home/ec2-user/stack/nginx/privkey.pem:/etc/ssl/privkey.pem
+    depends_on:
+      - frontend
+      - e700-frontend
+      - django
+      - django-static
+    ports:
+      - 80:80
+      - 443:443
+
+  amqpbroker:
+    <<:                    *service
+    image:                 rabbitmq:3.7.8-management-alpine
+    volumes:
+      - /home/ec2-user/stack/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - /home/ec2-user/stack/rabbitmq/rabbitmq.definitions.json:/etc/rabbitmq/definitions.json
+    ports:
+      - 5671:5671
+      - 5672:5672
+
+  elasticsearch:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/config/elasticsearch:v1-1-0
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+
+  kibana:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/config/kibana:v1-1-0
+    depends_on:
+      - elasticsearch
+
+  enrichment:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/enrichment:v1-1-1
+    depends_on:
+      - postgis
+      - elasticsearch
+      - amqpbroker
+
+  redis:
+    <<:                    *service
+    image:                 redis:4-alpine
+    volumes:
+      - redis:/data
+
+volumes:
+  minio:
+  postgres:
+  elasticsearch:
+  redis:

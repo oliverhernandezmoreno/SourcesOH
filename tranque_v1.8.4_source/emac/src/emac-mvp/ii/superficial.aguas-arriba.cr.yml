@@ -1,0 +1,15 @@
+name: Concentración representativa
+
+scope: group
+groups:
+  operator: and
+  items:
+    - name: Muestreo superficial
+      canonical_name: superficial
+    - name: Aguas arriba
+      canonical_name: aguas-arriba
+
+inputs:
+  - "@emac-mvp/ii/area-poligono"
+
+script: ./cr.js

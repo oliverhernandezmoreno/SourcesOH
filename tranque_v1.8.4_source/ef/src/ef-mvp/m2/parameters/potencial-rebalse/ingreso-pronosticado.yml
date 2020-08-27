@@ -1,0 +1,16 @@
+name: Volumen de ingreso de agua pronosticado por hora
+
+unit:
+  id: cubic-meter-per-hour
+  name: Metro cúbico por hora
+  abbreviation: m³/h
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/cota-laguna"
+  - "@ef-mvp/m2/parameters/variables/pronostico-cantidad-lluvia"
+  - "@ef-mvp/m2/parameters/variables/pronostico-tiempo-lluvia"
+  - "@ef-mvp/m2/parameters/variables/tiempo-lloviendo"
+  - "@ef-mvp/m2/parameters/variables/volumen-disponible"
+  - "@ef-mvp/m2/parameters/lluvia"  # usado para encontrar puntos de saturación de embalses en el pasado
+  - "@ef-mvp/m2/parameters/potencial-rebalse/ingreso-real"  # usado para el caso en el que no hay pronóstico

@@ -1,0 +1,29 @@
+# editor artifacts
+*~
+
+# python artifacts
+*.pyc
+__pycache__
+*.egg-info
+.pytest_cache
+
+# django artifacts
+*.sqlite3
+/src/static-root
+
+# virtual environment
+/env
+
+# profiles
+/src/profiles
+
+# ide
+# webstorm
+**/.idea
+
+# media files
+src/media-root
+
+# coverage reports
+.coverage
+coverage*

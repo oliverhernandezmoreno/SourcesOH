@@ -1,0 +1,22 @@
+name: Turbiedad del agua máxima por sector drenado
+description: >-
+  Se refiere a la máxima turbiedad detectada en un sector según la
+  relación drenaje asociado a sector.
+range_gte: 0
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+unit:
+  id: ntu
+  name: Unidad nefelométrica de turbidez
+  abbreviation: NTU
+  si: false
+
+inputs:
+  - "@ef-mvp/m2/parameters/turbiedad/maximo-dren"
+
+script: common-scripts/maximo.js

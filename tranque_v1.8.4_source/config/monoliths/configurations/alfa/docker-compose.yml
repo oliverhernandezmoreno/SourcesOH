@@ -1,0 +1,22 @@
+version: "3.4"
+
+services:
+  archivist:
+    image: registry.gitlab.com/inria-chile/tranque/archivist:dev
+    env_file:
+      - ../base/.env.defaults
+      - ../config/.env.secrets
+      - ../base/.env.fixed
+      - ../config/.env.archivist.secrets
+    environment:
+      BACKUPS_KEPT: "14"
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+    restart: on-failure
+    depends_on:
+      - postgis
+      - elasticsearch
+      - storage

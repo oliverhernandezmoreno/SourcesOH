@@ -1,0 +1,13 @@
+name: Cu -- Impacto -- Normalizado
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/variables/cu"
+  - "@emac-mvp/valid-variables/cu"
+
+script: ./../normalization-ii.js

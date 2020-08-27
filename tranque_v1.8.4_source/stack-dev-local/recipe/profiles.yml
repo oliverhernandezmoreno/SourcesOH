@@ -1,0 +1,12 @@
+- username: mine
+  password: tranque123
+  group:
+    - mine
+    - analyst
+  targets:
+    - el-mauro
+    - ovejeria
+
+- username: authority
+  password: tranque123
+  group: authority

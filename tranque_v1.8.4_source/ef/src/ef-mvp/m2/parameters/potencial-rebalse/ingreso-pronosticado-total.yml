@@ -1,0 +1,11 @@
+name: Volumen de ingreso acumulado pronosticado
+
+unit:
+  id: cubic-meter
+  name: Metro cúbico
+  abbreviation: m³
+  si: true
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse/ingreso-real-acumulado"
+  - "@ef-mvp/m2/parameters/potencial-rebalse/ingreso-pronosticado"

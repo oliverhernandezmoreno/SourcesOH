@@ -1,0 +1,17 @@
+name: Detecta que el vertedero de emergencia está o no operativo
+description: >-
+  Corresponde a la detección de forma manual de que el vertedero de emergencia está o no operativo.
+type: raw
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+frequencies:
+  - minutes: 60  # 60 min = 1 hr

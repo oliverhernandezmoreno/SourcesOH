@@ -1,0 +1,30 @@
+name: Pendiente de playa
+range_gte: 0
+type: raw
+
+unit:
+  id: percent
+  name: Porcentaje
+  abbreviation: "%"
+  si: false
+
+thresholds:
+  - upper: ~  # debe ser definido
+
+frequencies:
+  - minutes: 43200  # 30 días
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+parameters:
+  - canonical_name: porcentaje-cercania-pendiente-playa
+    name: >-
+      Corresponde al porcentaje del Valor umbral que indica que el
+      valor medido está cerca del Valor umbral.
+    schema:
+      type: number
+      minimum: 0

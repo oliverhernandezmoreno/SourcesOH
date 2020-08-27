@@ -1,0 +1,5 @@
+name: Fake singleton variable
+type: raw
+script_version: "fake:aabbccddeeff00112233445566778899"
+category:
+  - fake-index

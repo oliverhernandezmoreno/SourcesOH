@@ -1,0 +1,598 @@
+[
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-1.emac-mvp.sgt.ce",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 483.1591,
+        "std": 180.505
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-1.emac-mvp.sgt.nf",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11,
+        "std": 3.5
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-1.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-1.emac-mvp.sgt.ph",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 8.07,
+        "std": 0.24
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-1.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-2.emac-mvp.sgt.ce",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 483.1591,
+        "std": 180.505
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-2.emac-mvp.sgt.nf",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 12,
+        "std": 4
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-2.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-2.emac-mvp.sgt.ph",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 8.07,
+        "std": 0.24
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ABAJO-2.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUB-ARRIBA-2.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 28800000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.ce",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 483.1591,
+        "std": 180.505
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.nf",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0.04,
+        "std": 0.01
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "timestampOffset": {
+      "distribution": {
+        "name": "constant",
+        "value": -90
+      },
+      "factor": 60000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.ph",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 8.07,
+        "std": 0.24
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-1.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.ce",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 483.1591,
+        "std": 180.505
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.nf",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0.04,
+        "std": 0.01
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.ph",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 8.07,
+        "std": 0.24
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ABAJO-2.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.ce",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 483.1591,
+        "std": 180.505
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.nf",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0.04,
+        "std": 0.01
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.ph",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 8.07,
+        "std": 0.24
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-1.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.ce",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 483.1591,
+        "std": 180.505
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.nf",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 0.04,
+        "std": 0.01
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.orp",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 700,
+        "std": 100
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.ph",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 8.07,
+        "std": 0.24
+      }
+    }
+  },
+  {
+    "timeseries": "dep30.s-PUNTO-SUP-ARRIBA-2.emac-mvp.sgt.t",
+    "interval": {
+      "distribution": {
+        "name": "normal",
+        "mean": 1,
+        "std": 0.01
+      },
+      "fitMin": 1,
+      "factor": 3600000
+    },
+    "value": {
+      "distribution": {
+        "name": "normal",
+        "mean": 11.901,
+        "std": 3.547
+      }
+    }
+  }
+]

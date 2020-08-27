@@ -1,0 +1,37 @@
+name: CE
+description: CE
+range_gte: 0
+type: raw
+
+unit:
+  id: microsiemes-centimeter
+  name: Microsiemens por centímetro
+  abbreviation: "\xB5S/cm"
+  si: false
+  si_conversion_scale: 0.0001
+  si_unit:
+    id: siemens-meter
+    name: Siemens por metro
+    abbreviation: S/m
+    si: true
+
+frequencies:
+  - minutes: 43200
+
+thresholds:
+  - upper: 750
+    kind: riego
+  - upper: 1000
+    kind: vida-acuatica
+  - upper: 1500
+    kind: ii
+  - upper: 1500
+    kind: agua-potable
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+category: emac-variable

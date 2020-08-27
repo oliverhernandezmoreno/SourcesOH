@@ -1,0 +1,31 @@
+# Configures elasticsearch so that collections use the same template
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  labels:
+    app: configure-elasticsearch
+  name: configure-elasticsearch
+  namespace: tranque
+spec:
+  template:
+    spec:
+      containers:
+        - name: configure-elasticsearch
+          image: tranqueacr1.azurecr.io/tranque/enrichment:v1-6-2
+          command:
+            - yarn
+            - start
+            - timeseries-setup
+          env:
+            - name: ELASTICSEARCH_PROTOCOL
+              valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-protocol}}
+            - name: ELASTICSEARCH_HOST
+              valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-host}}
+            - name: ELASTICSEARCH_PORT
+              valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-port}}
+            - name: ELASTICSEARCH_USER
+              valueFrom: {configMapKeyRef: {name: configs, key: elasticsearch-user}}
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom: {secretKeyRef: {name: secrets, key: elasticsearch-password}}
+      restartPolicy: Never

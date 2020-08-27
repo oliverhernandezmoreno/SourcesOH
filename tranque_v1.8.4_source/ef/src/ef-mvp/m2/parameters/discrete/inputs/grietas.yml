@@ -1,0 +1,21 @@
+name: Presencia de grietas
+type: manual
+
+scope: group
+groups:
+  parents:
+    - canonical_name: sectores
+      name: Sectores de muro
+
+choices:
+  - choice: No hay grietas
+    value:
+      choiceValue: 0
+      lt: 1
+  - choice: Hay grietas que atentan contra la estabilidad del muro, en éste sector
+    value:
+      choiceValue: 1
+      gte: 1
+
+frequencies:
+  - minutes: 1440  # 1 día

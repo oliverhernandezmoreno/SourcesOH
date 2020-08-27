@@ -1,0 +1,13 @@
+name: Altura del coronamiento del muro máxima del depósito
+range_gte: 0
+
+unit:
+  id: altitude
+  name: Metros sobre el nivel del mar
+  abbreviation: m.s.n.m.
+  si: true
+
+inputs:
+  - "@ef-mvp/m2/parameters/altura-muro/maximo-sector"
+
+script: common-scripts/maximo.js

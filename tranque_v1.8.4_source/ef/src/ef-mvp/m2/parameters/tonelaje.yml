@@ -1,0 +1,14 @@
+name: Tonelaje
+description: >-
+  Tonelaje de relaves acumulados
+range_gte: 0
+type: raw
+
+unit:
+  id: ton
+  name: Tonelaje
+  abbreviation: ton
+  si: false
+
+frequencies:
+  - minutes: 1440  # 1 día

@@ -1,0 +1,7 @@
+name: ORP -- Status ADT
+
+inputs:
+  - "@emac-mvp/sgt/orp"
+  - "@emac-mvp/adt/arima/sgt.orp"
+
+script: ./../adt.js

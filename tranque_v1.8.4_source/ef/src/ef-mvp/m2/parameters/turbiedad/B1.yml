@@ -1,0 +1,19 @@
+name: Evento B1 de Turbiedad del sistema de drenaje
+description: >-
+  Si se activa el evento gatillador. Se detecta material particulado a
+  la salida del sistema de drenaje.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+inputs:
+  - "@ef-mvp/m1/triggers/turbiedad"
+
+script: common-scripts/copy-events.js

@@ -1,0 +1,20 @@
+name: Superación por sector del primer umbral de piezómetros
+
+scope: group
+groups:
+  parents:
+    - name: Sectores
+      canonical_name: sectores
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/t1"
+
+meta:
+  vars:
+    type: array
+    items: {type: object}
+  heads:
+    type: array
+    items: {type: object}
+
+script: common-scripts/concentrate.js

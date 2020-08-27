@@ -1,0 +1,152 @@
+version:                   "3.4"
+
+x-logging:                 &logging
+  driver:                  "json-file"
+  options:
+    max-size:              "10m"
+    max-file:              "3"
+
+x-service:                 &service
+  restart:                 on-failure
+  logging:                 *logging
+
+x-service-with-env:        &service-with-env
+  <<:                      *service
+  env_file:
+    - .env
+    - .secrets
+
+services:
+  storage:
+    <<:                    *service-with-env
+    image:                 minio/minio:RELEASE.2019-04-23T23-50-36Z
+    command:               ["server", "/data"]
+    volumes:
+      - minio:/data
+
+  postgis:
+    <<:                    *service-with-env
+    image:                 mdillon/postgis:10
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
+  django:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/backend:v1-0-6
+    healthcheck:
+      test: nc -z localhost 8000 || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 120
+    volumes:
+      - /home/ec2-user/stack/setup-package:/initial-setup
+    depends_on:
+      - postgis
+      - elasticsearch
+
+  django-amqpconsumer:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/backend:v1-0-6
+    entrypoint:            ["/entrypoint.amqpconsumer.sh"]
+    command:               ["./manage.py", "runconsumer"]
+    depends_on:
+      - postgis
+      - elasticsearch
+      - amqpbroker
+
+  django-static:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/backend/static-nginx:v1-0-6
+
+  cron:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/config/cron:v1-0-0
+    depends_on:
+      - django
+
+  frontend:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/frontend:v1-0-0
+
+  e700-frontend:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/e700-frontend:v1-0-3
+
+  proxy:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/config/secure-proxy:v1-0-0
+    volumes:
+      - /home/ec2-user/stack/nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - /home/ec2-user/stack/nginx/fullchain.pem:/etc/ssl/fullchain.pem
+      - /home/ec2-user/stack/nginx/privkey.pem:/etc/ssl/privkey.pem
+    depends_on:
+      - frontend
+      - e700-frontend
+      - beats-consumer
+      - django
+      - django-static
+    ports:
+      - 80:80
+      - 443:443
+
+  amqpbroker:
+    <<:                    *service
+    image:                 rabbitmq:3.7.8-management-alpine
+
+  elasticsearch:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/config/elasticsearch:v1-0-0
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+
+  kibana:
+    <<:                    *service
+    image:                 registry.gitlab.com/inria-chile/tranque/config/kibana:v1-0-0
+    depends_on:
+      - elasticsearch
+
+  logstash:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/config/logstash:v1-0-0
+    depends_on:
+      - elasticsearch
+      - amqpbroker
+      - redis
+
+  enrichment:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/enrichment:v1-0-2
+    depends_on:
+      - postgis
+      - elasticsearch
+      - amqpbroker
+
+  stats:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/stats/r-base:v1-0-1
+
+  redis:
+    <<:                    *service
+    image:                 redis:4-alpine
+    volumes:
+      - redis:/data
+
+  beats-consumer:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/beats-consumer:v1-0-0
+    depends_on:
+      - redis
+
+  fake-beats:
+    <<:                    *service-with-env
+    image:                 registry.gitlab.com/inria-chile/tranque/fake-beats:dev
+    volumes:
+      - /home/ec2-user/stack/behaviours:/app-assets
+    depends_on:
+      - redis
+
+volumes:
+  minio:
+  postgres:
+  elasticsearch:
+  redis:

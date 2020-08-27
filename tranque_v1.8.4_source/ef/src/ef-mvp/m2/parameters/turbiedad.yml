@@ -1,0 +1,23 @@
+name: Turbiedad del agua en el sistema de drenaje
+description: Turbiedad del agua en cada sistema de drenaje y en piscina de recuperación
+range_gte: 0
+type: raw
+
+thresholds:
+  # to be defined
+  - upper: ~
+
+scope: spread
+groups:
+  items:
+    - name: Turbidímetros
+      canonical_name: turbidimetros
+
+unit:
+  id: ntu
+  name: Unidad nefelométrica de turbidez
+  abbreviation: NTU
+  si: false
+
+frequencies:
+  - minutes: 60  # 1 hora

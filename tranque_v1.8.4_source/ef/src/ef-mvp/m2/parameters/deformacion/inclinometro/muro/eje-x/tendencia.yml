@@ -1,0 +1,22 @@
+name: Tendencia desfavorable en Eje X
+description: La tendencia desfavorable en eje X para medición en inclinometro del muro
+
+unit:
+  id: tendencia
+  name: Coefficient slope de la Regression Lineal intersection
+  abbreviation: slope
+  si: true
+
+scope: spread
+groups:
+  parents:
+    - canonical_name: inclinometros
+      name: "Inclinometros"
+
+thresholds:
+  - upper: ~  # CriticalTime Debe ser definido en configuracion sitio especifico
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/inclinometro/muro/eje-x/deformacion-inclinometro-z"
+
+script: ef-mvp/m2/parameters/deformacion/inclinometro/tendencia.js

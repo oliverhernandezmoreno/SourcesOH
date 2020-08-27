@@ -1,0 +1,28 @@
+name: Presión de poros evento C2-1
+description: >-
+  Si un instrumento validado manualmente supera el primer umbral
+  (valor irregular) y al menos un instrumento en el mismo sector, pero
+  en distinta ubicación supera el primer (independiente si es validado
+  manualmente de forma posterior) o segundo umbral. Se informa por
+  sector, por instrumento.
+
+choices:
+  - choice: "Sí"
+    value:
+      choiceValue: 1
+      gt: 0
+  - choice: "No"
+    value:
+      choiceValue: 0
+      lte: 0
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros/prop"
+
+script: ./from-prop.js

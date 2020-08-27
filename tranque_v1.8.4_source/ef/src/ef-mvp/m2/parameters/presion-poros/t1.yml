@@ -1,0 +1,23 @@
+name: Superación del primer umbral de un piezómetro
+
+scope: spread
+groups:
+  items:
+    - name: Piezómetros
+      canonical_name: piezometros
+
+inputs:
+  - "@ef-mvp/m2/parameters/presion-poros"
+  - "@ef-mvp/m2/parameters/presion-poros/validado"
+  - "@ef-mvp/m2/parameters/presion-poros/redundancia"
+
+meta:
+  value:
+    type: number
+  threshold:
+    type: number
+  valid:
+    type: boolean
+  redundant:
+    type: array
+    items: {type: string}

@@ -1,0 +1,20 @@
+export {default as DefaultTemporalView} from './DefaultTemporalView/DefaultTemporalView';
+export {default as PiezometricHead} from './PiezometricHead';
+export {default as TopographicProfiles} from './TopographicProfiles';
+export {default as TopographicProfilesAndHead} from './TopographicProfilesAndHead';
+export {default as PiezometerDetail} from './PiezometerDetail';
+export {default as Caudal} from './DrainageSystem/Caudal';
+export {default as Turbidity} from './DrainageSystem/Turbidity';
+export {default as FlowmeterDetail} from './DrainageSystem/FlowmeterDetail';
+export {default as TurbidimeterDetail} from './DrainageSystem/TurbidimeterDetail';
+export {default as Tonelaje} from './Tonelaje';
+export {default as OverflowPotential} from './OverflowPotential/OverflowPotential';
+export {default as ExternalIntegrity} from './ExternalIntegrity';
+export {default as Landfill} from './Landfill/Landfill';
+export {default as RainIntensity} from './RainIntensity';
+export {default as FinesPercentage} from './GranulometryAndDensity/FinesPercentage';
+export {default as WallDensity} from './GranulometryAndDensity/WallDensity';
+export {default as GranulometricCurve} from './GranulometryAndDensity/GranulometricCurve';
+export {default as DocumentsView} from './Documents/DocumentsView';
+export {default as Accelerographs} from './Accelerographs';
+

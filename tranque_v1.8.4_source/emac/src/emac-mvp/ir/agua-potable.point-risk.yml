@@ -1,0 +1,13 @@
+name: Indicador de riesgo -- Agua Potable
+
+scope: spread
+groups:
+  items:
+    - name: Punto de monitoreo de aguas
+      canonical_name: monitoreo-aguas
+
+inputs:
+  - "@emac-mvp/ir/agua-potable.exclusions"
+  - "@emac-mvp/normalized-variables/agua-potable/*"
+
+script: ./point-risk.js

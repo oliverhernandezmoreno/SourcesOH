@@ -1,0 +1,164 @@
+version: "3.4"
+
+x-service: &service
+  logging:
+    driver: json-file
+    options:
+      max-size: "10m"
+      max-file: "5"
+  restart: on-failure
+
+x-service-with-env: &service-with-env
+  <<: *service
+  env_file:
+    - environment.plain
+    - environment.secrets
+
+
+services:
+  # core application components
+
+  backend:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/backend:dev
+    healthcheck:
+      test: nc -z localhost 8000 || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 120
+    depends_on:
+      - postgis
+
+  amqpconsumer:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/backend:dev
+    entrypoint: ["/entrypoint.amqpconsumer.sh"]
+    command: ["./manage.py", "runconsumer"]
+    depends_on:
+      - amqpbroker
+      - postgis
+
+  alertsengine-runner:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/backend:dev
+    entrypoint: ["/entrypoint.amqpconsumer.sh"]
+    command: ["./manage.py", "alertsengine_runner"]
+    depends_on:
+      - amqpbroker
+      - postgis
+
+  enrichment:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/enrichment:dev
+    depends_on:
+      - amqpbroker
+      - postgis
+
+  stats:
+    <<: *service
+    image: registry.gitlab.com/inria-chile/tranque/stats/r-base:dev
+
+  cron:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/config/cron:dev
+
+  logstash:
+    <<: *service-with-env
+    # dev tag is broken and can't be fixed (somehow); use master instead
+    image: registry.gitlab.com/inria-chile/tranque/config/logstash:master
+    depends_on:
+      - amqpbroker
+      - elasticsearch
+      - redis
+
+  beats-consumer:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/beats-consumer:dev
+    depends_on:
+      - redis
+
+  archivist:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/archivist:dev
+    environment:
+      NAMESPACE: dev-stack
+    depends_on:
+      - postgis
+      - elasticsearch
+
+  fake-beats:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/fake-beats:dev
+
+  # core supporting services
+
+  postgis:
+    <<: *service-with-env
+    image: mdillon/postgis:10
+    volumes:
+      - postgis:/var/lib/postgresql/data
+
+  elasticsearch:
+    <<: *service-with-env
+    image: registry.gitlab.com/inria-chile/tranque/config/elasticsearch:dev
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+
+  amqpbroker:
+    <<: *service
+    image: registry.gitlab.com/inria-chile/tranque/config/rabbitmq:dev
+    ports:
+      - 5672:5672
+    volumes:
+      - ./rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./rabbitmq/definitions.json.secrets:/etc/rabbitmq/definitions.json
+
+  redis:
+    <<: *service
+    image: redis:6-alpine
+    volumes:
+      - redis:/data
+
+  # frontends
+
+  frontend:
+    <<: *service
+    image: registry.gitlab.com/inria-chile/tranque/e700-frontend:dev
+
+  django-static:
+    <<: *service
+    image: registry.gitlab.com/inria-chile/tranque/backend/static-nginx:dev
+
+  kibana:
+    <<: *service
+    image: registry.gitlab.com/inria-chile/tranque/config/kibana:dev
+    depends_on:
+      - elasticsearch
+
+  proxy:
+    <<: *service
+    image: registry.gitlab.com/inria-chile/tranque/config/secure-proxy:dev
+    entrypoint: ["/entrypoint/subst.sh"]
+    command: ["nginx", "-g", "daemon off;"]
+    volumes:
+      - ./proxy:/entrypoint
+    depends_on:
+      - backend
+      - beats-consumer
+      - frontend
+      - django-static
+    ports:
+      - 80:80
+      - 443:443
+
+volumes:
+  postgis:
+  elasticsearch:
+  redis:

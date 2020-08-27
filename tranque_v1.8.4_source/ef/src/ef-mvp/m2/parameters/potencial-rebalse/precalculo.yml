@@ -1,0 +1,10 @@
+name: Precálculo del potencial de rebalse
+description: >-
+  Cálculo del potencial de rebalse en base a pronóstico de lluvia
+  únicamente. Esta variable no considera mediciones reales de lluvia.
+
+inputs:
+  - "@ef-mvp/m2/parameters/potencial-rebalse/precalculo/ingreso-pronosticado-total"
+  - "@ef-mvp/m2/parameters/variables/volumen-disponible"
+
+script: ../potencial-rebalse.js

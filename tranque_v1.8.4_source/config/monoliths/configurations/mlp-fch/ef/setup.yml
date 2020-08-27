@@ -1,0 +1,581 @@
+# declaración de grupos
+groups:
+  # importaciones desde EF
+  - import_from: ef
+    canonical_name: "{x}"
+    with_x:
+      - sectores
+      - estribos
+      - arena-ciclonada
+      - perfil-transversal
+      - drenes
+      - piezometros
+      - ubicacion-aguas-abajo
+      - ubicacion-eje-central
+      - caudalimetros
+      - turbidimetros
+      - acelerografos
+      - roca
+      - suelo-fundacion
+      - coronamiento
+
+  # sectores de muro
+  - name: "{s}"
+    parents:
+      - sectores
+      - arena-ciclonada
+    canonical_name: "sector-{s}"
+    with_s: ["Canelo", "Pupio", "Tilama"]
+
+  # sectores de muro
+  - name: "{s}"
+    parents:
+      - sectores
+      - arena-ciclonada
+      - estribos
+    canonical_name: "sector-{s}"
+    with_s: ["Quebrada", "Mirador"]
+
+  # drenes
+  - name: Dren basal
+    canonical_name: dren-basal
+    parents:
+      - drenes
+      - sector-Quebrada
+      - sector-Mirador
+      - sector-Canelo
+      - sector-Pupio
+      - sector-Tilama
+# instrumentación
+sources:
+  # perfiles
+  # sector-Canelo
+  - hardware_id: P-900
+    name: Perfil transversal P-900
+    groups:
+      - perfil-transversal
+      - sector-Canelo
+
+  - hardware_id: P-950
+    name: Perfil transversal P-950
+    groups:
+      - perfil-transversal
+      - sector-Canelo
+
+  - hardware_id: P-1000
+    name: Perfil transversal P-1000
+    groups:
+      - perfil-transversal
+      - sector-Canelo
+
+  # sector-Quebrada
+  - hardware_id: QC-1
+    name: Perfil transversal QC-1
+    groups:
+      - perfil-transversal
+      - sector-Quebrada
+  
+  - hardware_id: QC-3
+    name: Perfil transversal QC-3
+    groups:
+      - perfil-transversal
+      - sector-Quebrada
+  
+  - hardware_id: QC-6
+    name: Perfil transversal QC-6
+    groups:
+      - perfil-transversal
+      - sector-Quebrada
+
+  # sector-Pupio
+  - hardware_id: P-750
+    name: Perfil transversal P-750
+    groups:
+      - perfil-transversal
+      - sector-Pupio
+
+  - hardware_id: P-800
+    name: Perfil transversal P-800
+    groups:
+      - perfil-transversal
+      - sector-Pupio
+
+  - hardware_id: P-850
+    name: Perfil transversal P-850
+    groups:
+      - perfil-transversal
+      - sector-Pupio
+
+  # sector-Tilama
+  - hardware_id: P-600
+    name: Perfil transversal P-600
+    groups:
+      - perfil-transversal
+      - sector-Tilama
+
+  - hardware_id: P-650
+    name: Perfil transversal P-650
+    groups:
+      - perfil-transversal
+      - sector-Tilama
+
+  - hardware_id: P-700
+    name: Perfil transversal P-700
+    groups:
+      - perfil-transversal
+      - sector-Tilama
+
+  # Sector-mirador
+  - hardware_id: P-450
+    name: Perfil transversal P-450
+    groups:
+      - perfil-transversal
+      - sector-Mirador
+
+  - hardware_id: P-500
+    name: Perfil transversal P-500
+    groups:
+      - perfil-transversal
+      - sector-Mirador
+
+  - hardware_id: P-550
+    name: Perfil transversal P-550
+    groups:
+      - perfil-transversal
+      - sector-Mirador
+
+  # piezómetros
+  - hardware_id: "4320PZ004"
+    name: PZ004
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - sector-Tilama
+    coords:
+      x: 306798
+      y: 6462904
+
+  - hardware_id: "4320PZ007"
+    name: "PZ007"
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - sector-Pupio
+      - dren-basal
+    coords:
+      x: 306995
+      y: 6462975
+
+  - hardware_id: "4320PZ008"
+    name: "PZ008"
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - sector-Pupio
+      - dren-basal
+    coords:
+      x: 306976
+      y: 6463033
+
+  - hardware_id: "4320PZ009"
+    name: "PZ009"
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - sector-Canelo
+    coords:
+      x: 307136
+      y: 6463081
+
+  - hardware_id: "4320PZ010"
+    name: "PZ010"
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - sector-Pupio
+      - dren-basal
+    coords:
+      x: 307136
+      y: 6463081
+
+  - hardware_id: "4320PZ013"
+    name: "PZ013"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - sector-Mirador
+    coords:
+      x: 306618
+      y: 6462929
+
+  - hardware_id: "4320PZ017"
+    name: "PZ017"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - dren-basal
+    coords:
+      x: 306281
+      y: 6463291
+
+  - hardware_id: "4320PZ020"
+    name: "PZ020"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - sector-Canelo
+    coords:
+      x: 306451
+      y: 6463427
+
+  - hardware_id: "4320PZ022"
+    name: "PZ022"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+    coords:
+      x: 306341
+      y: 6463502
+
+  - hardware_id: "4320PZ023"
+    name: "PZ023"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+    coords:
+      x: 306331
+      y: 6463600
+
+  - hardware_id: "4320PZD1{suffix}"
+    name: "PZD1{suffix}"
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - dren-basal
+      - sector-Mirador
+    coords:
+      x: 306788
+      y: 6462662
+    with_suffix: ["INF","SUP"]
+
+  - hardware_id: "4320PZD2{suffix}"
+    name: "PZD2{suffix}"
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - dren-basal
+      - sector-Pupio
+    coords:
+      x: 306877
+      y: 6463089
+    with_suffix: ["SUP"]
+
+  - hardware_id: "4320PZD3{suffix}"
+    name: "PZD3{suffix}"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - dren-basal
+      - sector-Pupio
+    coords:
+      x: 306606
+      y: 6463236
+    with_suffix: ["INF","SUP"]
+
+  - hardware_id: "4320PZD7{suffix}"
+    name: "PZD7{suffix}"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - dren-basal
+      - sector-Pupio
+    coords:
+      x: 306392
+      y: 6463497
+    with_suffix: ["INF"]
+
+  - hardware_id: 4320PZDE004
+    name: PZDE004
+    groups:
+      - piezometros
+      - ubicacion-eje-central
+      - sector-Pupio
+      - dren-basal
+    coords:
+      x: 306766
+      y: 6463124
+
+  - hardware_id: 4320PZDE005
+    name: PZDE005
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - sector-Tilama
+      - dren-basal
+    coords:
+      x: 306617
+      y: 6463150
+
+  - hardware_id: 4320PZDE007
+    name: PZDE007
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - sector-Pupio
+      - dren-basal
+    coords:
+      x: 306353
+      y: 6463366
+  - hardware_id: 4320PZDE008
+    name: PZDE008
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - dren-basal
+    coords:
+      x: 306374
+      y: 6463598
+
+  - hardware_id: "4320PZ015"
+    name: "PZD015"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - dren-basal
+      - sector-Quebrada
+    coords:
+      x: 306913
+      y: 6463461
+
+  - hardware_id: "4320PZ021"
+    name: "PZD021"
+    groups:
+      - piezometros
+      - ubicacion-aguas-abajo
+      - dren-basal
+      - sector-Canelo
+    coords:
+      x: 306501
+      y: 6463457
+
+  # turbidímetros
+  - hardware_id: 4350AI3560
+    name: AI3560
+    canonical_name: turbidimetro-AI3560
+    type: online
+    groups:
+      - turbidimetros
+      - dren-basal
+
+  - hardware_id: 4350AI3570
+    name: AI3570
+    canonical_name: turbidimetro-AI3570
+    type: online
+    groups:
+      - turbidimetros
+      - dren-basal
+  
+  # caudalimetro
+  - hardware_id: Caudalimetro-01
+    name: Caudalimetro-01
+    groups:
+      - caudalimetros
+      - dren-basal
+
+  - hardware_id: Acelerografo-01
+    name: Acelerografo-01
+    groups:
+      - acelerografos
+      - coronamiento
+
+  - hardware_id: Acelerografo-02
+    name: Acelerografo-02
+    groups:
+      - acelerografos
+      - suelo-fundacion
+
+  - hardware_id: Acelerografo-03
+    name: Acelerografo-03
+    groups:
+      - acelerografos
+      - roca
+parameters: []
+# ajustes de series temporales
+timeseries:
+  - canonical_name: "{target}.g-sector-{s}.ef-mvp.m2.parameters.discrete.resistencia-material"
+    active: false # deshabilita variables de calculo
+    with_s: ["Quebrada", "Canelo", "Pupio", "Tilama", "Mirador"]
+
+  - canonical_name: "{target}.s-4320PZ004.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 730.35
+        kind: cota-instalacion
+      - lower: 750.93
+        kind: cota-terreno
+      - upper: 798.1
+      - upper: 830.4
+
+  - canonical_name: "{target}.s-4320PZ007.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 735.01
+        kind: cota-instalacion
+      - lower: 735.01
+        kind: cota-terreno
+      - upper: 764
+      - upper: 802.4
+
+  - canonical_name: "{target}.s-4320PZ008.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 733.53
+        kind: cota-instalacion
+      - lower: 733.53
+        kind: cota-terreno
+      - upper: 746.6
+      - upper: 785.6
+
+  - canonical_name: "{target}.s-4320PZ009.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 740.23
+        kind: cota-instalacion
+      - lower: 778.43
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ010.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 731.52
+        kind: cota-instalacion
+      - lower: 731.52
+        kind: cota-terreno
+      - upper: 735.6
+      - upper: 772.9
+
+  - canonical_name: "{target}.s-4320PZ013.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 728.16
+        kind: cota-instalacion
+      - lower: 773.56
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ017.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 759
+        kind: cota-instalacion
+      - lower: 751.19
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ020.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 706.38
+        kind: cota-instalacion
+      - lower: 712.26
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ022.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 704.79
+        kind: cota-instalacion
+      - lower: 707
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ023.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 721.94
+        kind: cota-instalacion
+      - lower: 703.67
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZD1INF.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 741.9
+        kind: cota-instalacion
+      - lower: 843.03
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZD1SUP.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 791.9
+        kind: cota-instalacion
+      - lower: 843.04
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZD2SUP.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 735.89
+        kind: cota-instalacion
+      - lower: 730.52
+        kind: cota-terreno
+      - upper: 743.01
+      - upper: 774.76
+
+  - canonical_name: "{target}.s-4320PZD3INF.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 720.53
+        kind: cota-instalacion
+      - lower: 727.93
+        kind: cota-terreno
+      - upper: 730.37
+      - upper: 740.69
+
+  - canonical_name: "{target}.s-4320PZD3SUP.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 723.94
+        kind: cota-instalacion
+      - lower: 727.93
+        kind: cota-terreno
+      - upper: 730.37
+      - upper: 740.69
+
+  - canonical_name: "{target}.s-4320PZD7INF.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 719.59
+        kind: cota-instalacion
+      - lower: 719.78
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZDE004.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 727.51
+        kind: cota-instalacion
+      - lower: 728.03
+        kind: cota-terreno
+      - upper: 739.9
+      - upper: 761.3
+
+  - canonical_name: "{target}.s-4320PZDE005.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 722.86
+        kind: cota-instalacion
+      - lower: 724.31
+        kind: cota-terreno
+      - upper: 759
+      - upper: 767.9
+
+  - canonical_name: "{target}.s-4320PZDE007.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 724.07
+        kind: cota-instalacion
+      - lower: 722.67
+        kind: cota-terreno
+      - upper: 726
+      - upper: 726.7
+
+  - canonical_name: "{target}.s-4320PZ015.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 842.21
+        kind: cota-instalacion
+      - lower: 873.87
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZ021.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 732
+        kind: cota-instalacion
+      - lower: 720.81
+        kind: cota-terreno
+
+  - canonical_name: "{target}.s-4320PZDE008.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - lower: 712.07
+        kind: cota-instalacion
+      - lower: 712.53
+        kind: cota-terreno

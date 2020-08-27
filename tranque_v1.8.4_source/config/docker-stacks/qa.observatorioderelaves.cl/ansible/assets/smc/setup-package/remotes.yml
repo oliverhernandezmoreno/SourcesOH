@@ -1,0 +1,22 @@
+remotes:
+  - namespace: global-namespace
+    exchange: federated.global-namespace
+    bucket: smc
+
+  - namespace: qa-sml-1
+    exchange: federated.qa-sml-1
+    bucket: sml-1
+    targets:
+      - el-mauro
+
+  - namespace: qa-sml-2
+    exchange: federated.qa-sml-2
+    bucket: sml-2
+    targets:
+      - ovejeria
+
+  - namespace: qa-sml-3
+    exchange: federated.qa-sml-3
+    bucket: sml-3
+    targets:
+      - las-tortolas

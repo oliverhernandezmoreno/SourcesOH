@@ -1,0 +1,47 @@
+---
+- name:               54-mount-nfs-prometheus
+  hosts:              role_docker-worker-monitor
+  vars:
+    server_user:      ec2-user
+  remote_user:        "{{ server_user }}"
+  become:             yes
+  become_user:        root
+  tasks:
+  - name:             create nfs directory
+    file:
+      path:           /home/{{ server_user }}/prometheus-data
+      state:          directory
+      mode:           0755
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+  - name:             install NFS common
+    package:
+      name:           nfs-utils
+      state:          present
+  - name:             get current AZ from AWS
+    uri:
+      url:            http://169.254.169.254/latest/meta-data/placement/availability-zone
+      return_content: yes
+    register:         aws_current_az
+  - name:             mount NFS directory
+    mount:
+      name:           /home/{{ server_user }}/prometheus-data
+      src:            "{{ aws_current_az.content }}.fs-0b23bc72.efs.us-east-2.amazonaws.com:/"
+      fstype:         nfs4
+      opts:           nfsvers=4.1,defaults
+      state:          mounted
+  - name:             set mounted folder permissions
+    file:
+      path:           /home/{{ server_user }}/prometheus-data
+      state:          directory
+      mode:           0755
+      owner:          65534
+      group:          65534
+  - name:             copy prometheus.yml
+    copy:
+      src:            ../assets/configs/prometheus/prometheus.yml
+      dest:           "/home/{{ server_user }}/prometheus.yml"
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+      mode:           u+rw-x,g+r-wx,o+r-wx
+    register:         copy_prometheus_yml_output

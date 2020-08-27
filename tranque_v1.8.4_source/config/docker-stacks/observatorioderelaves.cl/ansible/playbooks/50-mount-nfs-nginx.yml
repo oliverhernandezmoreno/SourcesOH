@@ -1,0 +1,39 @@
+---
+- name:               50-mount-nfs-nginx
+  hosts:              role_docker-leader:role_docker-manager:role_docker-worker-broker
+  vars:
+    server_user:      ec2-user
+  remote_user:        "{{ server_user }}"
+  become:             yes
+  become_user:        root
+  tasks:
+  - name:             create nfs directory
+    file:
+      path:           /home/{{ server_user }}/nginx-certs
+      state:          directory
+      mode:           0755
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"
+  - name:             install NFS common
+    package:
+      name:           nfs-utils
+      state:          present
+  - name:             get current AZ from AWS
+    uri:
+      url:            http://169.254.169.254/latest/meta-data/placement/availability-zone
+      return_content: yes
+    register:         aws_current_az
+  - name:             mount NFS directory
+    mount:
+      name:           /home/{{ server_user }}/nginx-certs
+      src:            "{{ aws_current_az.content }}.fs-bfae1dc6.efs.us-east-2.amazonaws.com:/"
+      fstype:         nfs4
+      opts:           nfsvers=4.1,defaults
+      state:          mounted
+  - name:             set mounted folder permissions
+    file:
+      path:           /home/{{ server_user }}/nginx-certs
+      state:          directory
+      mode:           0755
+      owner:          "{{ server_user }}"
+      group:          "{{ server_user }}"

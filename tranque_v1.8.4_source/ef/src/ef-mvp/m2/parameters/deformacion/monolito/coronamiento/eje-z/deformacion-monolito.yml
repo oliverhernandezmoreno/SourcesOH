@@ -1,0 +1,12 @@
+name: Deformación de monolito en el eje Z en coronamiento de muro
+
+scope: spread
+groups:
+  items:
+    - canonical_name: coronamiento
+      name: "Coronamiento de muro"
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion-monolito-eje-z"
+
+script: common-scripts/copy-events.js

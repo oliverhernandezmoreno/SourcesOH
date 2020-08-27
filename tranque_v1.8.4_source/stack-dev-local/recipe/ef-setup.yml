@@ -1,0 +1,977 @@
+groups:
+  # METAGROUPS
+  - import_from: ef
+    canonical_name: sectores
+
+  - import_from: ef
+    canonical_name: validacion-piezometros
+
+  - import_from: ef
+    canonical_name: acelerografos
+
+  - import_from: ef
+    canonical_name: roca
+
+  - import_from: ef
+    canonical_name: instrumentos-nivel-freatico
+
+  # Piezómetros
+  - import_from: ef
+    canonical_name: piezometros
+
+  - import_from: ef
+    canonical_name: ubicacion-aguas-abajo
+
+  - import_from: ef
+    canonical_name: ubicacion-eje-central
+
+  # Monolitos
+  - import_from: ef
+    canonical_name: prismas-monolitos
+
+  - import_from: ef
+    canonical_name: coronamiento
+
+  - import_from: ef
+    canonical_name: talud
+
+  # Inclinómetros
+  - import_from: ef
+    canonical_name: inclinometros
+
+  - import_from: ef
+    canonical_name: muro
+
+  - import_from: ef
+    canonical_name: suelo-fundacion
+
+  # Sistemas de drenaje
+  - import_from: ef
+    canonical_name: drenes
+
+  # Perfiles topográficos
+  - import_from: ef
+    canonical_name: perfil-transversal
+
+  # Turbidímetros
+  - import_from: ef
+    canonical_name: turbidimetros
+
+  - import_from: ef
+    canonical_name: caudalimetros
+
+  - name: Inclinómetro 01
+    canonical_name: inclinometro-01
+    parents:
+      - inclinometros
+      - sector-C
+
+  - name: Inclinómetro 02
+    canonical_name: inclinometro-02
+    parents:
+      - inclinometros
+      - sector-H
+
+  - name: "Grupo de validación de piezómetros 1 y 2"
+    canonical_name: pzs-1-2
+    parents:
+      - validacion-piezometros
+
+  - name: "Grupo de validación de piezómetros 3 y 4"
+    canonical_name: pzs-3-4
+    parents:
+      - validacion-piezometros
+
+  - name: "Grupo de validación de piezómetros 5 y 6"
+    canonical_name: pzs-5-6
+    parents:
+      - validacion-piezometros
+
+  - name: "Sector {s}"
+    canonical_name: "sector-{s}"
+    meta:
+      type:
+        value: arena-cicloneada
+        name: Tipo de muro
+    parents:
+      - sectores
+    with_s: ["A", "B", "C", "D", "E"]
+
+  - name: "Sector {s}"
+    canonical_name: "sector-{s}"
+    meta:
+      type:
+        value: emprestito
+        name: Tipo de muro
+    parents:
+      - sectores
+    with_s: ["F", "G", "H", "I"]
+
+  - name: "Inclinometro 1"
+    canonical_name: "inclinometro-1"
+    parents:
+      - inclinometros
+
+  - name: "Drenaje 1"
+    canonical_name: "drenaje-1"
+    parents:
+      - drenes
+      - sector-A
+      - sector-B
+      - sector-B
+      - sector-D
+      - sector-E
+
+  - name: "Drenaje 2"
+    canonical_name: "drenaje-2"
+    parents:
+      - drenes
+      - sector-F
+      - sector-G
+      - sector-H
+      - sector-I
+
+  - name: Clino-extensómetro-01
+    canonical_name: clino-extensometro-01
+    parents:
+      - sector-C
+      - inclinometros
+    meta:
+      initial-x:
+        value: 685
+        name: Coordenada inicial X
+      initial-y:
+        value: 512
+        name: Coordenada inicial Y
+
+  - name: "Inclinometro {i}"
+    canonical_name: "inclinometro-{i}"
+    parents:
+      - inclinometros
+      - "sector-a"
+    with_i: [1, 2]
+
+sources:
+  # INSTRUMENTS
+  - hardware_id: "pz-{i}"
+    canonical_name: "pz-{i}"
+    name: "Piezometro #{i}"
+    groups:
+      - piezometros
+      - sector-C
+      - ubicacion-aguas-abajo
+      - pzs-1-2
+    with_i: ["1", "2"]
+
+  - hardware_id: "pz-{i}"
+    canonical_name: "pz-{i}"
+    name: "Piezometro #{i}"
+    groups:
+      - piezometros
+      - sector-C
+      - ubicacion-eje-central
+      - pzs-3-4
+    with_i: ["3", "4"]
+
+  - hardware_id: "pz-{i}"
+    canonical_name: "pz-{i}"
+    name: "Piezometro #{i}"
+    groups:
+      - piezometros
+      - sector-C
+      - ubicacion-aguas-abajo
+      - pzs-5-6
+    with_i: ["5", "6"]
+
+  - hardware_id: "pz-cg-1"
+    canonical_name: "pz-cg-1"
+    name: "Piezometro CG1"
+    groups:
+      - piezometros
+      - sector-C
+
+  - hardware_id: "dr-{i}"
+    canonical_name: "dr-{i}"
+    name: "Drenaje #{i}"
+    groups:
+      - drenes
+    with_i:
+      range:
+        start: 1
+        stop: 3
+
+  - hardware_id: "cd-1"
+    canonical_name: "cd-1"
+    name: "Caudalímetro 1"
+    groups:
+      - caudalimetros
+
+  - hardware_id: "tb-1"
+    canonical_name: "td-1"
+    name: "Turbidímetro 1"
+    groups:
+      - turbidimetros
+      - drenaje-1
+
+  # Perfiles topográficos
+  - hardware_id: "perfil-{s}{n}"
+    name: "Perfil {s}{n}"
+    groups:
+      - perfil-transversal
+      - "sector-{s}"
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  # Monolitos
+  - hardware_id: monolito-01
+    name: Monolito 01
+    groups:
+      - prismas-monolitos
+      - coronamiento
+      - sector-C
+    coords:
+      x: 685
+      y: 600
+
+  - hardware_id: monolito-02
+    name: Monolito 02
+    groups:
+      - prismas-monolitos
+      - talud
+      - sector-C
+    coords:
+      x: 685
+      y: 405
+
+  - hardware_id: monolito-03
+    name: Monolito 03
+    groups:
+      - prismas-monolitos
+      - coronamiento
+      - sector-H
+    coords:
+      x: 2215
+      y: 600
+
+  - hardware_id: monolito-04
+    name: Monolito 04
+    groups:
+      - prismas-monolitos
+      - talud
+      - sector-H
+    coords:
+      x: 2215
+      y: 405
+
+  # Inclinómetros
+  - hardware_id: iz-01-100
+    name: Punto de inclinómetro 01 cota 100
+    groups:
+      - inclinometro-01
+      - suelo-fundacion
+      - sector-C
+    coords:
+      x: 685
+      y: 512
+
+  - hardware_id: "iz-01-{n}"
+    name: "Punto de inclinómetro 01 cota {n}"
+    groups:
+      - inclinometro-01
+      - muro
+      - sector-C
+    coords:
+      x: 685
+      y: 512
+    with_n:
+      range:
+        start: 110
+        stop: 200
+        step: 10
+
+  - hardware_id: iz-02-100
+    name: Punto de inclinómetro 02 cota 100
+    groups:
+      - inclinometro-02
+      - suelo-fundacion
+      - sector-H
+    coords:
+      x: 2215
+      y: 512
+
+  - hardware_id: "iz-02-{n}"
+    name: "Punto de inclinómetro 02 cota {n}"
+    groups:
+      - inclinometro-02
+      - muro
+      - sector-H
+    coords:
+      x: 2215
+      y: 512
+    with_n:
+      range:
+        start: 110
+        stop: 200
+        step: 10
+
+  # Turbidímetros
+  - hardware_id: turbidimetro-01
+    name: Turbidímetro 01
+    groups:
+      - turbidimetros
+      - drenaje-1
+    coords:
+      x: 678
+      y: 150
+
+  - hardware_id: "acelerografo-1"
+    name: "Acelerografo 1"
+    canonical_name: "acelerografo-1"
+    groups:
+      - "roca"
+      - "acelerografos"
+
+  - hardware_id: "acelerografo-2"
+    name: "Acelerografo 2"
+    canonical_name: "acelerografo-2"
+    groups:
+      - "suelo-fundacion"
+      - "acelerografos"
+
+  - hardware_id: "acelerografo-{i}"
+    name: "Acelerografo {i}"
+    canonical_name: "acelerografo-{i}"
+    groups:
+      - "coronamiento"
+      - "acelerografos"
+    with_i:
+      range:
+        start: 3
+        stop: 5
+
+  - hardware_id: "iz-{i}"
+    canonical_name: "iz-{i}"
+    name: "Inclinometro Z #{i}"
+    groups:
+      - inclinometro-1
+      - suelo-fundacion
+    with_i:
+      range:
+        start: 1
+        stop: 3
+
+  - hardware_id: "ac-{i}"
+    canonical_name: "ac-{i}"
+    name: "Acelerografo #{i}"
+    groups:
+      - acelerografos
+    with_i:
+      range:
+        start: 1
+        stop: 5
+
+  - hardware_id: "d-ic-{i}"
+    canonical_name: "d-ic-{i}"
+    name: "Inclinometro #{i}"
+    groups:
+      - inclinometros
+    with_i:
+      range:
+        start: 1
+        stop: 1
+
+  - hardware_id: "monolito-{i}"
+    name: "Monolito {i}"
+    canonical_name: "monolito-{i}"
+    groups:
+      - prismas-monolitos
+      - talud
+    with_i:
+      range:
+        start: 2
+        stop: 5
+        step: 2
+
+  - hardware_id: "iz-01-{z}"
+    name: "Clino-extensómetro-01 Z {z}"
+    groups:
+      - muro
+    meta:
+      elevation:
+        value: "{z}"
+        name: Elevación
+    with_z:
+      range:
+        start: 110
+        stop: 210
+        step: 10
+
+  - hardware_id: "inc-01-z-{elevacion}"
+    canonical_name: "inc-01-z-{elevacion}"
+    name: "Inclinometro 01 Z-{elevacion}"
+    groups:
+      - "inclinometro-1"
+      - "suelo-fundacion"
+    with_elevacion:
+      range:
+        start: 1
+        stop: 2
+
+  - hardware_id: "inc-01-z-{elevacion}"
+    canonical_name: "inc-01-z-{elevacion}"
+    name: "Inclinometro 01 Z-{elevacion}"
+    groups:
+      - "inclinometro-1"
+      - "muro"
+    with_elevacion:
+      range:
+        start: 2
+        stop: 12
+
+  - hardware_id: "inc-02-z-{elevacion}"
+    canonical_name: "inc-02-z-{elevacion}"
+    name: "Inclinometro 02 Z-{elevacion}"
+    groups:
+      - "inclinometro-2"
+      - "suelo-fundacion"
+    with_elevacion:
+      range:
+        start: 1
+        stop: 2
+
+  - hardware_id: "inc-02-z-{elevacion}"
+    canonical_name: "inc-02-z-{elevacion}"
+    name: "Inclinometro 02 Z-{elevacion}"
+    groups:
+      - "inclinometro-2"
+      - "muro"
+    with_elevacion:
+      range:
+        start: 2
+        stop: 12
+
+  - hardware_id: "st-{s}"
+    canonical_name: "st-{s}"
+    name: "Sector {s}"
+    groups:
+      - "sectores"
+    with_s: ["A", "C"]
+
+  - hardware_id: "incl-{n}-z-{z}"
+    name: "Posición {z} del inclinómetro {n}"
+    groups:
+      - "inclinometro-{n}"
+      - muro
+    with_n: ["1", "2"]
+    with_z: ["0", "10", "20", "30", "40", "50"]
+
+parameters:
+  - canonical_name: error-permitido-tonelaje-plan-depositacion-proyecto
+    name: "Error permitido tonelaje con respecto al plan de depositación del proyecto."
+    value: 4500
+
+  - canonical_name: plan-depositacion-proyecto
+    name: "Plan de depositación del proyecto [tonelaje vs tiempo]"
+    value:
+      curve:
+        - date: "2016-03-01"
+          value: 100000
+        - date: "2016-06-01"
+          value: 105500
+        - date: "2016-09-01"
+          value: 111000
+        - date: "2016-12-01"
+          value: 116500
+        - date: "2017-03-01"
+          value: 122000
+        - date: "2017-06-01"
+          value: 127500
+        - date: "2017-09-01"
+          value: 133000
+        - date: "2017-12-01"
+          value: 138500
+        - date: "2018-03-01"
+          value: 144000
+        - date: "2018-06-01"
+          value: 149500
+        - date: "2018-09-01"
+          value: 155500
+        - date: "2018-12-01"
+          value: 160500
+        - date: "2019-03-01"
+          value: 166000
+        - date: "2019-06-01"
+          value: 171500
+        - date: "2019-09-01"
+          value: 177000
+        - date: "2019-12-01"
+          value: 182500
+        - date: "2020-03-01"
+          value: 188000
+        - date: "2020-06-01"
+          value: 193500
+
+  - canonical_name: plan-crecimiento-altura-coronamiento
+    name: "Altura proyectada de coronamiento de muro"
+    value:
+      curve:
+        - date: "2017-03-01"
+          value: 801
+        - date: "2017-06-01"
+          value: 806
+        - date: "2017-09-01"
+          value: 810
+        - date: "2017-12-01"
+          value: 815
+        - date: "2018-03-01"
+          value: 822
+        - date: "2018-06-01"
+          value: 827
+        - date: "2018-09-01"
+          value: 825
+        - date: "2018-12-01"
+          value: 830
+        - date: "2019-03-01"
+          value: 832
+        - date: "2019-06-01"
+          value: 835
+        - date: "2019-09-01"
+          value: 838
+        - date: "2019-12-01"
+          value: 840
+        - date: "2020-03-01"
+          value: 850
+        - date: "2020-06-01"
+          value: 855
+
+  - canonical_name: error-permitido-altura-coronamiento
+    name: "Error permitido en metros de altura vs. altura proyectada"
+    value: 2
+
+  - canonical_name: porcentaje-cercania-ancho-coronamiento
+    name: "Porcentaje del valor umbral que indica que el valor medido está cerca del valor umbral (umbral * (1 + alfa))."
+    value: 0.1
+
+  - canonical_name: porcentaje-cercania-pendiente-aguas-abajo
+    name: "Porcentaje del valor umbral que indica que el valor medido está cerca del valor umbral."
+    value: 0.1
+
+  - canonical_name: porcentaje-cercania-pendiente-aguas-arriba
+    name: "Porcentaje del valor umbral que indica que el valor medido está cerca del valor umbral."
+    value: 0.1
+
+  - canonical_name: porcentaje-cercania-revancha-operacional-minima
+    name: >-
+      Corresponde al porcentaje del Valor umbral que indica que el
+      valor medido se está cerca del Valor umbral asociado a la
+      revancha mínima.
+    value: 0.1
+
+  - canonical_name: porcentaje-cercania-revancha-operacional-maxima
+    name: >-
+      Corresponde al porcentaje del Valor umbral que indica que el
+      valor medido se está cerca del Valor umbral asociado a la
+      revancha máxima.
+    value: 0.1
+
+  - canonical_name: porcentaje-cercania-pendiente-playa
+    name: >-
+      Corresponde al porcentaje del Valor umbral que indica que el
+      valor medido está cerca del Valor umbral.
+    value: 0.1
+
+  - canonical_name: curva-embalse
+    name: Curva de embalse (cota de coronamiento [m.s.n.m.] vs volumen teórico de lamas y agua [Mm³])
+    value:
+      curve:
+        - {cotaCoronamiento: 798,   volumen: 0}
+        - {cotaCoronamiento: 805.9, volumen: 15}
+        - {cotaCoronamiento: 820.7, volumen: 65.8}
+        - {cotaCoronamiento: 838.5, volumen: 96.2}
+        - {cotaCoronamiento: 860.2, volumen: 188.2}
+        - {cotaCoronamiento: 875.2, volumen: 233.4}
+        - {cotaCoronamiento: 887.2, volumen: 287.4}
+        - {cotaCoronamiento: 897.6, volumen: 331}
+        - {cotaCoronamiento: 918.9, volumen: 506.6}
+        - {cotaCoronamiento: 935.5, volumen: 522.2}
+        - {cotaCoronamiento: 949.6, volumen: 598.2}
+        - {cotaCoronamiento: 962,   volumen: 633.8}
+        - {cotaCoronamiento: 973,   volumen: 731.4}
+        - {cotaCoronamiento: 975.1, volumen: 767.4}
+        - {cotaCoronamiento: 979.3, volumen: 981.4}
+        - {cotaCoronamiento: 980,   volumen: 1031.8}
+
+  - canonical_name: curva-capacidad-volumen-disponible
+    name: Curva de capacidad de volumen disponible (cota coronamiento [m.s.n.m.] vs volumen disponible [Mm³])
+    value:
+      curve:
+        - {cotaCoronamiento: 815,   volumen: 30.8}
+        - {cotaCoronamiento: 831.1, volumen: 94.3}
+        - {cotaCoronamiento: 845.4, volumen: 132.3}
+        - {cotaCoronamiento: 865.6, volumen: 247.3}
+        - {cotaCoronamiento: 880.2, volumen: 303.8}
+        - {cotaCoronamiento: 892.4, volumen: 371.3}
+        - {cotaCoronamiento: 902.2, volumen: 425.8}
+        - {cotaCoronamiento: 924.7, volumen: 645.3}
+        - {cotaCoronamiento: 939.2, volumen: 664.8}
+        - {cotaCoronamiento: 953.3, volumen: 759.8}
+        - {cotaCoronamiento: 965.1, volumen: 804.3}
+        - {cotaCoronamiento: 976.4, volumen: 926.3}
+        - {cotaCoronamiento: 978.7, volumen: 955.1}
+        - {cotaCoronamiento: 983,   volumen: 1126.3}
+
+  - canonical_name: areas-aportantes
+    name: Áreas aportantes que tributan al depósito
+    value:
+      - code: AA 1.0
+        area: 16200000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.1
+        area: 6000000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.2
+        area: 18200000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.4
+        area: 9800000
+        cr: 0.983
+        p: -0.0009875
+      - code: AA 1.5
+        area: 6400000
+        cr: 0.983
+        p: -0.0009875
+
+  - canonical_name: area-cubeta
+    name: Área de cubeta
+    value:
+      area: 21000000
+
+  - canonical_name: canales-perimetrales
+    name: Canales perimetrales
+    value:
+      - code: CP 1
+        desvio: 360
+        areaCode: AA 1.1
+        desvioConexion:
+          exterior: true
+      - code: CP 2
+        desvio: 360
+        areaCode: AA 1.2
+        desvioConexion:
+          embalseCode: Embalse 01
+      - code: CP 3
+        desvio: 3600
+        areaCode: AA 1.4
+        desvioConexion:
+          embalseCode: Embalse 01
+      - code: CP 4
+        desvio: 5400
+        areaCode: AA 1.5
+        desvioConexion:
+          exterior: true
+
+  - canonical_name: embalses
+    name: Embalses
+    value:
+      - code: Embalse 01
+        capacidad: 620000
+        areaCode: AA 1.0
+        descargaCanalCode: CP 1
+
+  - canonical_name: vertederos
+    name: Vertederos
+    value:
+      - code: Vertedero 01
+        capacidadDesvio: 36000
+        cotaInicioFuncionamiento: 841
+
+  - canonical_name: parameters-tonelaje-acumulado-proyectado
+    name: Tonelaje proyectado de relaves acumulados
+    value:
+      curve:
+        - date: "2016-03-01"
+          value: 100000
+        - date: "2016-06-01"
+          value: 105500
+        - date: "2016-09-01"
+          value: 111000
+        - date: "2016-12-01"
+          value: 116500
+        - date: "2017-03-01"
+          value: 122000
+        - date: "2017-06-01"
+          value: 127500
+        - date: "2017-09-01"
+          value: 133000
+        - date: "2017-12-01"
+          value: 138500
+        - date: "2018-03-01"
+          value: 144000
+        - date: "2018-06-01"
+          value: 149500
+        - date: "2018-09-01"
+          value: 155000
+        - date: "2018-12-01"
+          value: 160500
+        - date: "2019-03-01"
+          value: 166000
+        - date: "2019-06-01"
+          value: 171500
+        - date: "2019-09-01"
+          value: 177000
+        - date: "2019-12-01"
+          value: 182500
+        - date: "2020-03-01"
+          value: 188000
+        - date: "2020-06-01"
+          value: 193500
+
+  - canonical_name: banda-granulometrica-superior
+    name: "Límite superior de la granulometría de las arenas del muro"
+    value:
+      curve:
+        - abertura:
+            value: 0.5
+          pasa:
+            value: 99.69
+        - abertura:
+            value: 0.297
+          pasa:
+            value: 88.37
+        - abertura:
+            value: 0.21
+          pasa:
+            value: 78.57
+        - abertura:
+            value: 0.149
+          pasa:
+            value: 45.36
+        - abertura:
+            value: 0.105
+          pasa:
+            value: 29.59
+        - abertura:
+            value: 0.074
+          pasa:
+            value: 17.65
+
+  - canonical_name: banda-granulometrica-inferior
+    name: "Límite inferior de la granulometría de las arenas del muro"
+    value:
+      curve:
+        - abertura:
+            value: 0.5
+          pasa:
+            value: 87.4
+        - abertura:
+            value: 0.297
+          pasa:
+            value: 70.1
+        - abertura:
+            value: 0.21
+          pasa:
+            value: 48.57
+        - abertura:
+            value: 0.149
+          pasa:
+            value: 26.99
+        - abertura:
+            value: 0.105
+          pasa:
+            value: 16.58
+        - abertura:
+            value: 0.074
+          pasa:
+            value: 11.68
+
+  - canonical_name: alfa-modulos-deformacion-resistencia-muro
+    name: "Corresponde a la máxima cantidad de tiempo que puede estar activo el evento especificado antes de activar una Alerta Amarilla automática."
+    schema:
+      type: number
+      exclusiveMinimum: 0
+    value: 2940 # minutes = 25 hours
+
+  - canonical_name: alfa-turbiedad
+    name: "Tiempo α: Corresponde a la máxima cantidad de tiempo que puede estar activo el evento B3, antes de activar una Alerta Roja automática ."
+    value: 24
+
+timeseries:
+  # acelerografos en roca
+  - canonical_name: "{target}.s-acelerografo-1.ef-mvp.m2.parameters.aceleracion-sismica"
+    thresholds:
+      - upper: 7.8
+
+  # acelerografos en suelo-fundacion
+  - canonical_name: "{target}.s-acelerografo-2.ef-mvp.m2.parameters.aceleracion-sismica"
+    thresholds:
+      - upper: 7.8
+
+  # acelerografos en coronamiento
+  - canonical_name: "{target}.s-acelerografo-{i}.ef-mvp.m2.parameters.aceleracion-sismica"
+    thresholds:
+      - upper: 7.8
+    with_i:
+      range:
+        start: 3
+        stop: 5
+
+  - canonical_name: "{target}.s-pz-{n}.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - upper: 150
+      - upper: 160
+      - lower: 24
+        kind: tiempo-critico-primer-umbral
+      - lower: 24
+        kind: tiempo-critico-segundo-umbral
+    with_n: ["1", "2", "3", "4", "5", "6"]
+
+  - canonical_name: "{target}.s-monolito-{n}.ef-mvp.m2.parameters.deformacion-monolito-eje-{eje}"
+    thresholds:
+      - upper: 50
+    with_n: ["01", "02", "03", "04"]
+    with_eje: ["x", "y", "z"]
+
+  - canonical_name: "{target}.s-perfil-{s}{n}.ef-mvp.m2.parameters.ancho-coronamiento"
+    thresholds:
+      - lower: 10
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  - canonical_name: "{target}.s-perfil-{s}{n}.ef-mvp.m2.parameters.pendiente-muro.global-aguas-abajo"
+    thresholds:
+      - lower: 0.3
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  - canonical_name: "{target}.s-perfil-{s}{n}.ef-mvp.m2.parameters.pendiente-muro.global-aguas-arriba"
+    thresholds:
+      - lower: 0.5
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  - canonical_name: "{target}.none.ef-mvp.m2.parameters.revancha-hidraulica"
+    thresholds:
+      - lower: 2.5
+      - lower: 2.2
+      - lower: 2.0
+
+  - canonical_name: "{target}.s-perfil-{s}{n}.ef-mvp.m2.parameters.revancha-operacional"
+    thresholds:
+      - lower: 3.5
+      - upper: 9.0
+      - lower: 1.0
+        kind: total-volumen
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  - canonical_name: "{target}.s-perfil-{s}{n}.ef-mvp.m2.parameters.pendiente-playa"
+    thresholds:
+      - upper: 5
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  - canonical_name: "{target}.s-perfil-{s}{n}.ef-mvp.m2.parameters.distancia-laguna"
+    thresholds:
+      - lower: 200
+      - lower: 100
+      - lower: 0
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  - canonical_name: "{target}.s-perfil-{s}{n}.ef-mvp.m2.parameters.distancia-laguna"
+    thresholds:
+      - lower: 200
+      - lower: 100
+    with_s: ["A", "B", "C", "D", "E", "F", "G", "H", "I"]
+    with_n: ["1", "2"]
+
+  - canonical_name: "{target}.none.ef-mvp.m2.parameters.potencial-rebalse.tiempo-rebalse"
+    thresholds:
+      - lower: 2
+        kind: tiempo-evacuacion
+
+  - canonical_name: "{target}.none.ef-mvp.m2.parameters.volumen-relave"
+    thresholds:
+      - upper: 193600
+
+  - canonical_name: "{target}.s-inc-{i}-z-{elevacion}.ef-mvp.m2.parameters.deformacion-inclinometro-z-eje-{eje}"
+    thresholds:
+      - upper: 50
+    with_elevacion:
+      range:
+        start: 1
+        stop: 12
+    with_i: ["01", "02"]
+    with_eje: ["x", "y", "z"]
+
+  - canonical_name: "{target}.s-monolito-{n}.ef-mvp.m2.parameters.deformacion.monolito.coronamiento.eje-{eje}.tendencia"
+    thresholds:
+      - upper: 21
+    with_n: [1, 3]
+    with_eje: ["x", "y", "z"]
+
+  - canonical_name: "{target}.s-monolito-{n}.ef-mvp.m2.parameters.deformacion.monolito.muro.eje-{eje}.tendencia"
+    thresholds:
+      - upper: 21
+    with_n: [2, 4]
+    with_eje: ["x", "y", "z"]
+
+  - canonical_name: "{target}.s-inc-{i}-z-{elevacion}.ef-mvp.m2.parameters.deformacion.inclinometro.suelo.eje-{eje}.tendencia"
+    thresholds:
+      - upper: 21
+    with_elevacion:
+      range:
+        start: 1
+        stop: 2
+    with_i: ["01", "02"]
+    with_eje: ["x", "y", "z"]
+
+  - canonical_name: "{target}.s-inc-{i}-z-{elevacion}.ef-mvp.m2.parameters.deformacion.inclinometro.muro.eje-{eje}.tendencia"
+    thresholds:
+      - upper: 21
+    with_elevacion:
+      range:
+        start: 2
+        stop: 12
+    with_i: ["01", "02"]
+    with_eje: ["x", "y", "z"]
+
+  - canonical_name: "{target}.s-cd-1.ef-mvp.m2.parameters.caudal"
+    thresholds:
+      - upper: 0.017
+        kind: coeficiente-variacion-linea-base
+      - upper: 0.1
+        kind: porcentaje-variacion
+      - upper: 168
+        kind: ventana-movil
+
+  - canonical_name: "{target}.s-pz-{n}.ef-mvp.m2.parameters.presion-poros"
+    thresholds:
+      - upper: 140
+        kind: dren
+    with_n: ["5", "6"]
+
+  - canonical_name: "{target}.none.ef-mvp.m2.parameters.lluvia"
+    thresholds:
+      - upper: 22
+
+  - canonical_name: "{target}.s-pz-cg-1.ef-mvp.m2.parameters.nivel-freatico-cubeta-deposito"
+    thresholds:
+      - upper: 110
+      - upper: 105
+        kind: cota-instalacion
+
+  - canonical_name: "{target}.none.ef-mvp.m2.parameters.tonelaje"
+    thresholds:
+      - upper: 194000
+
+  - canonical_name: "{target}.s-tb-1.ef-mvp.m2.parameters.turbiedad"
+    thresholds:
+      - upper: 100
+
+  - canonical_name: "{target}.none.ef-mvp.m2.parameters.tonelaje"
+    thresholds:
+      - upper: 194000

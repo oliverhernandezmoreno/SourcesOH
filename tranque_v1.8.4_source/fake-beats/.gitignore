@@ -1,0 +1,10 @@
+# editor artifacts
+*~
+.idea/
+
+# build artifacts
+/node_modules
+*.js
+
+# test artifacts
+coverage

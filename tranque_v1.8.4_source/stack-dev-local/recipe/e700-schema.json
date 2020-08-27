@@ -1,0 +1,733 @@
+{
+  "title": "E700",
+  "steps": [
+    {
+      "title": "Faena",
+      "sections": [
+        {
+          "title": "Identificación de la Empresa",
+          "fields": [
+            {
+              "type": "text",
+              "key": "1",
+              "label": "Nombre"
+            },
+            {
+              "type": "text",
+              "key": "2",
+              "label": "Rut",
+              "validators": {
+                "isRUT": true
+              }
+            }
+          ]
+        },
+        {
+          "title": "Representante legal de la Empresa",
+          "fields": [
+            {
+              "type": "text",
+              "key": "3",
+              "label": "Nombre"
+            },
+            {
+              "type": "text",
+              "key": "4",
+              "label": "Rut",
+              "validators": {
+                "isRUT": true
+              }
+            }
+          ]
+        },
+        {
+          "title": "Propiedad Faena",
+          "fields": [
+            {
+              "key": "5",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Propia",
+                  "value": "propia"
+                },
+                {
+                  "label": "Arrendada",
+                  "value": "arrendada"
+                },
+                {
+                  "label": "Otro",
+                  "value": "otro"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Dirección de la Faena",
+          "fields": [
+            {
+              "type": "text",
+              "key": "6",
+              "label": "Calle"
+            },
+            {
+              "type": "text",
+              "key": "7",
+              "label": "Comuna"
+            },
+            {
+              "type": "text",
+              "key": "8",
+              "label": "Provincia"
+            },
+            {
+              "type": "text",
+              "key": "9",
+              "label": "Región"
+            }
+          ]
+        },
+        {
+          "title": "Profesional Responsable",
+          "fields": [
+            {
+              "type": "text",
+              "key": "10",
+              "label": "Nombre"
+            },
+            {
+              "type": "text",
+              "key": "11",
+              "label": "Cargo"
+            }
+          ]
+        },
+        {
+          "title": "Nombre y ubicación geográfica faena (UTM)",
+          "fields": [
+            {
+              "type": "text",
+              "key": "12",
+              "label": "Nombre"
+            },
+            {
+              "type": "text",
+              "key": "13",
+              "label": "Este",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 833000,
+                "greaterThan": 167000
+              }
+            },
+            {
+              "type": "text",
+              "key": "14",
+              "label": "Norte",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 10000000,
+                "greaterThan": 0
+              }
+            },
+            {
+              "type": "text",
+              "key": "15",
+              "label": "Cota (m.s.n.m)",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Depósito",
+      "sections": [
+        {
+          "title": "Nombre del depósito",
+          "fields": [
+            {
+              "type": "text",
+              "key": "16",
+              "label": "Nombre"
+            }
+          ]
+        },
+        {
+          "title": "Tipo de Depósito",
+          "fields": [
+            {
+              "key": "17",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Tranque",
+                  "value": "tranque"
+                },
+                {
+                  "label": "Embalse",
+                  "value": "embalse"
+                },
+                {
+                  "label": "R. Espesado",
+                  "value": "r_espesado"
+                },
+                {
+                  "label": "R. en Pasta",
+                  "value": "r_en_pasta"
+                },
+                {
+                  "label": "R. Filtrado",
+                  "value": "r_filtrado"
+                },
+                {
+                  "label": "Otro",
+                  "value": "otro",
+                  "allowText": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Relaves",
+      "sections": [
+        {
+          "title": "Cantidad de Relaves",
+          "fields": [
+            {
+              "type": "text",
+              "key": "18",
+              "label": "Autorizado (total)",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 10000000000
+              }
+            },
+            {
+              "type": "text",
+              "key": "19",
+              "label": "Actual (total)",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 10000000000
+              }
+            },
+            {
+              "key": "20",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Toneladas",
+                  "value": "toneladas"
+                },
+                {
+                  "label": "Metros cúbicos",
+                  "value": "metro_cubico"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Arenas en muro",
+          "fields": [
+            {
+              "type": "text",
+              "key": "21",
+              "label": "Trimestral",
+              "suffix": "Ton",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 10000000000
+              }
+            },
+            {
+              "type": "text",
+              "key": "22",
+              "label": "Acumulada",
+              "suffix": "Ton",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 10000000000
+              }
+            }
+          ]
+        },
+        {
+          "title": "Lamas en la Cubeta",
+          "fields": [
+            {
+              "type": "text",
+              "key": "23",
+              "label": "Trimestral",
+              "suffix": "Ton",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 10000000000
+              }
+            },
+            {
+              "type": "text",
+              "key": "24",
+              "label": "Acumulada",
+              "suffix": "Ton",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 10000000000
+              }
+            }
+          ]
+        },
+        {
+          "title": "Porcentajes de material",
+          "fields": [
+            {
+              "type": "text",
+              "key": "25",
+              "label": "Razón \"arenas/lamas\" en el período"
+            },
+            {
+              "type": "text",
+              "key": "26",
+              "label": "% de sólido en peso del relave total",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "27",
+              "label": "% de hum. relave filtrado y/o espesado",
+              "validators": {
+                "isNumber": true
+              }
+            }
+          ]
+        },
+        {
+          "title": "Granulometría del relave total",
+          "fields": [
+            {
+              "key": "28",
+              "type": "table",
+              "columns": [
+                {
+                  "header": "Mallas Nº Tyler",
+                  "type": "label",
+                  "values": [
+                    "35",
+                    "48",
+                    "65",
+                    "100",
+                    "150",
+                    "200",
+                    "-200",
+                    "Total"
+                  ],
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "Peso Retenido (grs)",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "% Retenido",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "% Acumulado Bajo",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Muros",
+      "sections": [
+        {
+          "title": "Método de construcción del muro en el caso de un tranque",
+          "fields": [
+            {
+              "key": "29",
+              "type": "radio",
+              "options": [
+                {
+                  "label": "Aguas Abajo",
+                  "value": "aguas_abajo"
+                },
+                {
+                  "label": "Eje Central",
+                  "value": "eje_central"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Características del muro",
+          "fields": [
+            {
+              "type": "text",
+              "key": "30",
+              "label": "Altura del muro o depósito",
+              "suffix": "m.",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "31",
+              "label": "Largo de berma de coronamiento",
+              "suffix": "m.",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "32",
+              "label": "Ancho de berma de coronamiento",
+              "suffix": "m.",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "33",
+              "label": "Dist. borde laguna-borde muro de arenas",
+              "suffix": "m.",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "34",
+              "label": "Ancho aprox. sector \"playa\" en la cubeta",
+              "suffix": "m.",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "35",
+              "label": "Revancha operacional mínima",
+              "suffix": "m.",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "36",
+              "label": "Área ocupada (aproximada)",
+              "suffix": "m2",
+              "validators": {
+                "isNumber": true
+              }
+            },
+            {
+              "type": "text",
+              "key": "37",
+              "label": "Ángulo del talud externo (ᵒ)",
+              "suffix": "grados",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 90
+              }
+            },
+            {
+              "type": "text",
+              "key": "38",
+              "label": "Ángulo del talud externo (')",
+              "suffix": "minutos",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 90
+              }
+            },
+            {
+              "type": "text",
+              "key": "39",
+              "label": "Ángulo del talud externo (\")",
+              "suffix": "segundos",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 90
+              }
+            },
+            {
+              "type": "text",
+              "key": "40",
+              "label": "Ángulo del talud interno (ᵒ)",
+              "suffix": "grados",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 90
+              }
+            },
+            {
+              "type": "text",
+              "key": "41",
+              "label": "Ángulo del talud interno (')",
+              "suffix": "minutos",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 90
+              }
+            },
+            {
+              "type": "text",
+              "key": "42",
+              "label": "Ángulo del talud interno (\")",
+              "suffix": "segundos",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 90
+              }
+            },
+            {
+              "type": "text",
+              "key": "43",
+              "label": "Método de compactación del muro",
+              "suffix": "(equipo)"
+            }
+          ]
+        },
+        {
+          "title": "Densidades de las arenas del muro",
+          "fields": [
+            {
+              "key": "44",
+              "type": "table",
+              "columns": [
+                {
+                  "header": "Sector",
+                  "type": "label",
+                  "values": [
+                    "1",
+                    "1",
+                    "2",
+                    "2",
+                    "3",
+                    "3"
+                  ],
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "Muestra (Altura de muro)",
+                  "type": "label",
+                  "values": [
+                    "1/3",
+                    "2/3",
+                    "1/3",
+                    "2/3",
+                    "1/3",
+                    "2/3"
+                  ],
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "In-Situ (grs/cc)",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "Min. Seca (grs/cc)",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "Máx. Seca (grs/cc)",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "Relativa (%)",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true,
+                    "lessThan": 100
+                  }
+                },
+                {
+                  "header": "Proctor (%)",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true,
+                    "lessThan": 100
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Granulometría de las arenas del muro",
+          "fields": [
+            {
+              "key": "45",
+              "type": "table",
+              "columns": [
+                {
+                  "header": "Mallas Nº Tyler",
+                  "type": "label",
+                  "values": [
+                    "35",
+                    "48",
+                    "65",
+                    "100",
+                    "150",
+                    "200",
+                    "-200",
+                    "Total"
+                  ],
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "Peso Retenido (grs)",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true
+                  }
+                },
+                {
+                  "header": "% Retenido",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true,
+                    "lessThan": 100
+                  }
+                },
+                {
+                  "header": "% Acumulado Bajo",
+                  "type": "text",
+                  "validators": {
+                    "isNumber": true,
+                    "lessThan": 100
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Piezometría",
+          "fields": [
+            {
+              "type": "text",
+              "key": "46",
+              "label": "Cota nivel coronamiento muro partida",
+              "suffix": "m.s.n.m",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            }
+          ]
+        },
+        {
+          "title": "Cota de niveles freáticos en los piezómetros",
+          "fields": [
+            {
+              "type": "text",
+              "key": "47",
+              "label": "P1",
+              "suffix": "m.s.n.m",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            },
+            {
+              "type": "text",
+              "key": "48",
+              "label": "P2",
+              "suffix": "m.s.n.m",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            },
+            {
+              "type": "text",
+              "key": "49",
+              "label": "P3",
+              "suffix": "m.s.n.m",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            },
+            {
+              "type": "text",
+              "key": "50",
+              "label": "P4",
+              "suffix": "m.s.n.m",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            },
+            {
+              "type": "text",
+              "key": "51",
+              "label": "P5",
+              "suffix": "m.s.n.m",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            },
+            {
+              "type": "text",
+              "key": "52",
+              "label": "P6",
+              "suffix": "m.s.n.m",
+              "validators": {
+                "isNumber": true,
+                "lessThan": 9000
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

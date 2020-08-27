@@ -1,0 +1,25 @@
+# Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: api-svc
+  name: api-svc
+  namespace: tranque
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  ports:
+  - name: 80-8000
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  - name: 443-8000
+    port: 443
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: api-svr
+  clusterIP: 10.0.126.191
+  type: LoadBalancer

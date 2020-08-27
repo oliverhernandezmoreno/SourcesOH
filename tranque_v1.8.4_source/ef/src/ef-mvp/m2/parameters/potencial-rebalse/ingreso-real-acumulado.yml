@@ -1,0 +1,15 @@
+name: Volumen de ingreso real acumulado de agua al depósito
+
+unit:
+  id: cubic-meter
+  name: Metro cúbico
+  abbreviation: m³
+  si: true
+
+frequencies:
+  - protocol: lluvia
+    minutes: 60  # 1 hora
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/tiempo-lloviendo"
+  - "@ef-mvp/m2/parameters/potencial-rebalse/ingreso-real"

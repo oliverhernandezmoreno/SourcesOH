@@ -1,0 +1,15 @@
+remotes:
+  - namespace: dpais-qa-sml
+    exchange: federated.dpais-qa-sml
+    bucket: sml
+    targets:
+      - dep01
+      - dep02
+      - dep03
+      - dep04
+      - dep05
+      - dep06
+      - dep07
+      - dep08
+      - dep09
+      - dep10

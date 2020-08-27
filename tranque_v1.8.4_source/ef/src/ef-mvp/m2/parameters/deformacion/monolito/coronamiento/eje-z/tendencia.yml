@@ -1,0 +1,26 @@
+name: Tendencia desfavorable en Eje Z
+description: La tendencia desfavorable en eje Z para medición en monolito del coronamiento de muro
+
+
+unit:
+  id: tendencia
+  name: Coefficient slope de la Regression Lineal intersection
+  abbreviation: slope
+  si: true
+
+scope: spread
+groups:
+  items:
+    - name: Prismas y Monolitos
+      canonical_name: prismas-monolitos
+
+thresholds:
+  - upper: ~  # CriticalTime Debe ser definido en configuracion sitio especifico
+
+
+inputs:
+  - "@ef-mvp/m2/parameters/deformacion/monolito/coronamiento/eje-z/deformacion-monolito"
+  - "@ef-mvp/m2/parameters/deformacion-monolito-eje-z"
+
+
+script: ef-mvp/m2/parameters/deformacion/monolito/tendencia.js

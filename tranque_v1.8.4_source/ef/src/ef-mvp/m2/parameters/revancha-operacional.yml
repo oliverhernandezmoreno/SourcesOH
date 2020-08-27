@@ -1,0 +1,46 @@
+name: Revancha operacional
+range_gte: 0
+
+unit:
+  id: meter
+  name: Metro
+  abbreviation: m
+  si: true
+
+thresholds:
+  - lower: ~  # debe ser definido
+  - upper: ~  # debe ser definido
+  - lower: ~  # debe ser definido
+    kind: total-volumen
+
+frequencies:
+  - minutes: 10080  # 7 días  # semanal
+
+scope: spread
+groups:
+  items:
+    - name: Perfil transversal a muro
+      canonical_name: perfil-transversal
+
+inputs:
+  - "@ef-mvp/m2/parameters/variables/elevacion"
+  - "@ef-mvp/m2/parameters/variables/cota-lamas"
+
+parameters:
+  - canonical_name: porcentaje-cercania-revancha-operacional-minima
+    name: >-
+      Corresponde al porcentaje del Valor umbral que indica que el
+      valor medido se está cerca del Valor umbral asociado a la
+      revancha mínima.
+    schema:
+      type: number
+      minimum: 0
+
+  - canonical_name: porcentaje-cercania-revancha-operacional-maxima
+    name: >-
+      Corresponde al porcentaje del Valor umbral que indica que el
+      valor medido se está cerca del Valor umbral asociado a la
+      revancha máxima.
+    schema:
+      type: number
+      minimum: 0

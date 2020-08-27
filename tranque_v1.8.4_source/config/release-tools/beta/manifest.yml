@@ -1,0 +1,62 @@
+# Specify the release name and version
+release:
+  name: tranque
+  version: "1.7.0"
+
+
+# Specify the versions of each of the docker images composing the release
+# Version canonical-names are specified on the settings.yml file.
+images:
+  backend: 
+    version: "1.7.0"
+
+  django_static:
+    version: "1.7.0"
+
+  frontend_sml:
+    version: "1.7.0"
+
+  frontend_smc:
+    version: "1.7.0"
+#
+#  enrichment: 
+#    version:
+#
+#  rabbitmq:
+#    version:
+#
+#  cron:
+#    version:
+#
+#  logstash:
+#    version:
+#
+#  elasticsearch:
+#    version:
+#
+#  storage:
+#    version:
+#
+#  kibana:
+#    version:
+#
+#  proxy:
+#    version:
+#
+#  stats:
+#    version:
+# 
+#  archivist: 
+#    version:
+#
+#  beats_consumer: 
+#    version:
+#
+#  fake_beats: 
+#    version:
+#
+#  http_producer: 
+#    version:
+#
+#  sql_producer: 
+#    version:

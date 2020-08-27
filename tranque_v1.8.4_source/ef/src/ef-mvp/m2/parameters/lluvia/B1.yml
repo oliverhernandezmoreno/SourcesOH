@@ -1,0 +1,6 @@
+name: Evento B1 de intensidad de lluvia
+description: >-
+  La intensidad de lluvia excede el valor umbral
+
+inputs:
+  - "@ef-mvp/m2/parameters/lluvia"
