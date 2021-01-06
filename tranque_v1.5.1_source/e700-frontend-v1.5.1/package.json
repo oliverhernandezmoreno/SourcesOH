@@ -11,7 +11,7 @@
     "@material-ui/pickers": "^3.2.8",
     "@material-ui/styles": "^4.6.0",
     "@storybook/addon-docs": "^5.2.6",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "d3-array": "^2.4.0",
     "file-saver": "^2.0.1",
     "hash-sum": "^2.0.0",
