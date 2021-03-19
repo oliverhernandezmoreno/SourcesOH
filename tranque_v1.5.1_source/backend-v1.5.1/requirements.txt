@@ -1,7 +1,7 @@
 boto3==1.11.8
 coreapi==2.3.3
 Django>=2.2.9,<3
-djangorestframework==3.11.0
+djangorestframework==3.11.2
 djangorestframework-recursive==0.1.2
 djangorestframework-simplejwt==4.4.0
 django-admin-json-editor==0.2.0
