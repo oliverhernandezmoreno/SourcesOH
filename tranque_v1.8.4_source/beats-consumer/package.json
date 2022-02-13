@@ -13,7 +13,7 @@
     "build-doc": "node index.js build-doc && redoc-cli bundle openapi.built.json -o doc.html"
   },
   "dependencies": {
-    "ajv": "^6.10.0",
+    "ajv": "^6.12.3",
     "commander": "^2.19.0",
     "express": "^4.16.4",
     "raven": "^2.6.4",
